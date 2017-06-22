@@ -64,8 +64,6 @@ public class AllFragment extends android.support.v4.app.Fragment {
 
         viewPagerBindTabLayout();
 
-
-
     }
 
     /**

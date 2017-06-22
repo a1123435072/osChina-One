@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fly on 2017/3/1.
- *
  * 综合界面的适配器
  */
 
@@ -18,7 +16,7 @@ public class AllFragmentAdapter extends FragmentPagerAdapter {
     private List<Fragment> subFragments = new ArrayList<>();
     private List<String>   subTitles = new ArrayList<>();
 
-    public AllFragmentAdapter(FragmentManager  fm) {
+    public AllFragmentAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -46,7 +44,7 @@ public class AllFragmentAdapter extends FragmentPagerAdapter {
      * 动态设置fragment
      * @param fragments
      */
-    public void addAll(List<Fragment>  fragments){
+    public void addAll(List<Fragment> fragments){
         this.subFragments.addAll(fragments);
     }
 
