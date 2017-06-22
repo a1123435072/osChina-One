@@ -19,6 +19,8 @@ import com.itheima.oschina.fragment.TweetFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//王锐
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener
 {
 
