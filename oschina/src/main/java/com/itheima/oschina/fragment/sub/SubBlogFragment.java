@@ -98,7 +98,6 @@ public class SubBlogFragment extends Fragment {
         params.put("type", "latest");
 
 
-
         HttpLoader.getInstance(getActivity()).get(url, params, null, 0x22, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
