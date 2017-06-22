@@ -15,6 +15,9 @@ import com.itheima.oschina.adapter.AllFragmentAdapter;
 import com.itheima.oschina.adapter.TweetFragmentAdapter;
 import com.itheima.oschina.fragment.sub.SubBlogFragment;
 import com.itheima.oschina.fragment.sub.SubNewFragment;
+import com.itheima.oschina.fragment.tweet.TweetHotFragment;
+import com.itheima.oschina.fragment.tweet.TweetMineFragment;
+import com.itheima.oschina.fragment.tweet.TweetNewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +67,9 @@ public class TweetFragment extends android.support.v4.app.Fragment {
 
     //初始化子fragment
     private void initSubFragment() {
-        subFragments.add(new SubNewFragment());//添加最新动弹fragment
-        subFragments.add(new SubBlogFragment());//添加fragment
+        subFragments.add(new TweetNewFragment());
+        subFragments.add(new TweetHotFragment());
+        subFragments.add(new TweetMineFragment());
         tweetAdapter.addAll(subFragments);
     }
 }
