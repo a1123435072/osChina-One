@@ -71,7 +71,8 @@ public class SubBlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             super(itemView);
             iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
-        }
+
+         }
 
     }
 

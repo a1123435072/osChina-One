@@ -1,12 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settingview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    android:orientation="vertical">
 
-
+    <com.itheima.oschina.view.findItemView
+    android:layout_marginTop="10dp"
+    android:id="@+id/tuijian"
+    settingview:icon="@drawable/fire"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_bg"
+    settingview:title="码云推荐"
+    android:padding="5dp" />
     <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#939393"/>
+    <com.itheima.oschina.view.findItemView
+        android:id="@+id/ruanjian"
+        settingview:icon="@drawable/fire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_bg"
+        settingview:title="开源软件"
+        android:padding="5dp" />
+
+    <com.itheima.oschina.view.findItemView
+        android:layout_marginTop="10dp"
+        android:id="@+id/saoyisao"
+        settingview:icon="@drawable/fire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_bg"
+        settingview:title="扫一扫"
+        android:padding="5dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#939393"/>
+    <com.itheima.oschina.view.findItemView
+
+        android:id="@+id/yaoyiyao"
+        settingview:icon="@drawable/fire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_bg"
+        settingview:title="摇一摇"
+        android:padding="5dp" />
+    <com.itheima.oschina.view.findItemView
+        android:layout_marginTop="10dp"
+        android:id="@+id/fujin"
+        settingview:icon="@drawable/fire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_bg"
+        settingview:title="附近的程序员"
+        android:padding="5dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#939393"/>
+    <com.itheima.oschina.view.findItemView
+
+        android:id="@+id/xianxia"
+        settingview:icon="@drawable/fire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_bg"
+        settingview:title="线下活动"
+        android:padding="5dp" />
 
 </LinearLayout>

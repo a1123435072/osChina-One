@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'android-apt'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -37,5 +37,7 @@ dependencies {
     compile project(':volleyok-devpkg')
     compile files('libs/xstream-1.4.7.jar')
     compile project(':xrecyclerview')
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 //    compile 'com.squareup.picasso:picasso:2.5.2'
 }

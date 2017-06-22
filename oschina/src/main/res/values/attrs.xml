@@ -10,5 +10,10 @@
         <attr name="allowWidthFull" format="boolean"/>
         <attr name="disableViewPager" format="boolean"/>
     </declare-styleable>
-    
+    <!--自定义的设置条目 view-->
+    <declare-styleable name="findItemView">
+        <attr name="title" format="string"/>
+        <attr name="icon" format="reference"/>
+    </declare-styleable>
+
 </resources>
