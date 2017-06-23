@@ -1,67 +1,61 @@
 package com.itheima.oschina.fragment.sub;
 
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 
-import com.itheima.oschina.R;
-import com.itheima.oschina.adapter.sub.SubNewFragmentAdapter;
 import com.itheima.oschina.base.baseFragment;
-import com.itheima.oschina.bean.NewsList;
+import com.itheima.oschina.bean.BlogList;
+import com.itheima.oschina.adapter.sub.PictureFragmentAdapter;
 import com.itheima.oschina.xutil.XmlUtils;
 
 /**
- * Created by jason on 2017/6/22.
+ * Created by fly on 2017/3/3.
  */
+//SubBlogFragment  SubTechnologyFragmentw
+public class SubTechnologyFragmentw extends baseFragment {
+    //一个通用的适配器
+    private PictureFragmentAdapter pictureFragmentAdapter;
 
-public class SubTechnologyFragment extends baseFragment {
-    private SubNewFragmentAdapter subNewFragmentAdapter;
     private boolean isPullResfresh;
 
     @Override
     protected RecyclerView.Adapter getCommonAdapter() {
-        subNewFragmentAdapter = new SubNewFragmentAdapter(getActivity());
-        return subNewFragmentAdapter;
+        pictureFragmentAdapter = new PictureFragmentAdapter(getActivity());
+        return pictureFragmentAdapter;
     }
-
+    //重写recyclerview下拉刷新和加载更多的监听
     @Override
     protected void requestdata(boolean isPullResfresh) {
         this.isPullResfresh = isPullResfresh;
         this.isPullResfresh =true;
         if(isPullResfresh){
             pageIndex=0;
-            requestData(0x24,"news_list");
+            requestData(0x26,"blog_list");
         }else{
             pageIndex++;
-            requestData(0x24,"news_list");
+            requestData(0x26,"blog_list");
         }
     }
-
+    //重写确定上啦加载
     @Override
     protected boolean isLoadMore() {
         return true;
     }
-
+    //重写确定下拉加载
     @Override
     protected boolean isPullRefresh() {
         return true;
     }
-
+    //重写接口刷新的方法,网络加载
     @Override
     protected void refresh(String response) {
-        NewsList newsList = XmlUtils.toBean(NewsList.class, response.getBytes());
+        BlogList blogList = XmlUtils.toBean(BlogList.class, response.getBytes());
         if(isPullResfresh){
-            subNewFragmentAdapter.clear();
-            subNewFragmentAdapter.addAll(newsList.getList());
+            pictureFragmentAdapter.clear();
+            pictureFragmentAdapter.addAll(blogList.getBloglist());
             isPullResfresh =!isPullResfresh;
             mRecyclerView.refreshComplete();
         }else{
-            subNewFragmentAdapter.addAll(newsList.getList());
+            pictureFragmentAdapter.addAll(blogList.getBloglist());
             mRecyclerView.loadMoreComplete();
         }
     }

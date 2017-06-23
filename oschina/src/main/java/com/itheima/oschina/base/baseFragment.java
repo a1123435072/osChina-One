@@ -11,10 +11,7 @@ import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
-import com.itheima.oschina.adapter.sub.SubNewFragmentAdapter;
-import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.utills.Constant;
-import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -31,7 +28,6 @@ public abstract class baseFragment extends Fragment {
 
     public int pageIndex = 0;
     private boolean ispullRefresh;
-
 
     @Nullable
     @Override
@@ -77,9 +73,15 @@ public abstract class baseFragment extends Fragment {
 
         //设置初始化状态为刷新状态。作用： 界面初始加载时，刷新数据。
         mRecyclerView.refresh();
-//
+        /**
+         * 第一个图片的轮播图,如果没有头则添加一个头,如果没有
+          */
+        if(getHeadView() != null){
+            mRecyclerView.addHeaderView(getHeadView());
+        }
+
 //        //设置适配器
-//        subNewFragmentAdapter = new SubNewFragmentAdapter(getActivity());
+//        subNewFragmentAdapter = new CommendFragmentAdapter(getActivity());
         mRecyclerView.setAdapter(getCommonAdapter());
 
 
@@ -117,8 +119,10 @@ public abstract class baseFragment extends Fragment {
 
             }
         });
-
     }
-
+    //得到头的
+    public View getHeadView(){
+       return  null;
+    }
     protected abstract void refresh(String response) ;
 }

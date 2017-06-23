@@ -8,13 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.itheima.oschina.R;
-import com.itheima.oschina.adapter.AllFragmentAdapter;
 import com.itheima.oschina.adapter.TweetFragmentAdapter;
-import com.itheima.oschina.fragment.sub.SubBlogFragment;
-import com.itheima.oschina.fragment.sub.SubNewFragment;
 import com.itheima.oschina.fragment.tweet.TweetHotFragment;
 import com.itheima.oschina.fragment.tweet.TweetMineFragment;
 import com.itheima.oschina.fragment.tweet.TweetNewFragment;
