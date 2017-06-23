@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.LoginActivity;
 import com.itheima.oschina.fragment.ExploreFragment;
 import com.itheima.oschina.fragment.MeFragment;
 import com.itheima.oschina.fragment.AllFragment;

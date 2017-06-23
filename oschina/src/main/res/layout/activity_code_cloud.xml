@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.itheima.oschina.activity.codeCloudActivity">
+
+    <TextView
+        android:text="我是马云推荐界面"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+</android.support.constraint.ConstraintLayout>
