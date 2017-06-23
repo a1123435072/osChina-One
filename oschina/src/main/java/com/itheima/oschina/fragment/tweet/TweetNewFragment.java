@@ -1,7 +1,6 @@
 package com.itheima.oschina.fragment.tweet;
 
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,12 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 import com.itheima.oschina.R;
 import com.itheima.oschina.activity.MainActivity;
 import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
-import com.itheima.oschina.bean.NewsList;
-import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetsList;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
@@ -26,9 +22,6 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by raynwang on 2017/6/22.
@@ -52,12 +45,11 @@ public class TweetNewFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         mRecyclerView = (XRecyclerView) view.findViewById(R.id.xrecyclerview);
 
         //分隔线，需要一个自定义分隔线控件，在view里面
         mRecyclerView.addItemDecoration(new RecycleViewDivider(getContext(),
-                LinearLayoutManager.HORIZONTAL, 1, Color.BLACK));
+                LinearLayoutManager.HORIZONTAL, 1, Color.GRAY));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -89,7 +81,7 @@ public class TweetNewFragment extends Fragment{
             }
         });
 
-        //设置初始化状态为刷新状态。作用： 界面初始加载时，刷新数据。
+        //设置初始化状态为刷新状态。作用：界面初始加载时，刷新数据。
         mRecyclerView.refresh();
 
 

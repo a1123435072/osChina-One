@@ -10,19 +10,19 @@
     <com.itheima.oschina.view.findItemView
     android:layout_marginTop="10dp"
     android:id="@+id/tuijian"
-    settingview:icon="@drawable/fire"
+    settingview:icon="@drawable/ic_discover_git"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selector_bg"
     settingview:title="码云推荐"
     android:padding="5dp" />
-    <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:background="#939393"/>
     <com.itheima.oschina.view.findItemView
         android:id="@+id/ruanjian"
-        settingview:icon="@drawable/fire"
+        settingview:icon="@drawable/ic_discover_softwares"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg"
@@ -32,7 +32,7 @@
     <com.itheima.oschina.view.findItemView
         android:layout_marginTop="10dp"
         android:id="@+id/saoyisao"
-        settingview:icon="@drawable/fire"
+        settingview:icon="@drawable/ic_discover_scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg"
@@ -40,12 +40,12 @@
         android:padding="5dp" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:background="#939393"/>
     <com.itheima.oschina.view.findItemView
 
         android:id="@+id/yaoyiyao"
-        settingview:icon="@drawable/fire"
+        settingview:icon="@drawable/ic_discover_shake"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg"
@@ -54,7 +54,7 @@
     <com.itheima.oschina.view.findItemView
         android:layout_marginTop="10dp"
         android:id="@+id/fujin"
-        settingview:icon="@drawable/fire"
+        settingview:icon="@drawable/ic_discover_nearby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg"
@@ -62,16 +62,14 @@
         android:padding="5dp" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:background="#939393"/>
     <com.itheima.oschina.view.findItemView
-
         android:id="@+id/xianxia"
-        settingview:icon="@drawable/fire"
+        settingview:icon="@drawable/ic_my_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg"
         settingview:title="线下活动"
         android:padding="5dp" />
-
 </LinearLayout>
