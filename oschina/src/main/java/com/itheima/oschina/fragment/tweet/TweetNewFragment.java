@@ -2,6 +2,7 @@ package com.itheima.oschina.fragment.tweet;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
 import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetsList;
+import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -52,6 +54,10 @@ public class TweetNewFragment extends Fragment{
 
 
         mRecyclerView = (XRecyclerView) view.findViewById(R.id.xrecyclerview);
+
+        //分隔线，需要一个自定义分隔线控件，在view里面
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(getContext(),
+                LinearLayoutManager.HORIZONTAL, 1, Color.BLACK));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

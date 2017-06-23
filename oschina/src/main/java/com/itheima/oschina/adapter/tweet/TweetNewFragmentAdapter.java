@@ -47,6 +47,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         TweetNewFragmentAdapter.TweetNewViewHolder tweetNewViewHolder = (TweetNewFragmentAdapter.TweetNewViewHolder) holder;
         tweetNewViewHolder.tv_content.setText(items.get(position).getBody());
         tweetNewViewHolder.tv_id.setText(items.get(position).getAuthor());
+        tweetNewViewHolder.tv_time.setText(items.get(position).getPubDate());
         ImageView imageView = tweetNewViewHolder.iv_head;
 //        BitmapUtils.display(context,imageView,items.get(position).getPortrait());
 
@@ -77,6 +78,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         private final TextView tv_content;
         private final TextView tv_id;
+        private final TextView tv_time;
         private final ImageView iv_head;
 
 
@@ -85,6 +87,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
             tv_id = (TextView) itemView.findViewById(R.id.tv_id);
             iv_head = (ImageView) itemView.findViewById(R.id.iv_head);
+            tv_time = (TextView) itemView.findViewById(R.id.tv_time);
         }
 
     }
