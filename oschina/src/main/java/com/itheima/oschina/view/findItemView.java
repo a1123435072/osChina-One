@@ -1,6 +1,8 @@
 package com.itheima.oschina.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,6 +40,8 @@ public class findItemView extends RelativeLayout {
         initAttrs(attrs);
     }
 
+
+
     /**
      * @param attrs  属性集合
      *                 获取在布局文件中定义出来的额自定义的额属性值,
@@ -49,9 +53,14 @@ public class findItemView extends RelativeLayout {
          String title = attrs.getAttributeValue(NAMESPACE, "title");
 
         tvTitle.setText(title);
-//        ImageView icon = attrs.getAttributeNameResource(NAMESPACE, "icon");
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.findItemView);
 
-
+        Drawable d = typedArray.getDrawable(R.styleable.findItemView_icon);
+        if (d!=  null){
+            setImageDrawable(d);
+        }
+        //typedArray.getFloat(R.,0);
+      //  ImageView icon = attrs.getAttributeNameResource(NAMESPACE, "icon");
     }
 
     //初始化试图
@@ -62,5 +71,10 @@ public class findItemView extends RelativeLayout {
         tvTitle = (TextView) view.findViewById(R.id.tv_setting_title);
         ivGotoRight = (ImageView) view.findViewById(R.id.iv_setting_right);
 
+    }
+
+    public void setImageDrawable(Drawable imageDrawable) {
+        ivImage.setImageDrawable(imageDrawable);
+       // this.imageDrawable = imageDrawable;
     }
 }

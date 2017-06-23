@@ -4,6 +4,11 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+
+    }
     defaultConfig {
         applicationId "com.itheima.oschina"
         minSdkVersion 15
@@ -22,8 +27,10 @@ android {
     }
 
     //允许不规范的.9图片
-    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
+//    aaptOptions.cruncherEnabled = false
+//    aaptOptions.useNewCruncher = false
+
+
 }
 
 dependencies {
