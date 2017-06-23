@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.activity.TweetDetailsActivity;
-import com.itheima.oschina.adapter.sub.SubNewFragmentAdapter;
-import com.itheima.oschina.bean.News;
 import com.itheima.oschina.bean.Tweet;
 import com.squareup.picasso.Picasso;
 
