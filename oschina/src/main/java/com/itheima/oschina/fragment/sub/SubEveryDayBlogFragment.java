@@ -11,6 +11,7 @@ import com.itheima.oschina.xutil.XmlUtils;
  */
 
 public class SubEveryDayBlogFragment extends baseFragment {
+    //一个通用的适配器
     private SubNewFragmentAdapter subNewFragmentAdapter;
 
     private boolean isPullResfresh;
@@ -20,30 +21,30 @@ public class SubEveryDayBlogFragment extends baseFragment {
         subNewFragmentAdapter = new SubNewFragmentAdapter(getActivity());
         return subNewFragmentAdapter;
     }
-
+    //重写recyclerview下拉刷新和加载更多的监听
     @Override
     protected void requestdata(boolean isPullResfresh) {
         this.isPullResfresh = isPullResfresh;
         this.isPullResfresh =true;
         if(isPullResfresh){
             pageIndex=0;
-            requestData(0x23);
+            requestData(0x23,"news_list");
         }else{
             pageIndex++;
-            requestData(0x23);
+            requestData(0x23,"news_list");
         }
     }
-
+    //重写确定上啦加载
     @Override
     protected boolean isLoadMore() {
         return true;
     }
-
+    //重写确定下拉加载
     @Override
     protected boolean isPullRefresh() {
         return true;
     }
-
+    //重写接口刷新的方法,网络加载
     @Override
     protected void refresh(String response) {
         NewsList newsList = XmlUtils.toBean(NewsList.class, response.getBytes());

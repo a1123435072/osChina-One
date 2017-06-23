@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.sub.SubNewFragmentAdapter;
 import com.itheima.oschina.bean.NewsList;
+import com.itheima.oschina.utills.Constant;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -95,9 +96,9 @@ public abstract class baseFragment extends Fragment {
     /**
      * 网络加载数据
      */
-    public void requestData(int number) {
-        System.out.println(number);
-        String url = "http://www.oschina.net/action/api/news_list";
+    public void requestData(int number,String Url) {
+
+        String url = Constant.PATH+Url;
 
         HttpParams params = new HttpParams();
         params.put("pageIndex", pageIndex + "");

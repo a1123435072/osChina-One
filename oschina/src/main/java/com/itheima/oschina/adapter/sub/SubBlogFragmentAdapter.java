@@ -40,11 +40,7 @@ public class SubBlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         SubBlogViewHolder  subBlogViewHolder = (SubBlogViewHolder) holder;
         subBlogViewHolder.tv_content.setText(items.get(position).getTitle());
 
-
-
     }
-
-
 
     @Override
     public int getItemCount() {
