@@ -52,12 +52,11 @@ public class TweetNewFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         mRecyclerView = (XRecyclerView) view.findViewById(R.id.xrecyclerview);
 
         //分隔线，需要一个自定义分隔线控件，在view里面
         mRecyclerView.addItemDecoration(new RecycleViewDivider(getContext(),
-                LinearLayoutManager.HORIZONTAL, 1, Color.BLACK));
+                LinearLayoutManager.HORIZONTAL, 1, Color.GRAY));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -89,7 +88,7 @@ public class TweetNewFragment extends Fragment{
             }
         });
 
-        //设置初始化状态为刷新状态。作用： 界面初始加载时，刷新数据。
+        //设置初始化状态为刷新状态。作用：界面初始加载时，刷新数据。
         mRecyclerView.refresh();
 
 

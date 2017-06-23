@@ -48,6 +48,10 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         tweetNewViewHolder.tv_content.setText(items.get(position).getBody());
         tweetNewViewHolder.tv_id.setText(items.get(position).getAuthor());
         tweetNewViewHolder.tv_time.setText(items.get(position).getPubDate());
+        tweetNewViewHolder.tv_commemntNumber.setText(items.get(position).getCommentCount());
+        tweetNewViewHolder.tv_likeNumber.setText(items.get(position).getLikeCount()+"");
+
+
         ImageView imageView = tweetNewViewHolder.iv_head;
 //        BitmapUtils.display(context,imageView,items.get(position).getPortrait());
 
@@ -55,6 +59,13 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (!TextUtils.isEmpty(urlPortrait)) {
             Picasso.with(context).load(urlPortrait).into(imageView);
         }
+
+        tweetNewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 
@@ -80,7 +91,8 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         private final TextView tv_id;
         private final TextView tv_time;
         private final ImageView iv_head;
-
+        private final TextView tv_likeNumber;
+        private final TextView tv_commemntNumber;
 
         public TweetNewViewHolder(View itemView) {
             super(itemView);
@@ -88,6 +100,8 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             tv_id = (TextView) itemView.findViewById(R.id.tv_id);
             iv_head = (ImageView) itemView.findViewById(R.id.iv_head);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
+            tv_likeNumber = (TextView) itemView.findViewById(R.id.tv_likeNumber);
+            tv_commemntNumber = (TextView) itemView.findViewById(R.id.tv_commentNumber);
         }
 
     }

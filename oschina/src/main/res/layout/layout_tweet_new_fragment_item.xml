@@ -42,23 +42,40 @@
                 android:text="发表时间"
                 android:layout_centerVertical="true"/>
 
+            <TextView
+                android:id="@+id/tv_commentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="3"/>
+
+
             <ImageView
                 android:id="@+id/iv_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/widget_bar_tweet_nor"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"/>
+                android:layout_toLeftOf="@id/tv_commentNumber"/>
+
+            <TextView
+                android:id="@+id/tv_likeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iv_comment"
+                android:layout_marginRight="10dp"
+                android:text="1"/>
 
             <ImageView
                 android:id="@+id/iv_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_unlike"
-                android:layout_toLeftOf="@id/iv_comment"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"/>
+                android:layout_toLeftOf="@id/tv_likeNumber"
+                android:layout_marginRight="3dp"
+                android:layout_centerVertical="true" />
         </RelativeLayout>
 
 
