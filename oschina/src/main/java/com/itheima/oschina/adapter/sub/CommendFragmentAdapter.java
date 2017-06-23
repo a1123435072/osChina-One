@@ -18,13 +18,13 @@ import java.util.List;
  * Created by fly on 2017/3/1.
  */
 
-public class SubNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity mActivity;
 
     private List<News>  items = new ArrayList<>();
 
-    public SubNewFragmentAdapter(Activity activity){
+    public CommendFragmentAdapter(Activity activity){
         this.mActivity = activity;
     }
 
@@ -39,9 +39,6 @@ public class SubNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         SubNewViewHolder  subNewViewHolder = (SubNewViewHolder) holder;
         subNewViewHolder.tv_content.setText(items.get(position).getTitle());
-
-
-
     }
 
 

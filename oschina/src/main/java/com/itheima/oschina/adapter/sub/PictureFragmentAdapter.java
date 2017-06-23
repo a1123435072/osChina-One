@@ -18,13 +18,13 @@ import java.util.List;
  * Created by fly on 2017/3/1.
  */
 
-public class SubBlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity mActivity;
 
     private List<Blog>  items = new ArrayList<>();
 
-    public SubBlogFragmentAdapter(Activity activity){
+    public PictureFragmentAdapter(Activity activity){
         this.mActivity = activity;
     }
 
