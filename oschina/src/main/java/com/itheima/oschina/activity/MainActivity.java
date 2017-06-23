@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        System.out.println("--------有sout的日志--------");
+
         //显示标题
         tv_toolbar_title = (TextView) findViewById(R.id.tv_toolbar_title);
 

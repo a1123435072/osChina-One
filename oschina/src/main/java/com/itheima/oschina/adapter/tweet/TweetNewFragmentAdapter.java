@@ -1,7 +1,9 @@
 package com.itheima.oschina.adapter.tweet;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.sub.SubNewFragmentAdapter;
 import com.itheima.oschina.bean.News;
+import com.itheima.oschina.bean.Tweet;
+import com.itheima.oschina.xutil.bitmap.BitmapUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +27,15 @@ import java.util.List;
 public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity mActivity;
+    Context context;
 
-    private List<News> items = new ArrayList<>();
+    private List<Tweet> items = new ArrayList<>();
 
-    public TweetNewFragmentAdapter(Activity activity){
+    public TweetNewFragmentAdapter(Activity activity, Context context) {
         this.mActivity = activity;
+        this.context = context;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mActivity).inflate(R.layout.layout_tweet_new_fragment_item, parent, false);
@@ -37,7 +45,16 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         TweetNewFragmentAdapter.TweetNewViewHolder tweetNewViewHolder = (TweetNewFragmentAdapter.TweetNewViewHolder) holder;
-        tweetNewViewHolder.tv_content.setText(items.get(position).getTitle());
+        tweetNewViewHolder.tv_content.setText(items.get(position).getBody());
+        tweetNewViewHolder.tv_id.setText(items.get(position).getAuthor());
+        ImageView imageView = tweetNewViewHolder.iv_head;
+//        BitmapUtils.display(context,imageView,items.get(position).getPortrait());
+
+        String urlPortrait = items.get(position).getPortrait();
+        if (!TextUtils.isEmpty(urlPortrait)) {
+            Picasso.with(context).load(urlPortrait).into(imageView);
+        }
+
     }
 
     @Override
@@ -46,25 +63,28 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     //在哪用的？？？
-    public void addAll(List<News> datas){
+    public void addAll(List<Tweet> datas) {
         items.addAll(datas);
-        notifyItemRangeInserted(items.size() -1, getItemCount() + datas.size());
+        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());
     }
 
     //在哪用的？？？
-    public void clear(){
+    public void clear() {
         notifyItemRangeRemoved(1, getItemCount());
     }
 
-    class TweetNewViewHolder extends RecyclerView.ViewHolder{
+    class TweetNewViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView iv_image;
         private final TextView tv_content;
+        private final TextView tv_id;
+        private final ImageView iv_head;
+
 
         public TweetNewViewHolder(View itemView) {
             super(itemView);
-            iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
+            tv_id = (TextView) itemView.findViewById(R.id.tv_id);
+            iv_head = (ImageView) itemView.findViewById(R.id.iv_head);
         }
 
     }

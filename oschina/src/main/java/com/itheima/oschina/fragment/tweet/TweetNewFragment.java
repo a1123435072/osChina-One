@@ -1,6 +1,7 @@
 package com.itheima.oschina.fragment.tweet;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,15 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.MainActivity;
 import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
 import com.itheima.oschina.bean.NewsList;
+import com.itheima.oschina.bean.Tweet;
+import com.itheima.oschina.bean.TweetsList;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by raynwang on 2017/6/22.
@@ -31,7 +39,6 @@ public class TweetNewFragment extends Fragment{
     private boolean isPullRefresh;
     private int pageIndex = 0;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class TweetNewFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         mRecyclerView = (XRecyclerView) view.findViewById(R.id.xrecyclerview);
 
@@ -80,7 +88,7 @@ public class TweetNewFragment extends Fragment{
 
 
         //设置适配器
-        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity());
+        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(),getContext());
         mRecyclerView.setAdapter(tweetNewFragmentAdapter);
 
 
@@ -91,33 +99,29 @@ public class TweetNewFragment extends Fragment{
      */
     private void requestData() {
 
-        String url = "http://www.oschina.net/action/api/news_list";
+        String url = "http://www.oschina.net/action/api/tweet_list";
 
         HttpParams params = new HttpParams();
-        params.put("pageIndex", pageIndex + "");
+        params.put("uid","0");
+        params.put("pageIndex", pageIndex+"");
         params.put("pageSize", "20");
-        params.put("catalog", "1");
-
-
 
         HttpLoader.getInstance(getActivity()).get(url, params, null, 0x11, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
-                NewsList newsList = XmlUtils.toBean(NewsList.class, response.getBytes());
+                TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
 
                 if (isPullRefresh) {
                     tweetNewFragmentAdapter.clear();
-                    tweetNewFragmentAdapter.addAll(newsList.getList());
+                    tweetNewFragmentAdapter.addAll(tweetsList.getList());
                     mRecyclerView.refreshComplete();
 
                     isPullRefresh = !isPullRefresh;
 
                 }else{
-                    tweetNewFragmentAdapter.addAll(newsList.getList());
+                    tweetNewFragmentAdapter.addAll(tweetsList.getList());
                     mRecyclerView.loadMoreComplete();
                 }
-
-
             }
 
             @Override
