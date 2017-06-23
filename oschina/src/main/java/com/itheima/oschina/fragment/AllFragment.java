@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.AllFragmentAdapter;
 import com.itheima.oschina.fragment.sub.SubBlogFragment;
+import com.itheima.oschina.fragment.sub.SubEveryDayBlogFragment;
 import com.itheima.oschina.fragment.sub.SubNewFragment;
+import com.itheima.oschina.fragment.sub.SubTechnologyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,25 +86,21 @@ public class AllFragment extends android.support.v4.app.Fragment {
 
             subFragments.add(new SubNewFragment());//添加资讯fragment
             subFragments.add(new SubBlogFragment());//添加博客fragment
-        
+            subFragments.add(new SubTechnologyFragment());//添加技术fragmet
+            subFragments.add(new SubEveryDayBlogFragment());//添加每日一博fragmet
             allAdapter.addAll(subFragments);
 
     }
-
 
     /**
      * 初始化标题
      */
     private void initSubTitle() {
-        subTitles.add("资讯");
-        subTitles.add("博客");
-
+        subTitles.add("开源资讯");
+        subTitles.add("推荐博客");
+        subTitles.add("技术问答");
+        subTitles.add("每日一博");
         allAdapter.addPagerTitles(subTitles);
 
-
     }
-
-
-
-
 }
