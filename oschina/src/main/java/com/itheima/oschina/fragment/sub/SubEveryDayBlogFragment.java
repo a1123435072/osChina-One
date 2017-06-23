@@ -1,7 +1,7 @@
 package com.itheima.oschina.fragment.sub;
 
 import android.support.v7.widget.RecyclerView;
-import com.itheima.oschina.adapter.sub.SubNewFragmentAdapter;
+import com.itheima.oschina.adapter.sub.CommendFragmentAdapter;
 import com.itheima.oschina.base.baseFragment;
 import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.xutil.XmlUtils;
@@ -12,14 +12,14 @@ import com.itheima.oschina.xutil.XmlUtils;
 
 public class SubEveryDayBlogFragment extends baseFragment {
     //一个通用的适配器
-    private SubNewFragmentAdapter subNewFragmentAdapter;
+    private CommendFragmentAdapter commendFragmentAdapter;
 
     private boolean isPullResfresh;
 
     @Override
     protected RecyclerView.Adapter getCommonAdapter() {
-        subNewFragmentAdapter = new SubNewFragmentAdapter(getActivity());
-        return subNewFragmentAdapter;
+        commendFragmentAdapter = new CommendFragmentAdapter(getActivity());
+        return commendFragmentAdapter;
     }
     //重写recyclerview下拉刷新和加载更多的监听
     @Override
@@ -49,12 +49,12 @@ public class SubEveryDayBlogFragment extends baseFragment {
     protected void refresh(String response) {
         NewsList newsList = XmlUtils.toBean(NewsList.class, response.getBytes());
         if(isPullResfresh){
-            subNewFragmentAdapter.clear();
-            subNewFragmentAdapter.addAll(newsList.getList());
+            commendFragmentAdapter.clear();
+            commendFragmentAdapter.addAll(newsList.getList());
             isPullResfresh =!isPullResfresh;
             mRecyclerView.refreshComplete();
         }else{
-            subNewFragmentAdapter.addAll(newsList.getList());
+            commendFragmentAdapter.addAll(newsList.getList());
             mRecyclerView.loadMoreComplete();
         }
     }
