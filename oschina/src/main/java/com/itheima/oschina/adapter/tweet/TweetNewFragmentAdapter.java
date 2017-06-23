@@ -2,6 +2,7 @@ package com.itheima.oschina.adapter.tweet;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.TweetDetailsActivity;
 import com.itheima.oschina.adapter.sub.SubNewFragmentAdapter;
 import com.itheima.oschina.bean.News;
 import com.itheima.oschina.bean.Tweet;
@@ -63,7 +65,8 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         tweetNewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, TweetDetailsActivity.class);
+                context.startActivity(intent);
             }
         });
 

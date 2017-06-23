@@ -38,6 +38,7 @@ public class TweetNewFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_sub_new_fragment, container, false);
+                                                //就一个XRecyclerView
         return view;
     }
 
