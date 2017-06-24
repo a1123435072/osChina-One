@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -308,6 +309,8 @@ public class XRecyclerView extends RecyclerView {
             return false;
         }
     }
+
+
 
     private class DataObserver extends RecyclerView.AdapterDataObserver {
         @Override

@@ -38,12 +38,13 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mActivity).inflate(R.layout.layout_tweet_new_fragment_item, parent, false);
+                                                                        //最新动弹item
         return new TweetNewFragmentAdapter.TweetNewViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        TweetNewFragmentAdapter.TweetNewViewHolder tweetNewViewHolder = (TweetNewFragmentAdapter.TweetNewViewHolder) holder;
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        final TweetNewFragmentAdapter.TweetNewViewHolder tweetNewViewHolder = (TweetNewFragmentAdapter.TweetNewViewHolder) holder;
         tweetNewViewHolder.tv_content.setText(items.get(position).getBody());
         tweetNewViewHolder.tv_id.setText(items.get(position).getAuthor());
         tweetNewViewHolder.tv_time.setText(items.get(position).getPubDate());
@@ -63,6 +64,8 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, TweetDetailsActivity.class);
+                int id = items.get(position).getId();
+                intent.putExtra("id",id);
                 context.startActivity(intent);
             }
         });

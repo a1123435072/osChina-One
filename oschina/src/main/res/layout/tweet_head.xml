@@ -7,7 +7,8 @@
     <!--上面部分，头像用户名发布时间-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/iv_head"
@@ -22,7 +23,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_id"
+                android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -46,12 +47,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="手机型号" />
+                    android:layout_marginRight="5dp"
+                    android:text="iphone" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="3dp"
                     android:layout_toLeftOf="@+id/tv_iphone"
                     android:src="@drawable/platform" />
 
@@ -60,20 +63,14 @@
     </LinearLayout>
 
     <!--中间内容部分-->
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="发表内容" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        android:text="发表内容"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_margin="10dp"/>
 
     <!--点赞评论-->
     <RelativeLayout
@@ -86,42 +83,44 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="3"/>
+            android:layout_marginRight="5dp"
+            android:text="3" />
 
 
         <ImageView
             android:id="@+id/iv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/widget_bar_tweet_nor"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/tv_commentNumber"/>
+            android:layout_toLeftOf="@id/tv_commentNumber"
+            android:src="@drawable/widget_bar_tweet_nor" />
 
         <TextView
             android:id="@+id/tv_likeNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/iv_comment"
             android:layout_marginRight="10dp"
-            android:text="1"/>
+            android:layout_toLeftOf="@id/iv_comment"
+            android:text="1" />
 
         <ImageView
             android:id="@+id/iv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_unlike"
-            android:layout_toLeftOf="@id/tv_likeNumber"
+            android:layout_centerVertical="true"
             android:layout_marginRight="3dp"
-            android:layout_centerVertical="true" />
+            android:layout_toLeftOf="@id/tv_likeNumber"
+            android:src="@drawable/ic_unlike" />
 
     </RelativeLayout>
 
     <!--点赞的人-->
     <TextView
-        android:text="有哪些人点赞了"
+        android:id="@+id/tv_likeMan"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="有哪些人点赞了" />
 
 
 </LinearLayout>
