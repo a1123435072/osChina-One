@@ -85,8 +85,8 @@ public class AllFragment extends android.support.v4.app.Fragment {
     private void initSubFragment() {
 
             subFragments.add(new SubNewFragment());//添加资讯fragment
-            subFragments.add(new SubTechnologyFragmentw());//添加博客fragment
-            subFragments.add(new SubBlogFragment());//添加技术fragmet
+            subFragments.add(new SubBlogFragment());//添加博客fragment
+            subFragments.add(new SubTechnologyFragmentw());//添加技术fragmet
             subFragments.add(new SubEveryDayBlogFragment());//添加每日一博fragmet
             allAdapter.addAll(subFragments);
 
