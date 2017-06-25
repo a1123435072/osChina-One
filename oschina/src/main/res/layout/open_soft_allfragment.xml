@@ -3,8 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/rv_tuijain"
+    <FrameLayout
+        android:id="@+id/fl_opensoft_allfragment"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+        android:layout_height="0dp"></FrameLayout>
 </LinearLayout>

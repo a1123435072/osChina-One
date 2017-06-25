@@ -116,9 +116,7 @@ public class TweetNewFragment extends Fragment{
                     tweetNewFragmentAdapter.clear();
                     tweetNewFragmentAdapter.addAll(tweetsList.getList());
                     mRecyclerView.refreshComplete();
-
                     isPullRefresh = !isPullRefresh;
-
                 }else{
                     tweetNewFragmentAdapter.addAll(tweetsList.getList());
                     mRecyclerView.loadMoreComplete();

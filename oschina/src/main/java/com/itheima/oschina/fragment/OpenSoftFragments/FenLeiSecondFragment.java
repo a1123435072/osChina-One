@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.fenLeiFragmentAdapter;
+import com.itheima.oschina.adapter.opensoft.fenLeiSecondFragmentAdapter;
 import com.itheima.oschina.bean.SoftwareCatalogList;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
@@ -28,12 +29,19 @@ import org.senydevpkg.net.HttpParams;
  * Created by yangg on 2017/6/23.
  */
 
-public class FenLeiFragment extends Fragment {
+public class FenLeiSecondFragment extends Fragment {
 
     private XRecyclerView rv_femlei;
-    private fenLeiFragmentAdapter fenLeiFragmentAdapter;
+    private fenLeiSecondFragmentAdapter fenLeiSecondFragmentAdapter;
     private Context context;
     private FragmentManager fragmentManager;
+    private int tag;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        tag = getArguments() != null ? getArguments().getInt("tag") : 1;
+    }
 
     @Nullable
     @Override
@@ -60,13 +68,13 @@ public class FenLeiFragment extends Fragment {
      * Create a new instance of CountingFragment, providing "num" as an
      * argument.
      */
-    static FenLeiFragment newInstance() {
-        FenLeiFragment f = new FenLeiFragment();
+    public static FenLeiSecondFragment newInstance(int tag) {
+        FenLeiSecondFragment f = new FenLeiSecondFragment();
 
-        // Supply num input as an argument.
-       // Bundle args = new Bundle();
-        //args.putInt("num", num);
-       // f.setArguments(args);
+       // Supply num input as an argument.
+        Bundle args = new Bundle();
+        args.putInt("tag", tag);
+        f.setArguments(args);
         return f;
     }
     /**
@@ -76,7 +84,7 @@ public class FenLeiFragment extends Fragment {
         String  url = "http://www.oschina.net/action/api/softwarecatalog_list";
 
         HttpParams httpParams = new HttpParams();
-        httpParams.put("tag","0");
+        httpParams.put("tag",tag);
 
         HttpLoader.getInstance(getActivity()).get(url, httpParams, null, 0x11, new HttpLoader.HttpListener<String>() {
             @Override
@@ -84,9 +92,9 @@ public class FenLeiFragment extends Fragment {
                 //System.out.println(response);
                 SoftwareCatalogList softwareCatalogList = XmlUtils.toBean(SoftwareCatalogList.class, response.getBytes());
                // Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
-                fenLeiFragmentAdapter.clear();
-                fenLeiFragmentAdapter.addAll(softwareCatalogList.getSoftwarecataloglist());
-                fenLeiFragmentAdapter.notifyDataSetChanged();
+                fenLeiSecondFragmentAdapter.clear();
+                fenLeiSecondFragmentAdapter.addAll(softwareCatalogList.getSoftwarecataloglist());
+                fenLeiSecondFragmentAdapter.notifyDataSetChanged();
 //                rv_femlei.refreshComplete();
             }
 
@@ -115,7 +123,7 @@ public class FenLeiFragment extends Fragment {
 
 //       rv_femlei.refresh();
 
-        fenLeiFragmentAdapter = new fenLeiFragmentAdapter(getActivity(),fragmentManager);
-        rv_femlei.setAdapter(fenLeiFragmentAdapter);
+        fenLeiSecondFragmentAdapter = new fenLeiSecondFragmentAdapter(getActivity(),fragmentManager);
+        rv_femlei.setAdapter(fenLeiSecondFragmentAdapter);
     }
 }

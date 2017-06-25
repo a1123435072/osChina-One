@@ -22,8 +22,10 @@
         </activity>
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.codeCloudActivity" />
-        <activity android:name=".activity.OpenSoftActivity"></activity>
-        <activity android:name=".activity.TweetDetailsActivity"></activity>
+        <activity android:name=".activity.OpenSoftActivity" />
+        <activity android:name=".activity.TweetDetailsActivity" />
+        <activity android:name=".activity.opensoft.RecommendActivity" />
+        <activity android:name=".activity.opensoft.WeburlShowActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.itheima.oschina.adapter;
+package com.itheima.oschina.adapter.opensoft;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.bean.SoftwareCatalogList;
-
 import com.itheima.oschina.fragment.OpenSoftFragments.FenLeiSecondFragment;
 
 import java.util.ArrayList;
@@ -23,15 +22,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.attr.tag;
+
 /**
  * Created by yangg on 2017/6/23.
  */
 
-public class fenLeiFragmentAdapter extends RecyclerView.Adapter {
+public class fenLeiSecondFragmentAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<SoftwareCatalogList.SoftwareType> item = new ArrayList<>();
     private FragmentManager fragmentManager;
-    public fenLeiFragmentAdapter(Context context, FragmentManager fragmentManager) {
+    public fenLeiSecondFragmentAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager=fragmentManager;
     }
@@ -46,15 +47,15 @@ public class fenLeiFragmentAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        fenLeiFragmentAdapter.ViewHolder viewHolder = (ViewHolder) holder;
+        fenLeiSecondFragmentAdapter.ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.tvTitleFenlei.setText(item.get(position).getName());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(context,"点击了条目",Toast.LENGTH_SHORT).show();
                 int tag = item.get(position).getTag();
-                Toast.makeText(context,"点击了条目:tag是"+tag,Toast.LENGTH_SHORT).show();
-                addFragmentToStack(tag);
+               // addFragmentToStack(tag);
 
 
             }
@@ -67,7 +68,7 @@ public class fenLeiFragmentAdapter extends RecyclerView.Adapter {
         ft.replace(R.id.fl_opensoft_allfragment, newFragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.addToBackStack(null);
-        ft.commitAllowingStateLoss();
+        ft.commit();
     }
 
     @Override

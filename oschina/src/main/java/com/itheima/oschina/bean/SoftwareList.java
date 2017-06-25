@@ -5,6 +5,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 开源软件,推荐,bean
+ */
 @SuppressWarnings("serial")
 @XStreamAlias("oschina")
 public class SoftwareList extends Entity implements ListEntity<SoftwareDec> {
