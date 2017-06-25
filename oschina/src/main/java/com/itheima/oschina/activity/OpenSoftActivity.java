@@ -3,14 +3,15 @@ package com.itheima.oschina.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.OpenSoftAdapter;
 import com.itheima.oschina.fragment.OpenSoftFragments.FenLeiFragment;
-import com.itheima.oschina.fragment.sub.SubBlogFragment;
+import com.itheima.oschina.fragment.OpenSoftFragments.tuiJianFragment;
+
 import com.itheima.oschina.fragment.sub.SubEveryDayBlogFragment;
 
 
@@ -60,7 +61,7 @@ public class OpenSoftActivity extends AppCompatActivity {
     private void initFragment() {
         initTab();
         openSoftFragments.add(new FenLeiFragment());//分类Fragment
-        openSoftFragments.add(new SubBlogFragment());//添加博客fragment
+        openSoftFragments.add(new tuiJianFragment());//添加博客fragment
         openSoftFragments.add(new SubEveryDayBlogFragment());//添加技术fragmet
         openSoftFragments.add(new SubEveryDayBlogFragment());//添加每日一博fragmet
         openSoftFragments.add(new SubEveryDayBlogFragment());//添加每日一博fragmet
