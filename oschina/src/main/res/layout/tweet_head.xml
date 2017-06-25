@@ -22,13 +22,14 @@
             android:layout_weight="5"
             android:orientation="vertical">
 
+            <!--用户名-->
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="用户名"
-                android:textColor="#ba0077ff" />
+                android:textColor="#ba0077ff"
+                android:textSize="15sp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -47,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="10dp"
                     android:text="iphone" />
 
                 <ImageView
@@ -70,7 +71,8 @@
         android:text="发表内容"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:layout_margin="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <!--点赞评论-->
     <RelativeLayout
@@ -83,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:text="3" />
 
 
@@ -120,7 +122,9 @@
         android:id="@+id/tv_likeMan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="有哪些人点赞了" />
+        android:text="有哪些人点赞了"
+        android:layout_margin="10dp"/>
+
 
 
 </LinearLayout>

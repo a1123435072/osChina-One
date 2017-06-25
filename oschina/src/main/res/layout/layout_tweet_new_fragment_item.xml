@@ -78,6 +78,22 @@
                 android:layout_centerVertical="true" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/comment_reply_container_bg"
+                android:layout_centerInParent="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hahahhaahahahahahahh"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
 
     </LinearLayout>
 

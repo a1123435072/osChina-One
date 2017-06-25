@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
 import com.itheima.oschina.activity.MainActivity;
+import com.itheima.oschina.activity.TweetDetailsActivity;
+import com.itheima.oschina.adapter.tweet.TweetCommentAdapter;
 import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
 import com.itheima.oschina.bean.TweetsList;
 import com.itheima.oschina.view.RecycleViewDivider;

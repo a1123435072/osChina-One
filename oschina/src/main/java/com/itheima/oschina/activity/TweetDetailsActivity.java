@@ -1,5 +1,8 @@
 package com.itheima.oschina.activity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +17,16 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
+import com.itheima.oschina.adapter.tweet.TweetCommentAdapter;
+import com.itheima.oschina.bean.Comment;
+import com.itheima.oschina.bean.CommentList;
 import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetDetail;
 import com.itheima.oschina.bean.TweetLike;
 import com.itheima.oschina.bean.TweetLikeUserList;
 import com.itheima.oschina.bean.TweetsList;
 import com.itheima.oschina.bean.User;
+import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.squareup.picasso.Picasso;
@@ -27,6 +34,7 @@ import com.squareup.picasso.Picasso;
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -51,13 +59,17 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     private int pageIndex = 0;
     private boolean isPullRefresh;
+    private TweetDetail tweetDetail;
+    private Tweet tweet;
+    int id;
+    TweetCommentAdapter tweetCommentAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_details);
-        //一个XRecyclerView
-//        tvName = (TextView) findViewById(R.id.tv_name);
+                                //一个XRecyclerView
         xrecyclerView = (XRecyclerView) findViewById(R.id.rv_tweetDetails);
         //添加头部  楼主内容
 //        View view = View.inflate(this, R.layout.tweet_head, null);
@@ -77,13 +89,16 @@ public class TweetDetailsActivity extends AppCompatActivity {
         String url = "http://www.oschina.net/action/api/tweet_detail";
         HttpParams params = new HttpParams();
         //从intent中获取id
-        int id = getIntent().getIntExtra("id", 0);
+        id = getIntent().getIntExtra("id", 0);
         params.put("id", id);
         HttpLoader.getInstance(this).get(url, params, null, 0x11, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
-                TweetDetail tweetDetail = XmlUtils.toBean(TweetDetail.class, response.getBytes());
-                Tweet tweet = tweetDetail.getTweet();
+                tweetDetail = XmlUtils.toBean(TweetDetail.class, response.getBytes());
+                tweet = tweetDetail.getTweet();
+//                int id = tweet.getId();
+//                System.out.println("内部"+id);
+//                t.setId(id);
 
                 //给头部item控件设置数据
                 //先是楼主信息
@@ -102,14 +117,18 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 List<User> likeUser = tweet.getLikeUser();
                 String str = "";
                 int size = likeUser.size();
-                for (int i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        str += likeUser.get(i).getName();
-                        break;
+                if (size==1){
+                    str = likeUser.get(0).getName()+"觉得很赞";
+                }else if (size>1){
+                    for (int i = 0; i < size; i++) {
+                        if (i == size - 1) {
+                            str += likeUser.get(i).getName();
+                            break;
+                        }
+                        str += likeUser.get(i).getName() + "、";
                     }
-                    str += likeUser.get(i).getName() + "、";
+                    str = str + "等" + size +"人觉的很赞";
                 }
-                str = str + "等" + size +"人觉的很赞";
                 tv_likeMan.setText(str);
             }
 
@@ -118,37 +137,42 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
             }
         });
-
+        //把头部楼主部分添加到XRecyclerView上面
         xrecyclerView.addHeaderView(view);
 
 
         //添加下面的评论item
-        xrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        xrecyclerView.setAdapter(new RecyclerView.Adapter() {
+        String url2 = "http://www.oschina.net/action/api/comment_list";
+        System.out.println("外部"+id);
+
+        HttpParams params2 = new HttpParams();
+        params2.put("pageIndex", pageIndex+"");
+        params2.put("catalog", "3");
+        params2.put("pageSize", "20");
+        params2.put("id", id);//记得id是int值
+
+        HttpLoader.getInstance(this).get(url2, params2, null, 0x25, new HttpLoader.HttpListener<String>() {
             @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = View.inflate(getApplicationContext(), R.layout.item_tweet_comment, null);
-                return new MyViewholder(view);
+            public void onGetResponseSuccess(int requestCode, String response) {
+                System.out.println("访问成功");
+                CommentList commentList = XmlUtils.toBean(CommentList.class, response.getBytes());
+//                System.out.println(commentList.getList().get(0).getAppClient());
+                tweetCommentAdapter.addAll(commentList.getList());
             }
 
             @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+            public void onGetResponseError(int requestCode, VolleyError error) {
+                System.out.println("访问失败");
             }
-
-            @Override
-            public int getItemCount() {
-                return 100;
-            }
-
-            class MyViewholder extends RecyclerView.ViewHolder {
-
-                public MyViewholder(View itemView) {
-                    super(itemView);
-                }
-            }
-
         });
+        //分隔线，需要一个自定义分隔线控件，在view里面
+        xrecyclerView.addItemDecoration(new RecycleViewDivider(
+                this, LinearLayoutManager.HORIZONTAL, 1, Color.GRAY));
+        xrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        tweetCommentAdapter = new TweetCommentAdapter(TweetDetailsActivity.this,getApplicationContext());
+        xrecyclerView.setAdapter(tweetCommentAdapter);
+
     }
 
     @OnClick(R.id.iv_like)
