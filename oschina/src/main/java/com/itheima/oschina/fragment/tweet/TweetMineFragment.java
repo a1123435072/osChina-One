@@ -113,7 +113,6 @@ public class TweetMineFragment extends Fragment{
                 }
             });
 
-            mRecyclerView.setLoadingMoreEnabled(false);
             //设置初始化状态为刷新状态。作用：界面初始加载时，刷新数据。
             mRecyclerView.refresh();
 
@@ -150,7 +149,7 @@ public class TweetMineFragment extends Fragment{
                 TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
 
                 if (isPullRefresh) {
-                    tweetNewFragmentAdapter.clear();//让适配器清空一下数据
+                    tweetNewFragmentAdapter.clear();
                     items.addAll(tweetsList.getList());
                     mRecyclerView.refreshComplete();
 

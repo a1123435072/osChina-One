@@ -95,8 +95,6 @@ public class MeFragment extends Fragment {
         TextView tv_content = (TextView) view.findViewById(R.id.tv_username);
         tv_content.setText("我是用户名");
 
- 
-
     }
 
     @Override

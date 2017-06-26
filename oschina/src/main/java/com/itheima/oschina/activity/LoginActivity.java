@@ -51,7 +51,6 @@ public  class LoginActivity extends AppCompatActivity {
         et_login_pwd = (EditText) findViewById(R.id.et_login_pwd);
         bt_login_submit = (Button) findViewById(R.id.bt_login_submit);
 
-        //登录按钮的点击事件
         bt_login_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

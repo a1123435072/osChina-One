@@ -137,14 +137,14 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 //    public void addAll(List<Tweet> datas) {
 //        items.addAll(datas);
-//        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());//从一个区间段添加item
+//        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());
 //        //需要刷新一次，因为加载新的item时，itemCount需要相应变化
 //        notifyDataSetChanged();
 //    }
 
     //在哪用的？？？
     public void clear() {
-//        notifyItemRangeRemoved(1, getItemCount());//从一个区间段移除item
+//        notifyItemRangeRemoved(1, getItemCount());
         items.clear();
     }
 
