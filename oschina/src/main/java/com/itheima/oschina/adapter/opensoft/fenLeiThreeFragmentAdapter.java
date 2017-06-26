@@ -1,6 +1,7 @@
 package com.itheima.oschina.adapter.opensoft;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.opensoft.RecommendActivity;
+import com.itheima.oschina.activity.opensoft.WeburlShowActivity;
 import com.itheima.oschina.bean.SoftwareDec;
 import com.itheima.oschina.fragment.OpenSoftFragments.FenLeiSecondFragment;
 
@@ -52,10 +55,14 @@ public class fenLeiThreeFragmentAdapter extends RecyclerView.Adapter {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "点击了条目", Toast.LENGTH_SHORT).show();
                 String url = item.get(position).getUrl();
+               // Toast.makeText(context, "点击了条目"+url, Toast.LENGTH_SHORT).show();
                 // addFragmentToStack(tag);
 
+                Intent intent = new Intent(context, RecommendActivity.class);
+                intent.putExtra("url",url);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
 
             }
         });

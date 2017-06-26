@@ -11,6 +11,9 @@ import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.OpenSoftAdapter;
 import com.itheima.oschina.fragment.OpenSoftFragments.FenLeiAllFragment;
 import com.itheima.oschina.fragment.OpenSoftFragments.FenLeiFragment;
+import com.itheima.oschina.fragment.OpenSoftFragments.HotFragment;
+import com.itheima.oschina.fragment.OpenSoftFragments.MideInChinaNewFragment;
+import com.itheima.oschina.fragment.OpenSoftFragments.VeryNewFragment;
 import com.itheima.oschina.fragment.OpenSoftFragments.tuiJianFragment;
 
 import com.itheima.oschina.fragment.sub.SubEveryDayBlogFragment;
@@ -63,9 +66,9 @@ public class OpenSoftActivity extends AppCompatActivity {
         initTab();
         openSoftFragments.add(new FenLeiAllFragment());//分类Fragment
         openSoftFragments.add(new tuiJianFragment());//添加博客fragment
-        openSoftFragments.add(new SubEveryDayBlogFragment());//添加技术fragmet
-        openSoftFragments.add(new SubEveryDayBlogFragment());//添加每日一博fragmet
-        openSoftFragments.add(new SubEveryDayBlogFragment());//添加每日一博fragmet
+        openSoftFragments.add(new VeryNewFragment());//添加技术fragmet
+        openSoftFragments.add(new HotFragment());//添加每日一博fragmet
+        openSoftFragments.add(new MideInChinaNewFragment());//添加每日一博fragmet
         openSoftAdapter.addAll(openSoftFragments);
 
 
