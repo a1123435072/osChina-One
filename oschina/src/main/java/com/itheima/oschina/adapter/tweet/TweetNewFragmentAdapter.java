@@ -4,20 +4,33 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.MainActivity;
 import com.itheima.oschina.activity.TweetDetailsActivity;
 import com.itheima.oschina.bean.Tweet;
+import com.itheima.oschina.utills.SpannableUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.itheima.oschina.xutil.UIUtils.getContext;
+import static com.itheima.oschina.xutil.UIUtils.getResources;
 
 /**
  * Created by raynwang on 2017/6/22.
@@ -51,7 +64,6 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         tweetNewViewHolder.tv_commemntNumber.setText(items.get(position).getCommentCount());
         tweetNewViewHolder.tv_likeNumber.setText(items.get(position).getLikeCount()+"");
 
-
         ImageView imageView = tweetNewViewHolder.iv_head;
 //        BitmapUtils.display(context,imageView,items.get(position).getPortrait());
 
@@ -59,6 +71,52 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (!TextUtils.isEmpty(urlPortrait)) {
             Picasso.with(context).load(urlPortrait).into(imageView);
         }
+
+
+        //富文本
+//        String content = items.get(position).getBody();
+//        tweetNewViewHolder.tv_content.setText(content);
+//        Spannable spannable = SpannableUtil.formatterOnlyTag(context, tweetNewViewHolder.tv_content.getText());
+//        spannable = SpannableUtil.formatterOnlyLink(context, spannable);
+//        spannable = SpannableUtil.formatterEmoji(getResources(), spannable, 50);//先不弄表情
+//        tweetNewViewHolder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
+//        tweetNewViewHolder.tv_content.setText(spannable);
+
+
+//        content_txt_6.setText("xxxxxxx<a href='http://www.baidu.com'>www.baidu.com</a>");
+
+//        SpannableStringBuilder builder = new SpannableStringBuilder(content);
+//
+//        Pattern pattern = Pattern.compile(
+//                "<a\\s+href=['\"]([^'\"]*)['\"][^<>]*>([^<>]*)</a>"
+//        );
+//
+//        Matcher matcher;
+//        while (true) {
+//            matcher = pattern.matcher(builder.toString());
+//            if (matcher.find()) {
+//                final String group0 = matcher.group(1);//http://www.baidu.com
+//                final String group1 = matcher.group(2);//www.baidu.com
+//
+//                // 字符串中<a href='http://www.baidu.com'>www.baidu.com</a> 替换成 www.baidu.com
+//                builder.replace(matcher.start(), matcher.end(), group1);
+//                ClickableSpan span = new ClickableSpan() {
+//                    @Override
+//                    public void onClick(View widget) {
+//                        Toast.makeText(getContext(), "group0 = " + group0, Toast.LENGTH_SHORT).show();
+//                    }
+//                };
+//                builder.setSpan(span, matcher.start(), matcher.start() + group1.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+//                continue;
+//            }
+//            break;
+//        }
+//        //设置TextView的行为.比如:超链接行为  或者  滑动行为
+//        tweetNewViewHolder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());// ScrollingMovementMethod.getInstance();
+//        //将格式化的字符串,设置给textview
+//        tweetNewViewHolder.tv_content.setText(builder);
+
+
 
         tweetNewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

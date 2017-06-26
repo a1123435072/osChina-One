@@ -90,15 +90,13 @@ public class TweetDetailsActivity extends AppCompatActivity {
         HttpParams params = new HttpParams();
         //从intent中获取id
         id = getIntent().getIntExtra("id", 0);
+        System.out.println("-----------------"+id);
         params.put("id", id);
         HttpLoader.getInstance(this).get(url, params, null, 0x11, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
                 tweetDetail = XmlUtils.toBean(TweetDetail.class, response.getBytes());
                 tweet = tweetDetail.getTweet();
-//                int id = tweet.getId();
-//                System.out.println("内部"+id);
-//                t.setId(id);
 
                 //给头部item控件设置数据
                 //先是楼主信息
@@ -106,7 +104,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 tvTime.setText(tweet.getPubDate());
                 tvCommentNumber.setText(tweet.getCommentCount() + "");
                 tvLikeNumber.setText(tweet.getLikeCount() + "");
-                tv_content.setText(tweet.getBody());
+                tv_content.setText(tweet.getBody().trim());
 //                tv_content.setText("\u3000\u3000"+tweet.getBody());
                 String urlPortrait = tweet.getPortrait();
                 if (!TextUtils.isEmpty(urlPortrait)) {
@@ -137,6 +135,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
             }
         });
+        xrecyclerView.setLoadingMoreEnabled(false);//让它不要上拉加载，就不会在下面多一条分割线
         //把头部楼主部分添加到XRecyclerView上面
         xrecyclerView.addHeaderView(view);
 
@@ -154,15 +153,14 @@ public class TweetDetailsActivity extends AppCompatActivity {
         HttpLoader.getInstance(this).get(url2, params2, null, 0x25, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
-                System.out.println("访问成功");
                 CommentList commentList = XmlUtils.toBean(CommentList.class, response.getBytes());
 //                System.out.println(commentList.getList().get(0).getAppClient());
                 tweetCommentAdapter.addAll(commentList.getList());
+                tweetCommentAdapter.notifyDataSetChanged();//适配器添加了数据，但是没有刷新，有可能出不来
             }
 
             @Override
             public void onGetResponseError(int requestCode, VolleyError error) {
-                System.out.println("访问失败");
             }
         });
         //分隔线，需要一个自定义分隔线控件，在view里面
