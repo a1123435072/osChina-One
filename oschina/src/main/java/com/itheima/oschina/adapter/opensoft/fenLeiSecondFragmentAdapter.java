@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.itheima.oschina.R;
 import com.itheima.oschina.bean.SoftwareCatalogList;
 import com.itheima.oschina.fragment.OpenSoftFragments.FenLeiSecondFragment;
+import com.itheima.oschina.fragment.OpenSoftFragments.FenLeiThreeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,9 @@ public class fenLeiSecondFragmentAdapter extends RecyclerView.Adapter {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"点击了条目",Toast.LENGTH_SHORT).show();
                 int tag = item.get(position).getTag();
-               // addFragmentToStack(tag);
+                Toast.makeText(context,"点击了条目"+tag,Toast.LENGTH_SHORT).show();
+                addFragmentToStack(tag);
 
 
             }
@@ -63,7 +64,7 @@ public class fenLeiSecondFragmentAdapter extends RecyclerView.Adapter {
     }
 
     public void addFragmentToStack(int tag) {
-        Fragment newFragment = FenLeiSecondFragment.newInstance(tag);
+        Fragment newFragment = FenLeiThreeFragment.newInstance(tag);
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.fl_opensoft_allfragment, newFragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
