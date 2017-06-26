@@ -43,9 +43,10 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private List<Tweet> items = new ArrayList<>();
 
-    public TweetNewFragmentAdapter(Activity activity, Context context) {
+    public TweetNewFragmentAdapter(Activity activity, Context context,List<Tweet> items) {
         this.mActivity = activity;
         this.context = context;
+        this.items = items;
     }
 
     @Override
@@ -71,7 +72,6 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (!TextUtils.isEmpty(urlPortrait)) {
             Picasso.with(context).load(urlPortrait).into(imageView);
         }
-
 
         //富文本
 //        String content = items.get(position).getBody();
@@ -135,15 +135,17 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         return items.size();
     }
 
-    //在哪用的？？？
-    public void addAll(List<Tweet> datas) {
-        items.addAll(datas);
-        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());
-    }
+//    public void addAll(List<Tweet> datas) {
+//        items.addAll(datas);
+//        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());
+//        //需要刷新一次，因为加载新的item时，itemCount需要相应变化
+//        notifyDataSetChanged();
+//    }
 
     //在哪用的？？？
     public void clear() {
-        notifyItemRangeRemoved(1, getItemCount());
+//        notifyItemRangeRemoved(1, getItemCount());
+        items.clear();
     }
 
     class TweetNewViewHolder extends RecyclerView.ViewHolder {
