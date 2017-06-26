@@ -30,7 +30,7 @@ public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity).inflate(R.layout.layout_sub_new_fragment_item, parent, false);
+        View view = LayoutInflater.from(mActivity).inflate(R.layout.layout_sub_commend, parent, false);
         return new SubNewViewHolder(view);
     }
 
@@ -38,7 +38,10 @@ public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         SubNewViewHolder  subNewViewHolder = (SubNewViewHolder) holder;
-        subNewViewHolder.tv_content.setText(items.get(position).getTitle());
+        subNewViewHolder.title.setText(items.get(position).getTitle());
+        subNewViewHolder.tvcontent.setText(items.get(position).getBody());
+        subNewViewHolder.nickName.setText(items.get(position).getAuthor());
+
     }
 
 
@@ -50,6 +53,7 @@ public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public void addAll(List<News> datas){
         items.addAll(datas);
+
         notifyItemRangeInserted(items.size() -1, getItemCount() + datas.size());
     }
 
@@ -62,17 +66,40 @@ public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     class SubNewViewHolder extends RecyclerView.ViewHolder{
 
-        private final ImageView iv_image;
-        private final TextView tv_content;
+       // private final ImageView ivimage;
+        private final TextView tvcontent;
+        private final TextView title;
+        private final TextView nickName;
+        private final TextView count;
+        private final TextView tvTimes;
 
         public SubNewViewHolder(View itemView) {
             super(itemView);
-            iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
-            tv_content = (TextView) itemView.findViewById(R.id.tv_content);
+            /**
+             * 个性头像
+             */
+          //  ivimage = (ImageView) itemView.findViewById(R.id.iv_image);
+            /**
+             *标题
+             */
+            title = (TextView) itemView.findViewById(R.id.tv_title);
+            /**
+             *内容主题
+             */
+            tvcontent = (TextView) itemView.findViewById(R.id.tv_content);
+            /**
+             *用户昵称
+             */
+            nickName = (TextView) itemView.findViewById(R.id.nick_name);
+            /**
+             *点在次数count
+             */
+            count = (TextView) itemView.findViewById(R.id.count);
+            /**
+             *时间
+             */
+            tvTimes = (TextView) itemView.findViewById(R.id.tv_time);
         }
 
     }
-
-
-
 }

@@ -65,7 +65,7 @@ public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         public SubBlogViewHolder(View itemView) {
             super(itemView);
-            iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
+          iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
 
          }

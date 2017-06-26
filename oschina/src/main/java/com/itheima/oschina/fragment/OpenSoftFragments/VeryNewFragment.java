@@ -27,7 +27,7 @@ import org.senydevpkg.net.HttpParams;
  * Created by yangg on 2017/6/23.
  */
 
-public class tuiJianFragment extends Fragment {
+public class VeryNewFragment extends Fragment {
 
 
     private XRecyclerView rv_tuijian;
@@ -97,7 +97,7 @@ public class tuiJianFragment extends Fragment {
     private void reFreshData() {
         String url = "https://www.oschina.net/action/api/software_list";
         HttpParams params = new HttpParams();
-        params.put("searchTag", "recommend");
+        params.put("searchTag", "time");
 //        params.put("pageIndex", pageIndex + "");
 //        params.put("pageSize", 20);
 

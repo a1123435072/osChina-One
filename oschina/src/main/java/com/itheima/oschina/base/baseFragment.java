@@ -120,9 +120,17 @@ public abstract class baseFragment extends Fragment {
             }
         });
     }
-    //得到头的
+
+    /**
+     *
+     * 获得一个头view,作为轮播图
+     */
     public View getHeadView(){
        return  null;
     }
+
+    /**
+     *一个刷新数据的方法
+     */
     protected abstract void refresh(String response) ;
 }

@@ -27,7 +27,7 @@ import org.senydevpkg.net.HttpParams;
  * Created by yangg on 2017/6/23.
  */
 
-public class tuiJianFragment extends Fragment {
+public class MideInChinaNewFragment extends Fragment {
 
 
     private XRecyclerView rv_tuijian;
@@ -97,20 +97,14 @@ public class tuiJianFragment extends Fragment {
     private void reFreshData() {
         String url = "https://www.oschina.net/action/api/software_list";
         HttpParams params = new HttpParams();
-        params.put("searchTag", "recommend");
-//        params.put("pageIndex", pageIndex + "");
-//        params.put("pageSize", 20);
+        params.put("searchTag", "list_cn");
 
         HttpLoader.getInstance(getActivity())
                 .get(url, params, null, 0x21, new HttpLoader.HttpListener<String>() {
                     @Override
                     public void onGetResponseSuccess(int requestCode, String response) {
                         SoftwareList softwareList = XmlUtils.toBean(SoftwareList.class, response.getBytes());
-                       /* recommendAdapter.clear();
-                        recommendAdapter.addAll(softwareList.getList());
-                        rv_tuijian.refreshComplete();
-                        isPullRefresh = !isPullRefresh;
-*/
+
                         if (isPullRefresh) {
                             recommendAdapter.clear();
                             recommendAdapter.addAll(softwareList.getList());

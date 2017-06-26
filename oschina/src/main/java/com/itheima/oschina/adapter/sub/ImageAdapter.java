@@ -1,6 +1,5 @@
 package com.itheima.oschina.adapter.sub;
 
-import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,10 @@ import java.util.List;
  */
 
 public class ImageAdapter extends PagerAdapter {
-    private Context context;
     private List<ImageView> pictureList;
 
-    public ImageAdapter(List<ImageView> pictureList, Context context) {
+    public ImageAdapter(List<ImageView> pictureList) {
         this.pictureList = pictureList;
-        this.context = context;
     }
 
     @Override

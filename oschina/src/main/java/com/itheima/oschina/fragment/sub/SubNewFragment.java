@@ -116,6 +116,7 @@ public class SubNewFragment extends baseFragment {
         container = (LinearLayout) view.findViewById(R.id.ll_point_container);
         initPicture();
         initSwitchImageView();
+        initPoint();
         return view;
     }
     private void initPicture() {
@@ -130,31 +131,48 @@ public class SubNewFragment extends baseFragment {
 
     private void initSwitchImageView() {
         List<ImageView>  imageViews = new ArrayList<>();
-        for (int i = 0; i < pictureList.size(); i++) {
-            Integer resId;
-//            if(i == -1){//
-//                //添加最后的一张图片
-//                resId = pictureList.get(pictureList.size() - 1);
-//            }else if(i ==  pictureList.size()){
-//                //添加第一张图片
-//                resId = pictureList.get(0);
-//            }else{
+        for (int i = -1; i < pictureList.size()+1; i++) {
+            Integer resId=0;
+            if(i == -1){
+                //添加最后的一张图片
+                resId = pictureList.get(pictureList.size() - 1);
+            }else if(i ==  pictureList.size()){
+                //添加第一张图片
+                resId = pictureList.get(0);
+            }else{
                resId = pictureList.get(i);
-//            }
-            ImageView iv = new ImageView(getActivity());
+            }
+            ImageView iv = new ImageView(getContext());
             iv.setImageResource(resId);
             imageViews.add(iv);
         }
-
         tvTitle.setText("第n张图");
-
-        ImageAdapter adapter= new ImageAdapter(imageViews,getContext());
+        ImageAdapter adapter= new ImageAdapter(imageViews);
         swichImage.setAdapter(adapter);
 
-//        swichImage.setCurrentItem(1,false);
-
+        swichImage.setCurrentItem(1,false);
         starSwitch();
     }
+    //初始化点
+    private void initPoint() {
+        //清空容器里面的布局
+        container.removeAllViews();
+        for (int i = 0; i < pictureList.size(); i++) {
+            //小圆点
+            View view = new View(getContext());
+            //设置背景颜色
+            view.setBackgroundResource(R.drawable.point_gray_bg);
+            //布局参数
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(5,5);
+            //右边距
+            params.rightMargin = 10;
+            //添加布局
+            container.addView(view,params);
+        }
+        //让第一个点的背景为红色
+        container.getChildAt(0).setBackgroundResource(R.drawable.point_red_bg);
+    }
+
 
     //开始切换
     public void starSwitch(){

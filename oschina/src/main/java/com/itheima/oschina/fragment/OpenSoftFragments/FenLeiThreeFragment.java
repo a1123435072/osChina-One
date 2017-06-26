@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
-import com.itheima.oschina.adapter.fenLeiFragmentAdapter;
+import com.itheima.oschina.adapter.opensoft.fenLeiSecondFragmentAdapter;
+import com.itheima.oschina.adapter.opensoft.fenLeiThreeFragmentAdapter;
 import com.itheima.oschina.bean.SoftwareCatalogList;
+import com.itheima.oschina.bean.SoftwareDec;
+import com.itheima.oschina.bean.SoftwareList;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -28,12 +31,19 @@ import org.senydevpkg.net.HttpParams;
  * Created by yangg on 2017/6/23.
  */
 
-public class FenLeiFragment extends Fragment {
+public class FenLeiThreeFragment extends Fragment {
 
     private XRecyclerView rv_femlei;
-    private fenLeiFragmentAdapter fenLeiFragmentAdapter;
+    private fenLeiThreeFragmentAdapter fenLeiThreeFragmentAdapter;
     private Context context;
     private FragmentManager fragmentManager;
+    private int tag;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        tag = getArguments() != null ? getArguments().getInt("tag") : 1;
+    }
 
     @Nullable
     @Override
@@ -60,34 +70,34 @@ public class FenLeiFragment extends Fragment {
      * Create a new instance of CountingFragment, providing "num" as an
      * argument.
      */
-    static FenLeiFragment newInstance() {
-        FenLeiFragment f = new FenLeiFragment();
+    public static FenLeiThreeFragment newInstance(int tag) {
+        FenLeiThreeFragment f = new FenLeiThreeFragment();
 
-        // Supply num input as an argument.
-       // Bundle args = new Bundle();
-        //args.putInt("num", num);
-       // f.setArguments(args);
+       // Supply num input as an argument.
+        Bundle args = new Bundle();
+        args.putInt("tag", tag);
+        f.setArguments(args);
         return f;
     }
     /**
      * 刷新数据
      */
     private void reflashData() {
-        String  url = "http://www.oschina.net/action/api/softwarecatalog_list";
+        String  url = "https://www.oschina.net/action/api/softwaretag_list";
 
         HttpParams httpParams = new HttpParams();
-        httpParams.put("tag","0");
+        httpParams.put("searchTag",tag);
 
         HttpLoader.getInstance(getActivity()).get(url, httpParams, null, 0x11, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
                 //System.out.println(response);
-                SoftwareCatalogList softwareCatalogList = XmlUtils.toBean(SoftwareCatalogList.class, response.getBytes());
-               // Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
-                fenLeiFragmentAdapter.clear();
-                fenLeiFragmentAdapter.addAll(softwareCatalogList.getSoftwarecataloglist());
-                fenLeiFragmentAdapter.notifyDataSetChanged();
-//                rv_femlei.refreshComplete();
+                SoftwareList softwareList = XmlUtils.toBean(SoftwareList.class, response.getBytes());
+                // Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                fenLeiThreeFragmentAdapter.clear();
+                fenLeiThreeFragmentAdapter.addAll(softwareList.getList());
+                fenLeiThreeFragmentAdapter.notifyDataSetChanged();
+               rv_femlei.refreshComplete();
             }
 
             @Override
@@ -96,16 +106,13 @@ public class FenLeiFragment extends Fragment {
             }
         });
 
-
-
     }
 
     /**
      * 初始化revycleview
      */
     private void initRecycleView() {
-        //
-        rv_femlei.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL,1, Color.GRAY));
+        //rv_femlei.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL,1, Color.GRAY));
         //设置一个线性布局的管理器i
         rv_femlei.setLayoutManager(new LinearLayoutManager(getActivity()));
         //设置下拉刷新的样式
@@ -113,9 +120,9 @@ public class FenLeiFragment extends Fragment {
         rv_femlei.setPullRefreshEnabled(false);
         rv_femlei.setLoadingMoreEnabled(false);
 
-//       rv_femlei.refresh();
+        rv_femlei.refresh();
 
-        fenLeiFragmentAdapter = new fenLeiFragmentAdapter(getActivity(),fragmentManager);
-        rv_femlei.setAdapter(fenLeiFragmentAdapter);
+        fenLeiThreeFragmentAdapter = new fenLeiThreeFragmentAdapter(getActivity(),fragmentManager);
+        rv_femlei.setAdapter(fenLeiThreeFragmentAdapter);
     }
 }
