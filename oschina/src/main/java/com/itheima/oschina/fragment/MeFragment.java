@@ -71,8 +71,8 @@ public class MeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_me_fragment, container, false);
 
+        View view = inflater.inflate(R.layout.layout_me_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
