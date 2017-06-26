@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< .merge_file_a11500
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+=======
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> .merge_file_a09452
     android:orientation="vertical" android:layout_width="match_parent"
 
     android:layout_height="match_parent">
 
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
+<<<<<<< .merge_file_a11500
+
+        android:id="@+id/rv_openSoft_fenlei"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+</LinearLayout>
+=======
         android:id="@+id/rv_openSoft_fenlei"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
 </RelativeLayout>
+>>>>>>> .merge_file_a09452

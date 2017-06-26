@@ -3,7 +3,8 @@ package com.itheima.oschina.fragment.sub;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.itheima.oschina.adapter.sub.CommendFragmentAdapter;
+
+import com.itheima.oschina.adapter.sub.BlogFragmentAdapter;
 import com.itheima.oschina.base.baseFragment;
 import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.xutil.XmlUtils;
@@ -13,13 +14,15 @@ import com.itheima.oschina.xutil.XmlUtils;
  */
 
 public class SubBlogFragment extends baseFragment {
-    private CommendFragmentAdapter commendFragmentAdapter;
+
+    private BlogFragmentAdapter blogFragmentAdapter;
+
     private boolean isPullResfresh;
 
     @Override
     protected RecyclerView.Adapter getCommonAdapter() {
-        commendFragmentAdapter = new CommendFragmentAdapter(getActivity());
-        return commendFragmentAdapter;
+         blogFragmentAdapter = new BlogFragmentAdapter(getActivity());
+        return blogFragmentAdapter;
     }
 
     @Override
@@ -28,10 +31,10 @@ public class SubBlogFragment extends baseFragment {
         this.isPullResfresh =true;
         if(isPullResfresh){
             pageIndex=0;
-            requestData(0x24,"news_list");
+            requestData(0x24,"news_list","","20","4","","","week&pag");
         }else{
             pageIndex++;
-            requestData(0x24,"news_list");
+            requestData(0x24,"news_list","","20","4","","","week&pag");
         }
     }
 
@@ -49,12 +52,12 @@ public class SubBlogFragment extends baseFragment {
     protected void refresh(String response) {
         NewsList newsList = XmlUtils.toBean(NewsList.class, response.getBytes());
         if(isPullResfresh){
-            commendFragmentAdapter.clear();
-            commendFragmentAdapter.addAll(newsList.getList());
+            blogFragmentAdapter.clear();
+            blogFragmentAdapter.addAll(newsList.getList());
             isPullResfresh =!isPullResfresh;
             mRecyclerView.refreshComplete();
         }else{
-            commendFragmentAdapter.addAll(newsList.getList());
+            blogFragmentAdapter.addAll(newsList.getList());
             mRecyclerView.loadMoreComplete();
         }
     }

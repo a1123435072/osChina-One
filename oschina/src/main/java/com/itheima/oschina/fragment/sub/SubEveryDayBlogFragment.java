@@ -2,7 +2,9 @@ package com.itheima.oschina.fragment.sub;
 
 import android.support.v7.widget.RecyclerView;
 import com.itheima.oschina.adapter.sub.CommendFragmentAdapter;
+import com.itheima.oschina.adapter.sub.EveryDayFragmentAdapter;
 import com.itheima.oschina.base.baseFragment;
+import com.itheima.oschina.bean.BlogList;
 import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.xutil.XmlUtils;
 
@@ -12,14 +14,14 @@ import com.itheima.oschina.xutil.XmlUtils;
 
 public class SubEveryDayBlogFragment extends baseFragment {
     //一个通用的适配器
-    private CommendFragmentAdapter commendFragmentAdapter;
+    private EveryDayFragmentAdapter commendFragmentAdapter;
 
     private boolean isPullResfresh;
 
     @Override
-    protected RecyclerView.Adapter getCommonAdapter() {
-        commendFragmentAdapter = new CommendFragmentAdapter(getActivity());
-        return commendFragmentAdapter;
+        protected RecyclerView.Adapter getCommonAdapter() {
+            commendFragmentAdapter = new EveryDayFragmentAdapter(getActivity());
+            return commendFragmentAdapter;
     }
     //重写recyclerview下拉刷新和加载更多的监听
     @Override
@@ -28,10 +30,10 @@ public class SubEveryDayBlogFragment extends baseFragment {
         this.isPullResfresh =true;
         if(isPullResfresh){
             pageIndex=0;
-            requestData(0x23,"news_list");
+            requestData(0x23,"blog_list",pageIndex+"","20","","latest","","");
         }else{
             pageIndex++;
-            requestData(0x23,"news_list");
+            requestData(0x23,"blog_list",pageIndex+"","20","","latest","","");
         }
     }
     //重写确定上啦加载
@@ -47,14 +49,15 @@ public class SubEveryDayBlogFragment extends baseFragment {
     //重写接口刷新的方法,网络加载
     @Override
     protected void refresh(String response) {
-        NewsList newsList = XmlUtils.toBean(NewsList.class, response.getBytes());
+
+        BlogList blogList = XmlUtils.toBean(BlogList.class, response.getBytes());
         if(isPullResfresh){
             commendFragmentAdapter.clear();
-            commendFragmentAdapter.addAll(newsList.getList());
+            commendFragmentAdapter.addAll(blogList.getBloglist());
             isPullResfresh =!isPullResfresh;
             mRecyclerView.refreshComplete();
         }else{
-            commendFragmentAdapter.addAll(newsList.getList());
+            commendFragmentAdapter.addAll(blogList.getBloglist());
             mRecyclerView.loadMoreComplete();
         }
     }

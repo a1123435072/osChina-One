@@ -21,14 +21,14 @@ import java.util.Random;
  * Created by fly on 2017/3/1.
  */
 
-public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class EveryDayFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity mActivity;
 
     private List<Blog>  items = new ArrayList<>();
 
 
-    public PictureFragmentAdapter(Activity activity){
+    public EveryDayFragmentAdapter(Activity activity){
         this.mActivity = activity;
     }
 
@@ -42,7 +42,7 @@ public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         SubBlogViewHolder  subBlogViewHolder = (SubBlogViewHolder) holder;
-        subBlogViewHolder.iv_image.setImageResource(R.drawable.alien);
+       // subBlogViewHolder.iv_image.setImageResource(R.drawable.alien);
         subBlogViewHolder.title.setText(items.get(position).getTitle());
         subBlogViewHolder.tv_content.setText(items.get(position).getBody());
         subBlogViewHolder.nickName.setText(items.get(position).getAuthor());
@@ -54,7 +54,6 @@ public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             public void onClick(View v) {
                 Intent intent= new Intent(mActivity,NewDatailActivity.class);
                 intent.putExtra("url",items.get(position).getUrl());
-
                 mActivity.startActivity(intent);
             }
         });

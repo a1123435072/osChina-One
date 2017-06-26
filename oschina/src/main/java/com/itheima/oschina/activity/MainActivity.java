@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("--------有sout的日志--------");
-
         //显示标题
         tv_toolbar_title = (TextView) findViewById(R.id.tv_toolbar_title);
 
@@ -105,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         fragments.add(new MeFragment());
 
     }
+
 
     //资讯， 动弹， 发现，我的，相互切换监听
     @Override

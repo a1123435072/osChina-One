@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.activity.NewDatailActivity;
 import com.itheima.oschina.bean.Blog;
+import com.itheima.oschina.bean.News;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +23,14 @@ import java.util.Random;
  * Created by fly on 2017/3/1.
  */
 
-public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Activity mActivity;
 
-    private List<Blog>  items = new ArrayList<>();
+    private List<News>  items = new ArrayList<>();
 
 
-    public PictureFragmentAdapter(Activity activity){
+    public BlogFragmentAdapter(Activity activity){
         this.mActivity = activity;
     }
 
@@ -42,7 +44,7 @@ public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         SubBlogViewHolder  subBlogViewHolder = (SubBlogViewHolder) holder;
-        subBlogViewHolder.iv_image.setImageResource(R.drawable.alien);
+
         subBlogViewHolder.title.setText(items.get(position).getTitle());
         subBlogViewHolder.tv_content.setText(items.get(position).getBody());
         subBlogViewHolder.nickName.setText(items.get(position).getAuthor());
@@ -52,12 +54,13 @@ public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         subBlogViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(mActivity, "被点击了", Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(mActivity,NewDatailActivity.class);
                 intent.putExtra("url",items.get(position).getUrl());
-
                 mActivity.startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -65,7 +68,7 @@ public class PictureFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return items.size();
     }
 
-    public void addAll(List<Blog> datas){
+    public void addAll(List<News> datas){
         items.addAll(datas);
         notifyItemRangeInserted(items.size() -1, getItemCount() + datas.size());
     }
