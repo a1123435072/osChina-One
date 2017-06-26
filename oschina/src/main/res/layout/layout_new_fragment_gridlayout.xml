@@ -2,5 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+<com.itheima.oschina.view.DragGridLayout
+    android:id="@+id/dragGridLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="4"
+    android:animateLayoutChanges="true"></com.itheima.oschina.view.DragGridLayout>
+    <TextView
+        android:text="一条华丽的分割线--------------------------------------------------------"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.itheima.oschina.view.DragGridLayout
+        android:id="@+id/dragGridLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:animateLayoutChanges="true"></com.itheima.oschina.view.DragGridLayout>
 
 </LinearLayout>

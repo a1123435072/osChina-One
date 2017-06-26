@@ -29,10 +29,10 @@ public class SubTechnologyFragmentw extends baseFragment {
         this.isPullResfresh =true;
         if(isPullResfresh){
             pageIndex=0;
-            requestData(0x26,"blog_list");
+            requestData(0x26,"blog_list",pageIndex+"","20","","recommend","","");
         }else{
             pageIndex++;
-            requestData(0x26,"blog_list");
+            requestData(0x26,"blog_list",pageIndex+"","20","","recommend","","");
         }
     }
     //重写确定上啦加载

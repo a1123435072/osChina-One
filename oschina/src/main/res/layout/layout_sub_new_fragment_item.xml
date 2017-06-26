@@ -28,14 +28,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="aaaaaaaaaaaaaa" />
+                android:text="aaaaaaaaaaaaaa"
+                android:textSize="20sp"
+                android:textColor="#000"/>
 
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="ssssssssssssss" />
+                android:text="ssssssssssssss"
+                android:textColor="#2e2d2d"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -67,8 +70,9 @@
                 <ImageView
                     android:layout_toLeftOf="@id/count"
                     android:src="@drawable/drawer_menu_icon_opensoft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
         </LinearLayout>

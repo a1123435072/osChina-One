@@ -98,14 +98,19 @@ public abstract class baseFragment extends Fragment {
     /**
      * 网络加载数据
      */
-    public void requestData(int number,String Url) {
+    public void requestData(int number,String Url,
+                            String pageIndex,String pageSize,
+                            String catalog,String type,String newsCount,String show) {
 
         String url = Constant.PATH+Url;
 
         HttpParams params = new HttpParams();
         params.put("pageIndex", pageIndex + "");
-        params.put("pageSize", "20");
-        params.put("catalog", "1");
+        params.put("pageSize", pageSize);
+        params.put("catalog", catalog);
+        params.put("type",type );
+        params.put("newsCount",newsCount);
+        params.put("show",show);
 
         HttpLoader.getInstance(getActivity()).get(url, params, null, number, new HttpLoader.HttpListener<String>() {
 

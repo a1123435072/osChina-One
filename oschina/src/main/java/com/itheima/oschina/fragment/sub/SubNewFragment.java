@@ -3,25 +3,19 @@ package com.itheima.oschina.fragment.sub;
 
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Size;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.sub.ImageAdapter;
 import com.itheima.oschina.adapter.sub.CommendFragmentAdapter;
 import com.itheima.oschina.base.baseFragment;
 import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.xutil.XmlUtils;
-
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +42,6 @@ public class SubNewFragment extends baseFragment {
             if(swichImage!=null){
                 //切换
                 int currenItem=swichImage.getCurrentItem();
-                Log.d("Tag", "currentItem = " + currenItem);
                 //判断是否在最后一页
                 if(currenItem==pictureList.size()-1){
                     currenItem=0;
@@ -64,6 +57,7 @@ public class SubNewFragment extends baseFragment {
     //设置一个开关
     boolean turn=false;
 
+
     @Override
     protected RecyclerView.Adapter getCommonAdapter() {
         commendFragmentAdapter = new CommendFragmentAdapter(getActivity());
@@ -76,10 +70,10 @@ public class SubNewFragment extends baseFragment {
         this.isPullResfresh =true;
         if(isPullResfresh){
             pageIndex=0;
-            requestData(0x25,"news_list");
+            requestData(0x25,"news_list",pageIndex+"","20","1","","","");
         }else{
             pageIndex++;
-            requestData(0x25,"news_list");
+            requestData(0x25,"news_list",pageIndex+"","20","1","","","");
         }
 
     }
