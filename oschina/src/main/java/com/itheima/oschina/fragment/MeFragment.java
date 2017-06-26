@@ -80,9 +80,6 @@ public class MeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView tv_content = (TextView) view.findViewById(R.id.tv_username);
-        tv_content.setText("我是用户名");
-
 
     }
 
