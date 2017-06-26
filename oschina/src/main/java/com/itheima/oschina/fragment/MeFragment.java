@@ -16,6 +16,7 @@ import com.itheima.oschina.R;
 import com.itheima.oschina.view.CircleImageView;
 import com.itheima.oschina.view.findItemView;
 
+import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
 import org.senydevpkg.utils.SPUtil;
 
@@ -142,5 +143,7 @@ public class MeFragment extends Fragment {
         HttpParams params = new HttpParams();
         params.put("uid",uid);
         //params.put("user",)
+       // HttpLoader.getInstance(getActivity())
+                //.get(url,params,0x11,new )
     }
 }
