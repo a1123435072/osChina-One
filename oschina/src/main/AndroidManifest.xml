@@ -25,7 +25,8 @@
         <activity android:name=".activity.OpenSoftActivity" />
         <activity android:name=".activity.TweetDetailsActivity" />
         <activity android:name=".activity.opensoft.RecommendActivity" />
-        <activity android:name=".activity.opensoft.WeburlShowActivity"></activity>
+        <activity android:name=".activity.opensoft.WeburlShowActivity" />
+        <activity android:name=".activity.TweetShareActivity"></activity>
     </application>
 
 </manifest>

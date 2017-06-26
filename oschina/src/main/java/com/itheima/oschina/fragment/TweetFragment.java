@@ -63,9 +63,10 @@ public class TweetFragment extends android.support.v4.app.Fragment {
 
     //初始化子fragment
     private void initSubFragment() {
-        subFragments.add(new TweetNewFragment(0x11,"0"));
-        subFragments.add(new TweetNewFragment(0x12,"-1"));
-        subFragments.add(new TweetMineFragment(0x11,"0"));
+        subFragments.add(new TweetNewFragment(0x11,0));
+        subFragments.add(new TweetNewFragment(0x12,-1));
+//        subFragments.add(new TweetNewFragment(0x13,3566723));
+        subFragments.add(new TweetMineFragment(0x13));
         tweetAdapter.addAll(subFragments);
     }
 }

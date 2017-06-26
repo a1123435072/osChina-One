@@ -90,9 +90,7 @@ public  class LoginActivity extends AppCompatActivity {
                             //将uid存到sp中，其他界面使用
                             User user = loginUserBean.getUser();
                             SPUtil.newInstance(getApplicationContext()).putString("uid",user.getId()+"");
-                            //跳转到发布动弹页面
-                            Intent intent = new Intent(context, TweetDetailsActivity.class);
-                            context.startActivity(intent);
+                            finish();
                         }
                     }
 
@@ -128,8 +126,5 @@ public  class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 }

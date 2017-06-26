@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
+import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetsList;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
@@ -23,6 +24,9 @@ import org.senydevpkg.net.HttpHeaders;
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
 import org.senydevpkg.utils.CookieManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by raynwang on 2017/6/22.
@@ -35,9 +39,10 @@ public class TweetNewFragment extends Fragment{
     private boolean isPullRefresh;
     private int pageIndex = 0;
     private int requestCode;
-    private String uid;
+    private int uid;
+    private List<Tweet> items = new ArrayList<>();
 
-    public TweetNewFragment(int requestCode,String uid){
+    public TweetNewFragment(int requestCode,int uid){
         this.requestCode = requestCode;
         this.uid = uid;
     }
@@ -87,6 +92,7 @@ public class TweetNewFragment extends Fragment{
             public void onLoadMore() {//上拉加载更多
                 pageIndex++;
                 requestData();
+
             }
         });
 
@@ -95,7 +101,7 @@ public class TweetNewFragment extends Fragment{
 
 
         //设置适配器
-        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(),getContext());
+        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(),getContext(),items);
         mRecyclerView.setAdapter(tweetNewFragmentAdapter);
 
 
@@ -120,11 +126,11 @@ public class TweetNewFragment extends Fragment{
 
                 if (isPullRefresh) {
                     tweetNewFragmentAdapter.clear();
-                    tweetNewFragmentAdapter.addAll(tweetsList.getList());
+                    items.addAll(tweetsList.getList());
                     mRecyclerView.refreshComplete();
                     isPullRefresh = !isPullRefresh;
                 }else{
-                    tweetNewFragmentAdapter.addAll(tweetsList.getList());
+                    items.addAll(tweetsList.getList());
                     mRecyclerView.loadMoreComplete();
                 }
             }
