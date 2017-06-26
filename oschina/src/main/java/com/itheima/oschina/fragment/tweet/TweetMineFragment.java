@@ -1,7 +1,7 @@
 package com.itheima.oschina.fragment.tweet;
 
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.LoginActivity;
+import com.itheima.oschina.activity.MainActivity;
 import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
 import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetsList;
@@ -54,6 +56,7 @@ public class TweetMineFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uid = SPUtil.newInstance(getActivity()).getString("uid");
+
     }
 
     @Nullable
@@ -62,8 +65,13 @@ public class TweetMineFragment extends Fragment{
 //        uid = SPUtil.newInstance(getActivity()).getString("uid");
         View view;
         if (TextUtils.isEmpty(uid)){
-            System.out.println("11111111111");
-            view = inflater.inflate(R.layout.layout_need_login, container, false);
+            view = inflater.inflate(R.layout.layout_please_login, container, false);
+            view.findViewById(R.id.bt_pleaseLogin).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+            });
         }else {
             flag = true;
             view = inflater.inflate(R.layout.layout_sub_new_fragment, container, false);
