@@ -1,5 +1,6 @@
 package com.itheima.oschina.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import com.itheima.oschina.R;
 import com.itheima.oschina.view.CircleImageView;
 import com.itheima.oschina.view.findItemView;
+
+import org.senydevpkg.net.HttpParams;
+import org.senydevpkg.utils.SPUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +71,14 @@ public class MeFragment extends Fragment {
     @BindView(R.id.team)
     findItemView team;
     Unbinder unbinder;
+    private String uid;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        uid = SPUtil.newInstance(getActivity()).getString("uid");
+
+    }
 
     @Nullable
     @Override
@@ -82,7 +94,6 @@ public class MeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView tv_content = (TextView) view.findViewById(R.id.tv_username);
         tv_content.setText("我是用户名");
-
 
     }
 
@@ -121,5 +132,13 @@ public class MeFragment extends Fragment {
             case R.id.team:
                 break;
         }
+    }
+
+    public void requestData(){
+        String url= "http://www.oschina.net/action/api/my_information";
+
+        HttpParams params = new HttpParams();
+        params.put("uid",uid);
+        //params.put("user",)
     }
 }
