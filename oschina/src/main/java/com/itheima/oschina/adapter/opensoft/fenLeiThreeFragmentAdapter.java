@@ -57,7 +57,6 @@ public class fenLeiThreeFragmentAdapter extends RecyclerView.Adapter {
             public void onClick(View v) {
                 String url = item.get(position).getUrl();
                // Toast.makeText(context, "点击了条目"+url, Toast.LENGTH_SHORT).show();
-                // addFragmentToStack(tag);
 
                 Intent intent = new Intent(context, RecommendActivity.class);
                 intent.putExtra("url",url);
@@ -68,14 +67,7 @@ public class fenLeiThreeFragmentAdapter extends RecyclerView.Adapter {
         });
     }
 
-    public void addFragmentToStack(int tag) {
-        Fragment newFragment = FenLeiSecondFragment.newInstance(tag);
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.fl_opensoft_allfragment, newFragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.addToBackStack(null);
-        ft.commit();
-    }
+
 
     @Override
     public int getItemCount() {

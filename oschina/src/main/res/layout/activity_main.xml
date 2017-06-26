@@ -9,6 +9,7 @@
 
     <!--标题栏-->
     <android.support.v7.widget.Toolbar
+        android:id="@+id/too_bar"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/actionbar_background"

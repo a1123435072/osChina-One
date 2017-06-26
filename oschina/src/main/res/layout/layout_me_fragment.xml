@@ -1,12 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:settingview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/rl_all"
+        android:layout_width="match_parent"
+        android:layout_height="224dp"
+        android:background="@color/actionbar_background">
 
+        <ImageView
+            android:id="@+id/setting"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:padding="5dp"
+            android:src="@drawable/btn_my_setting" />
+
+        <ImageView
+            android:id="@+id/qrcode"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:padding="5dp"
+            android:src="@drawable/btn_qrcode" />
+
+        <com.itheima.oschina.view.CircleImageView
+            android:id="@+id/iv_portrait"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/widget_dface" />
+
+        <ImageView
+            android:id="@+id/iv_gender"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/iv_portrait"
+            android:layout_alignEnd="@id/iv_portrait"
+            android:layout_alignRight="@id/iv_portrait"
+            android:contentDescription="@null"
+            android:src="@drawable/userinfo_icon_male" />
+
+        <TextView
+
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_gender"
+            android:layout_centerHorizontal="true"
+            android:text="username"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_username"
+            android:layout_centerHorizontal="true"
+            android:text="积分 0"
+            android:textColor="#FFF"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/tv_score"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_dongtan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_tweet_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="0"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="动弹"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_shoucang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_shoucang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="0"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="收藏"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_guanzhu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="0"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="关注"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_fensi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_fensi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="0"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="粉丝"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_weight="10"
+        android:orientation="vertical">
+
+        <com.itheima.oschina.view.findItemView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg"
+            settingview:icon="@drawable/icon_my_message"
+            settingview:title="我的消息" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#939393" />
+
+        <com.itheima.oschina.view.findItemView
+            android:id="@+id/blog"
+            android:background="@drawable/selector_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            settingview:icon="@drawable/icon_my_blog"
+            settingview:title="我的播客" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#939393" />
+
+        <com.itheima.oschina.view.findItemView
+            android:id="@+id/note"
+            android:background="@drawable/selector_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            settingview:icon="@drawable/icon_my_note"
+            settingview:title="我的问答" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#939393" />
+
+        <com.itheima.oschina.view.findItemView
+            android:id="@+id/action"
+            android:background="@drawable/selector_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            settingview:icon="@drawable/icon_my_note"
+            settingview:title="我的活动" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#939393" />
+
+        <com.itheima.oschina.view.findItemView
+            android:id="@+id/team"
+            android:background="@drawable/selector_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            settingview:icon="@drawable/icon_my_team"
+            settingview:title="我的团队" />
+    </LinearLayout>
 </LinearLayout>
