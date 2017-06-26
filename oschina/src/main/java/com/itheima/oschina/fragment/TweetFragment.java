@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.TweetFragmentAdapter;
-import com.itheima.oschina.fragment.tweet.TweetHotFragment;
 import com.itheima.oschina.fragment.tweet.TweetMineFragment;
 import com.itheima.oschina.fragment.tweet.TweetNewFragment;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -27,8 +26,8 @@ public class TweetFragment extends android.support.v4.app.Fragment {
     private ViewPager viewPager;
     private TweetFragmentAdapter tweetAdapter;
 
-    private List<Fragment> subFragments = new ArrayList<>();
-    private List<String>  subTitles = new ArrayList<>();
+    private List<Fragment> subFragments = new LinkedList<>();
+    private List<String>  subTitles = new LinkedList<>();
 
     @Nullable
     @Override
@@ -46,6 +45,7 @@ public class TweetFragment extends android.support.v4.app.Fragment {
         initSubTitle();
         initSubFragment();
         viewPagerBindTabLayout();
+
     }
 
     private void viewPagerBindTabLayout() {
@@ -63,9 +63,10 @@ public class TweetFragment extends android.support.v4.app.Fragment {
 
     //初始化子fragment
     private void initSubFragment() {
-        subFragments.add(new TweetNewFragment());
-        subFragments.add(new TweetHotFragment());
-        subFragments.add(new TweetMineFragment());
+        subFragments.add(new TweetNewFragment(0x11,0));
+        subFragments.add(new TweetNewFragment(0x12,-1));
+//        subFragments.add(new TweetNewFragment(0x13,3566723));
+        subFragments.add(new TweetMineFragment(0x13));
         tweetAdapter.addAll(subFragments);
     }
 }

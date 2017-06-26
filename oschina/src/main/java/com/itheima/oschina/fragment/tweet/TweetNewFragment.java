@@ -12,18 +12,21 @@ import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
-import com.itheima.oschina.activity.MainActivity;
-import com.itheima.oschina.activity.TweetDetailsActivity;
-import com.itheima.oschina.adapter.tweet.TweetCommentAdapter;
 import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
+import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetsList;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import org.senydevpkg.net.HttpHeaders;
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
+import org.senydevpkg.utils.CookieManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by raynwang on 2017/6/22.
@@ -35,6 +38,14 @@ public class TweetNewFragment extends Fragment{
     private TweetNewFragmentAdapter tweetNewFragmentAdapter;
     private boolean isPullRefresh;
     private int pageIndex = 0;
+    private int requestCode;
+    private int uid;
+    private List<Tweet> items = new ArrayList<>();
+
+    public TweetNewFragment(int requestCode,int uid){
+        this.requestCode = requestCode;
+        this.uid = uid;
+    }
 
     @Nullable
     @Override
@@ -81,6 +92,7 @@ public class TweetNewFragment extends Fragment{
             public void onLoadMore() {//上拉加载更多
                 pageIndex++;
                 requestData();
+
             }
         });
 
@@ -89,7 +101,7 @@ public class TweetNewFragment extends Fragment{
 
 
         //设置适配器
-        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(),getContext());
+        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(),getContext(),items);
         mRecyclerView.setAdapter(tweetNewFragmentAdapter);
 
 
@@ -103,24 +115,22 @@ public class TweetNewFragment extends Fragment{
         String url = "http://www.oschina.net/action/api/tweet_list";
 
         HttpParams params = new HttpParams();
-        params.put("uid","0");
+        params.put("uid",uid);
         params.put("pageIndex", pageIndex+"");
         params.put("pageSize", "20");
 
-        HttpLoader.getInstance(getActivity()).get(url, params, null, 0x11, new HttpLoader.HttpListener<String>() {
+        HttpLoader.getInstance(getActivity()).get(url, params, null, requestCode, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
                 TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
 
                 if (isPullRefresh) {
                     tweetNewFragmentAdapter.clear();
-                    tweetNewFragmentAdapter.addAll(tweetsList.getList());
+                    items.addAll(tweetsList.getList());
                     mRecyclerView.refreshComplete();
-
                     isPullRefresh = !isPullRefresh;
-
                 }else{
-                    tweetNewFragmentAdapter.addAll(tweetsList.getList());
+                    items.addAll(tweetsList.getList());
                     mRecyclerView.loadMoreComplete();
                 }
             }

@@ -5,6 +5,10 @@ import android.os.Bundle;
 
 import com.itheima.oschina.R;
 
+/**
+ * 发现中 码云推荐界面,,没有接口没有实现
+ *
+ */
 public class codeCloudActivity extends AppCompatActivity {
 
     @Override

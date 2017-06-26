@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     private List<Fragment> fragments;
     private TextView tv_toolbar_title;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         //显示标题
         tv_toolbar_title = (TextView) findViewById(R.id.tv_toolbar_title);
 
+        toolbar = (Toolbar) findViewById(R.id.too_bar);
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
         radioGroup.setOnCheckedChangeListener(this);
 
@@ -111,7 +114,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
             case R.id.rb_me://我的
                 switchFragments(3);
-                tv_toolbar_title.setText("我的");
+                //tv_toolbar_title.setText("我的");
+                toolbar.setVisibility(View.GONE);
                 break;
         }
     }

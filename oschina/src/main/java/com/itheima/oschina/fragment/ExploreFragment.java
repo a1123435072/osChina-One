@@ -53,6 +53,14 @@ public class ExploreFragment extends Fragment {
 //        TextView tv_content = (TextView) view.findViewById(R.id.tv_content);
 //        tv_content.setText("发现");
 
+        /*View viewById = view.findViewById(R.id.tuijian);
+        viewById.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(),codeCloudActivity.class));
+            }
+        });*/
     }
 
     @Override
@@ -69,7 +77,7 @@ public class ExploreFragment extends Fragment {
                 startActivity(new Intent(getActivity(),codeCloudActivity.class));
                 break;
             case R.id.ruanjian:
-                Toast.makeText(getActivity(),"码云推荐",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(),"推荐",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getActivity(),OpenSoftActivity.class));
                 break;
             case R.id.saoyisao:
