@@ -64,15 +64,15 @@
     </LinearLayout>
 
     <!--中间内容部分-->
-    <TextView
+    <cn.droidlover.xrichtext.XRichText
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="发表内容"
-        android:textColor="@color/black"
         android:textSize="15sp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
+
 
     <!--点赞评论-->
     <RelativeLayout

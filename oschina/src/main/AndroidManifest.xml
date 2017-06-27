@@ -25,6 +25,8 @@
         <activity android:name=".activity.OpenSoftActivity"></activity>
         <activity android:name=".activity.TweetDetailsActivity"></activity>
         <activity android:name=".activity.NewDatailActivity"></activity>
+        <activity android:name=".activity.opensoft.RecommendActivity"/>
+        <activity android:name=".activity.TweetShareActivity"/>
     </application>
 
 </manifest>

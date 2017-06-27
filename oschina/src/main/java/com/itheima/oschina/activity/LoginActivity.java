@@ -105,27 +105,4 @@ public  class LoginActivity extends AppCompatActivity {
 
     }
 
-    //上传数据
-    private void upLoadFile(){
-        String url = "";
-        HttpParams params = new HttpParams();
-        String file_path = Environment.getExternalStorageDirectory().getPath()+"/bear.png";
-        params.put("resource",new File(file_path));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.put("Cookie",CookieManager.getCookie(this));
-        HttpLoader.getInstance(this).get(url, params, null, 0x23, new HttpLoader.HttpListener<String>() {
-
-            @Override
-            public void onGetResponseSuccess(int requestCode, String response) {
-
-            }
-
-            @Override
-            public void onGetResponseError(int requestCode, VolleyError error) {
-
-            }
-        });
-    }
-
 }
