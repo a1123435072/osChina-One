@@ -29,8 +29,10 @@
         <activity android:name=".activity.me.MessageActivity" />
         <activity android:name=".activity.me.BlogActivity" />
         <activity android:name=".activity.me.NoteActivity" />
+<activity android:name=".activity.me.NoteActivity" />
         <activity android:name=".activity.me.ActionActivity" />
         <activity android:name=".activity.me.TeamActivity"></activity>
+	<activity android:name=".activity.TweetShareActivity"/>
     </application>
 
 </manifest>
