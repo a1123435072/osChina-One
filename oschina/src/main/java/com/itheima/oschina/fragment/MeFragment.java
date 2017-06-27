@@ -1,5 +1,6 @@
 package com.itheima.oschina.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -148,7 +149,7 @@ public class MeFragment extends Fragment {
             case R.id.rl_all://头像下面的布局点击使劲
                 break;
             case R.id.message://消息布局   @我
-
+                    new Intent();
                 break;
             case R.id.blog://博客
                 break;
