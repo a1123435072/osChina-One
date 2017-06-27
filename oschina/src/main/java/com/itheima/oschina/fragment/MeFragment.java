@@ -17,6 +17,11 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.me.ActionActivity;
+import com.itheima.oschina.activity.me.BlogActivity;
+import com.itheima.oschina.activity.me.MessageActivity;
+import com.itheima.oschina.activity.me.NoteActivity;
+import com.itheima.oschina.activity.me.TeamActivity;
 import com.itheima.oschina.bean.MyInformation;
 import com.itheima.oschina.view.CircleImageView;
 import com.itheima.oschina.view.findItemView;
@@ -149,15 +154,24 @@ public class MeFragment extends Fragment {
             case R.id.rl_all://头像下面的布局点击使劲
                 break;
             case R.id.message://消息布局   @我
-                    new Intent();
+                Intent intent1 = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.blog://博客
+                Intent intent2 = new Intent(getActivity(), BlogActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.note://问答
+                Intent intent3 = new Intent(getActivity(), NoteActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.action://活动
+                Intent intent4 = new Intent(getActivity(), ActionActivity.class);
+                startActivity(intent4);
                 break;
             case R.id.team://团队
+                Intent intent5 = new Intent(getActivity(), TeamActivity.class);
+                startActivity(intent5);
                 break;
         }
     }

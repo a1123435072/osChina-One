@@ -4,10 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itheima.oschina.activity.me.MessageActivity">
+    tools:context="com.itheima.oschina.activity.me.MessageActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:text="我是消息界面"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:background="#27a42a"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/ic_brows_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:gravity="center_horizontal"
+            android:text="消息中心"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout_message"
+        android:layout_width="match_parent"
+        app:tabMode="fixed"
+        android:layout_height="40dp">
+o
+    </android.support.design.widget.TabLayout>
+
+
+    <android.support.v4.view.ViewPager
+
+        android:id="@+id/viewpager_message"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </android.support.v4.view.ViewPager>
 </LinearLayout>
