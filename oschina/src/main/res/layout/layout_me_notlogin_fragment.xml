@@ -58,138 +58,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_gender"
             android:layout_centerHorizontal="true"
-            android:text="username"
+            android:text="点击头像登陆"
             android:textColor="#FFF"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tv_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_username"
-            android:layout_centerHorizontal="true"
-            android:text="积分 0"
-            android:textColor="#FFF"
-            android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/tv_score"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/ll_dongtan"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_tweet_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="0"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="动弹"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_shoucang"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_shoucang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="0"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="收藏"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_guanzhu"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_guanzhu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="0"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="关注"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_fensi"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_fensi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="0"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="粉丝"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-        </LinearLayout>
     </RelativeLayout>
 
 
