@@ -203,6 +203,10 @@ public class MeFragment extends Fragment {
                         tvGuanzhu.setText(user.getUser().getFollowers() + "");
                         tvFensi.setText(user.getNotice().getNewFansCount() + "");
                         // Toast.makeText(getActivity(),"请求数据成功"+response,Toast.LENGTH_SHORT).show();
+                        if(user.getUser().getPortrait()!=null){
+
+                            Picasso.with(getActivity()).load(user.getUser().getPortrait()).into(ivPortrait);
+                        }
                         String gender = user.getUser().getGender();
                         if (Integer.parseInt(gender)==1){
                             ivGender.setImageResource(R.drawable.userinfo_icon_male);
@@ -211,7 +215,8 @@ public class MeFragment extends Fragment {
 
                         }
 
-                        Picasso.with(getActivity()).load(user.getUser().getPortrait()).into(ivPortrait);
+
+
 
                         //ivPortrait
                     }
