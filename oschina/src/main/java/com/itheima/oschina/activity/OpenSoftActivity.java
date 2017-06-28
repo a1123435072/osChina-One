@@ -34,6 +34,7 @@ public class OpenSoftActivity extends AppCompatActivity {
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     private OpenSoftAdapter openSoftAdapter;
+    private FenLeiAllFragment fenLeiAllFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,21 @@ public class OpenSoftActivity extends AppCompatActivity {
         tablayout.setupWithViewPager(viewpager);
     }
 
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+
+
+    }
+
     /**
      *  初始化furagment
      */
     private void initFragment() {
         initTab();
-        openSoftFragments.add(new FenLeiAllFragment());//分类Fragment
+        fenLeiAllFragment = new FenLeiAllFragment();
+        openSoftFragments.add(fenLeiAllFragment);//分类Fragment
         openSoftFragments.add(new tuiJianFragment());//添加博客fragment
         openSoftFragments.add(new VeryNewFragment());//添加技术fragmet
         openSoftFragments.add(new HotFragment());//添加每日一博fragmet

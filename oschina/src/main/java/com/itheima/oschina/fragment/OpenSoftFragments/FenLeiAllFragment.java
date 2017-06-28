@@ -1,35 +1,33 @@
 package com.itheima.oschina.fragment.OpenSoftFragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
-import com.itheima.oschina.adapter.fenLeiFragmentAdapter;
 import com.itheima.oschina.bean.SoftwareCatalogList;
-import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
+
 
 /**
  * Created by yangg on 2017/6/23.
  */
 
 public class FenLeiAllFragment extends Fragment {
+
+    private FragmentTransaction ft;
 
     @Nullable
     @Override
@@ -41,18 +39,41 @@ public class FenLeiAllFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Button  back = (Button) view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popFragmentFromStack();
+            }
+        });
         addFragmentToStack();
 
     }
 
+
     public void addFragmentToStack() {
         Fragment newFragment = FenLeiFragment.newInstance();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.fl_opensoft_allfragment, newFragment);
+        ft = getChildFragmentManager().beginTransaction();
+//        ft.replace(R.id.fl_opensoft_allfragment, newFragment);
+        ft.replace(R.id.fl_opensoft_allfragment, newFragment, newFragment.getClass().getSimpleName());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.addToBackStack(null);
         ft.commit();
     }
+
+    public void popFragmentFromStack(){
+//        getChildFragmentManager().popBackStack();
+        int backStackEntryCount = getChildFragmentManager().getBackStackEntryCount();
+        if(backStackEntryCount >1){
+
+                getChildFragmentManager().popBackStack();
+
+        }else{
+           getActivity().finish();
+        }
+    }
+
+
 
 
     //参考的代码-------------
@@ -134,23 +155,5 @@ public class FenLeiAllFragment extends Fragment {
 
         }
 
-        /**
-         * 初始化revycleview
-         */
-//    private void initRecycleView() {
-//        //
-//        rv_femlei.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL,1, Color.GRAY));
-//        //设置一个线性布局的管理器i
-//        rv_femlei.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        //设置下拉刷新的样式
-//        rv_femlei.setRefreshProgressStyle(ProgressStyle.LineScalePulseOut);
-//        rv_femlei.setPullRefreshEnabled(false);
-//        rv_femlei.setLoadingMoreEnabled(false);
-//
-////       rv_femlei.refresh();
-//
-//        fenLeiFragmentAdapter = new fenLeiFragmentAdapter(getActivity());
-//        rv_femlei.setAdapter(fenLeiFragmentAdapter);
-//    }
     }
 }
