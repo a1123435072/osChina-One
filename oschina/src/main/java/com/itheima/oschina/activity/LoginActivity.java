@@ -34,7 +34,7 @@ import java.util.Map;
  * Created by fly on 2017/3/1.
  */
 
-public  class LoginActivity extends AppCompatActivity {
+public  class  LoginActivity extends AppCompatActivity {
     Context context;
 
     EditText et_login_username;

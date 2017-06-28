@@ -22,6 +22,7 @@ public class AllFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+
         return subFragments.get(position);
     }
 

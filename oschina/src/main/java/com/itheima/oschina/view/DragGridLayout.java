@@ -132,9 +132,6 @@ public class DragGridLayout extends GridLayout {
     public static String getDragEventAction(DragEvent de){
         return dragEventType.get(de.getAction());
     }
-
-
-
     private int margin = 5;
 
     public void addItem(String content){
@@ -151,6 +148,8 @@ public class DragGridLayout extends GridLayout {
         tv.setPadding(0,margin,0,margin);
         tv.setGravity(Gravity.CENTER);
         tv.setText(content);
+
+
         //设置背景资源
         tv.setBackgroundResource(R.drawable.comment_reply_container_bg);
         addView(tv,0);
