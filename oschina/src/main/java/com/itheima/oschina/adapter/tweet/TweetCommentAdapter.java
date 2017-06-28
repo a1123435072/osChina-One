@@ -39,8 +39,7 @@ public class TweetCommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //            View view = View.inflate(getApplicationContext(), R.layout.item_tweet_comment, null);
-        View view = LayoutInflater.from(mActivity).inflate(
-                R.layout.item_tweet_comment, parent, false);
+        View view = LayoutInflater.from(mActivity).inflate(R.layout.item_tweet_comment, parent, false);
         return new MyViewholder(view);
     }
 

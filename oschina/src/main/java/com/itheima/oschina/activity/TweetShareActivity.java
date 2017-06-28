@@ -128,6 +128,7 @@ public class TweetShareActivity extends AppCompatActivity {
                         });
 
                     }else{//没有图片，纯文字的发布
+                        //token只需要传一个空字符串
                         publish(share,"");
 
                     }
@@ -137,6 +138,7 @@ public class TweetShareActivity extends AppCompatActivity {
             }
         });
 
+        //相册点击事件，开启系统相册
         iv_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,7 +171,7 @@ public class TweetShareActivity extends AppCompatActivity {
         }
     }
 
-
+    //发布动弹方法
     public void publish (String share,String token){
         String url = "http://www.oschina.net/action/apiv2/tweet";
         HttpParams params = new HttpParams();

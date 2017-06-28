@@ -22,12 +22,12 @@ import java.util.List;
  */
 
 public class TweetFragment extends android.support.v4.app.Fragment {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private TweetFragmentAdapter tweetAdapter;
+    private static TabLayout tabLayout;
+    private static ViewPager viewPager;
+    private static TweetFragmentAdapter tweetAdapter;
 
-    private List<Fragment> subFragments = new LinkedList<>();
-    private List<String>  subTitles = new LinkedList<>();
+    private static List<Fragment> subFragments = new LinkedList<>();
+    private static List<String>  subTitles = new LinkedList<>();
 
     @Nullable
     @Override
@@ -46,15 +46,35 @@ public class TweetFragment extends android.support.v4.app.Fragment {
         initSubFragment();
         viewPagerBindTabLayout();
 
+        //监听viewPager的切换，可以学一手
+//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//                if(position == 1){
+//                    TweetHotFragment.res();
+//                }
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
     }
 
-    private void viewPagerBindTabLayout() {
+    public static void viewPagerBindTabLayout() {
         viewPager.setAdapter(tweetAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     //初始化子标题
-    private void initSubTitle() {
+    public static void initSubTitle() {
         subTitles.add("最新动弹");
         subTitles.add("热门动弹");
         subTitles.add("我的动弹");
@@ -62,11 +82,13 @@ public class TweetFragment extends android.support.v4.app.Fragment {
     }
 
     //初始化子fragment
-    private void initSubFragment() {
+    public static void initSubFragment() {
         subFragments.add(new TweetNewFragment(0x11,0));
         subFragments.add(new TweetNewFragment(0x12,-1));
-//        subFragments.add(new TweetNewFragment(0x13,3566723));
-        subFragments.add(new TweetMineFragment(0x13));
+        subFragments.add(new TweetMineFragment());
         tweetAdapter.addAll(subFragments);
+
     }
+
+
 }

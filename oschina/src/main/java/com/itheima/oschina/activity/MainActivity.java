@@ -19,6 +19,7 @@ import com.itheima.oschina.fragment.ExploreFragment;
 import com.itheima.oschina.fragment.MeFragment;
 import com.itheima.oschina.fragment.AllFragment;
 import com.itheima.oschina.fragment.TweetFragment;
+import com.itheima.oschina.fragment.tweet.TweetMineFragment;
 
 import org.senydevpkg.utils.SPUtil;
 
@@ -124,9 +125,17 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
             case R.id.rb_me://我的
                 switchFragments(3);
-                //tv_toolbar_title.setText("我的");
                 toolbar.setVisibility(View.GONE);
                 break;
         }
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        if(requestCode == 1010){
+//            // 刷新
+//
+//        }
+//    }
 }

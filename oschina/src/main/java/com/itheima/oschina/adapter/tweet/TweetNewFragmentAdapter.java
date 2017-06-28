@@ -42,7 +42,6 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private List<Tweet> items = new ArrayList<>();
 
-    XRichText richText = new XRichText(getContext());
 
     public TweetNewFragmentAdapter(Activity activity, Context context,List<Tweet> items) {
         this.mActivity = activity;
@@ -61,29 +60,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final TweetNewFragmentAdapter.TweetNewViewHolder tweetNewViewHolder = (TweetNewFragmentAdapter.TweetNewViewHolder) holder;
 
-        //从详情里面获取内容，放在外面的内容
-        String id = items.get(position).getId()+"";
-        String url = "http://www.oschina.net/action/api/tweet_detail";
-        HttpParams params = new HttpParams();
-        params.put("id", id);
-        HttpLoader.getInstance(getContext()).get(url, params, null, 0x11, new HttpLoader.HttpListener<String>() {
-            @Override
-            public void onGetResponseSuccess(int requestCode, String response) {
-                TweetDetail tweetDetail = XmlUtils.toBean(TweetDetail.class, response.getBytes());
-                Tweet tweet = tweetDetail.getTweet();
-
-                //解析成Html
-                tweetNewViewHolder.tv_content.setText(Html.fromHtml(tweet.getBody().trim()));
-                // 无需管他啥意思 加上这个东西 textview中的超链接就可以点击
-                tweetNewViewHolder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());
-            }
-
-            @Override
-            public void onGetResponseError(int requestCode, VolleyError error) {
-
-            }
-        });
-
+        tweetNewViewHolder.tv_content.setText(items.get(position).getBody().trim());
         tweetNewViewHolder.tv_name.setText(items.get(position).getAuthor());
         tweetNewViewHolder.tv_time.setText(items.get(position).getPubDate());
         tweetNewViewHolder.tv_commemntNumber.setText(items.get(position).getCommentCount());
@@ -137,7 +114,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         public TweetNewViewHolder(View itemView) {
             super(itemView);
-            tv_content = (XRichText) itemView.findViewById(R.id.tv_content);
+            tv_content = (TextView) itemView.findViewById(R.id.tv_content);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             iv_head = (ImageView) itemView.findViewById(R.id.iv_head);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);

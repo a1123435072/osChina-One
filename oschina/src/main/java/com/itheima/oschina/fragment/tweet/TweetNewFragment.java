@@ -122,7 +122,6 @@ public class TweetNewFragment extends Fragment{
         HttpLoader.getInstance(getActivity()).get(url, params, null, requestCode, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
-                System.out.println("-----------------------"+response);
                 TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
 
                 if (isPullRefresh) {
