@@ -34,7 +34,7 @@ public class EveryDayFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity).inflate(R.layout.layout_sub_new_fragment_item, parent, false);
+        View view = LayoutInflater.from(mActivity).inflate(R.layout.layout_sub_commend, parent, false);
         return new SubBlogViewHolder(view);
     }
 
@@ -77,7 +77,7 @@ public class EveryDayFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     class SubBlogViewHolder extends RecyclerView.ViewHolder{
 
-        private final ImageView iv_image;
+       // private final ImageView iv_image;
         private final TextView tv_content;
         private final TextView title;
         private final TextView nickName;
@@ -89,7 +89,7 @@ public class EveryDayFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             /**
              * 个性头像
              */
-            iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
+           // iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
             /**
              *标题
              */

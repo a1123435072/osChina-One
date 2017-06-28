@@ -54,6 +54,8 @@ public class AllFragment extends Fragment {
     private RelativeLayout relativeLayoutfunction;
     private TextView delete;
     private boolean deleteItem;
+    private String s;
+    private List<String> list;
 
 
     @Nullable
@@ -86,8 +88,8 @@ public class AllFragment extends Fragment {
         allAdapter = new AllFragmentAdapter(getChildFragmentManager());
         //初始化子fragment
         initSubFragment();
-        //初始化tablayout的标题
-        initSubTitle();
+
+
         //绑定 viewpager 和 tablayout
         //注意： 初始化子fragment和标题之后，确保adapter中有数据，才能绑定。
         viewPagerBindTabLayout();
@@ -104,26 +106,23 @@ public class AllFragment extends Fragment {
     }
 
     /**
-     * 初始化子fragment
+     * 初始化子fragment和初始化标题
      */
+
+
     private void initSubFragment() {
         subFragments.add(new SubNewFragment());//添加资讯fragment
         subFragments.add(new SubBlogFragment());//添加博客fragment
         subFragments.add(new SubTechnologyFragmentw());//添加技术fragmet
         subFragments.add(new SubEveryDayBlogFragment());//添加每日一博fragmet
         allAdapter.addAll(subFragments);
-    }
 
-    /**
-     * 初始化标题
-     */
-    private void initSubTitle() {
         subTitles.add("开源资讯");
         subTitles.add("推荐博客");
         subTitles.add("技术问答");
         subTitles.add("每日一博");
         allAdapter.addPagerTitles(subTitles);
-        //allAdapter.addPagerTitles(list);
+
     }
 
     @Override
@@ -131,16 +130,20 @@ public class AllFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-    List <String> list;
+    List <String> list1;
     public void loadGridLayout() {
         dragGridLayout.setHasCanDrag(true);
-        List<String> list1 = new ArrayList<>();
+        list1 = new ArrayList<>();
+        list1.add("开源资讯");
+        list1.add("推荐博客");
+        list1.add("技术问答");
+        list1.add("每日一博");
+        dragGridLayout.setItems(list1);
+        List<String> list2 = new ArrayList<>();
         list1.add("a");
         list1.add("b");
         list1.add("c");
         list1.add("d");
-        dragGridLayout.setItems(list1);
-        List<String> list2 = new ArrayList<>();
         list1.add("c");
         list1.add("d");
         list1.add("e");
@@ -162,23 +165,28 @@ public class AllFragment extends Fragment {
         list2.add("t");
         dragGridLayout2.setItems(list2);
         dragGridLayout2.setHasCanDrag(false);
+        list = new ArrayList<>();
         //设置条目点击监听
-        dragGridLayout.setOnDragItemClickListener(new DragGridLayout.OnDragItemClickListener() {
-            @Override
-            public void onDragItemClick(TextView tv) {
-                //移除点击的条目，把条目添加到下面的Gridlayout
-                dragGridLayout.removeView(tv);//移除是需要时间,不能直接添加
-                dragGridLayout2.addItem(tv.getText().toString());
-
-            }
-        });
+            dragGridLayout.setOnDragItemClickListener(new DragGridLayout.OnDragItemClickListener() {
+                @Override
+                public void onDragItemClick(TextView tv) {
+                    //移除点击的条目，把条目添加到下面的Gridlayout
+                    dragGridLayout.removeView(tv);//移除是需要时间,不能直接添加
+                    dragGridLayout2.addItem(tv.getText().toString());
+                    if(list.contains(tv.getText().toString())){
+                        list.remove(tv.getText().toString());
+                    }
+                }
+            });
         dragGridLayout2.setOnDragItemClickListener(new DragGridLayout.OnDragItemClickListener() {
             @Override
             public void onDragItemClick(TextView tv) {
                 //移除点击的条目，把条目添加到上面的Gridlayout
                 dragGridLayout2.removeView(tv);//移除是需要时间,不能直接添加
                 dragGridLayout.addItem(tv.getText().toString());
-
+                if(!list.contains(tv.getText().toString())){
+                    list.add(tv.getText().toString());
+                }
             }
         });
     }
@@ -208,8 +216,28 @@ public class AllFragment extends Fragment {
                 tabLayout.setVisibility(View.VISIBLE);
                 relativeLayoutfunction.setVisibility(View.GONE);
                 isShowCross = !isShowCross;
-        }break;
+                init();
+        }
+
+        break;
         }
     }
 
+    private void init() {
+        if(list.size()>0){
+            for (String s: list) {
+                System.out.println(s);
+            }
+        }
+
+    }
+
+    public interface getData{
+        public void getItem(String tv);
+    }
+    private getData getdata;
+
+    public void setOnDataItemClickListener(getData getdata) {
+        this.getdata = getdata;
+    }
 }
