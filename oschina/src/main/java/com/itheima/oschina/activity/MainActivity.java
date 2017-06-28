@@ -113,14 +113,17 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         switch (checkedId){
             case R.id.rb_new://资讯
                 switchFragments(0);
+                toolbar.setVisibility(View.VISIBLE);
                 tv_toolbar_title.setText("综合");
                 break;
             case R.id.rb_tweet://动弹
                 switchFragments(1);
+                toolbar.setVisibility(View.VISIBLE);
                 tv_toolbar_title.setText("动弹");
                 break;
             case R.id.rb_explore://发现
                 switchFragments(2);
+                toolbar.setVisibility(View.VISIBLE);
                 tv_toolbar_title.setText("发现");
                 break;
             case R.id.rb_me://我的
