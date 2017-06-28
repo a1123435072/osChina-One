@@ -8,7 +8,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,12 +102,17 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                 //给头部item控件设置数据
                 //先是楼主信息
+
                 tvName.setText(tweet.getAuthor());
                 tvTime.setText(tweet.getPubDate());
                 tvCommentNumber.setText(tweet.getCommentCount() + "");
                 tvLikeNumber.setText(tweet.getLikeCount() + "");
-                tv_content.setText(tweet.getBody().trim());
-//                tv_content.setText("\u3000\u3000"+tweet.getBody());
+
+                //解析成Html
+                tv_content.setText(Html.fromHtml(tweet.getBody().trim()));
+                // 无需管他啥意思 加上这个东西 textview中的超链接就可以点击
+                tv_content.setMovementMethod(LinkMovementMethod.getInstance());
+
                 String urlPortrait = tweet.getPortrait();
                 if (!TextUtils.isEmpty(urlPortrait)) {
                     Picasso.with(getApplicationContext()).load(urlPortrait).into(ivHead);

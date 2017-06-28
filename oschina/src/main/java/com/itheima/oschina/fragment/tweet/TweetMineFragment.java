@@ -127,11 +127,7 @@ public class TweetMineFragment extends Fragment{
             //设置适配器
             tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(), getContext(),items);
             mRecyclerView.setAdapter(tweetNewFragmentAdapter);
-        }else{
-
         }
-
-
     }
 
     /**
@@ -151,7 +147,6 @@ public class TweetMineFragment extends Fragment{
             public void onGetResponseSuccess(int requestCode, String response) {
                 System.out.println(response);
                 TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
-
                 if (isPullRefresh) {
                     tweetNewFragmentAdapter.clear();
                     items.addAll(tweetsList.getList());
