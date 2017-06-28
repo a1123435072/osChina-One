@@ -57,8 +57,7 @@ public class MeFragment extends Fragment {
     ImageView ivGender;
     @BindView(tv_username)
     TextView tvUsername;
-    @BindView(R.id.tv_score)
-    TextView tvScore;
+
     @BindView(R.id.tv_tweet_size)
     TextView tvTweetSize;
     @BindView(R.id.ll_dongtan)
@@ -92,6 +91,7 @@ public class MeFragment extends Fragment {
 
     private boolean hasUid;
     private View view;
+    private TextView tvScore;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,11 +99,13 @@ public class MeFragment extends Fragment {
         uid = SPUtil.newInstance(getActivity()).getString("uid");
 
 
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
 
         if (TextUtils.isEmpty(uid)) {
             //uid为空的时候我们跳转到新的界面
@@ -119,6 +121,8 @@ public class MeFragment extends Fragment {
         }else {
 
         }
+        tvScore = (TextView) view.findViewById(R.id.tv_score);
+
         return view;
     }
 
