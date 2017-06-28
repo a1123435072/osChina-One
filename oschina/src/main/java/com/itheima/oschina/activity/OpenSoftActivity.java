@@ -49,6 +49,8 @@ public class OpenSoftActivity extends AppCompatActivity {
         //初始化tablayout
          initTab();
         //初始化玩tablayout之后要进行tablayout的绑定
+        //初始化玩tablayout之后要进行tablayout的绑定
+
         bindtablayoutViewPaget();
     }
 
