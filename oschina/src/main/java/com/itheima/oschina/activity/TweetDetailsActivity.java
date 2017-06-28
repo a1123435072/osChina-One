@@ -69,7 +69,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_details);
-                                //一个XRecyclerView
+                                //标题加一个XRecyclerView
         xrecyclerView = (XRecyclerView) findViewById(R.id.rv_tweetDetails);
         //添加头部  楼主内容
 //        View view = View.inflate(this, R.layout.tweet_head, null);

@@ -3,6 +3,7 @@ package com.itheima.oschina.adapter.tweet;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -24,11 +25,16 @@ import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.utills.SpannableUtil;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cn.droidlover.xrichtext.ImageLoader;
+import cn.droidlover.xrichtext.XRichText;
+
+import static android.provider.Telephony.Mms.Part.TEXT;
 import static com.itheima.oschina.xutil.UIUtils.getContext;
 import static com.itheima.oschina.xutil.UIUtils.getResources;
 
@@ -42,6 +48,8 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     Context context;
 
     private List<Tweet> items = new ArrayList<>();
+
+    XRichText richText = new XRichText(getContext());
 
     public TweetNewFragmentAdapter(Activity activity, Context context,List<Tweet> items) {
         this.mActivity = activity;
@@ -59,6 +67,49 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final TweetNewFragmentAdapter.TweetNewViewHolder tweetNewViewHolder = (TweetNewFragmentAdapter.TweetNewViewHolder) holder;
+
+//        richText.callback(new XRichText.BaseClickCallback() {
+//
+//                    @Override
+//                    public boolean onLinkClick(String url) {
+//                        showMsg(url);
+//                        return true;
+//                    }
+//
+//                    @Override
+//                    public void onImageClick(List<String> urlList, int position) {
+//                        super.onImageClick(urlList, position);
+//                        showMsg("图片:" + position);
+//                    }
+//
+//                    @Override
+//                    public void onFix(XRichText.ImageHolder holder) {
+//                        super.onFix(holder);
+//                        if (holder.getPosition() % 3 == 0) {
+//                            holder.setStyle(XRichText.Style.LEFT);
+//                        } else if (holder.getPosition() % 3 == 1) {
+//                            holder.setStyle(XRichText.Style.CENTER);
+//                        } else {
+//                            holder.setStyle(XRichText.Style.RIGHT);
+//                        }
+//
+//                        //设置宽高
+//                        holder.setWidth(550);
+//                        holder.setHeight(400);
+//                    }
+//                })
+//                .imageDownloader(new ImageLoader() {
+//                    @Override
+//                    public Bitmap getBitmap(String url) throws IOException {
+//                        return UILKit.getLoader().loadImageSync(url);
+//                    }
+//                })
+//                .text(TEXT);
+
+
+
+
+
         tweetNewViewHolder.tv_content.setText(items.get(position).getBody());
         tweetNewViewHolder.tv_id.setText(items.get(position).getAuthor());
         tweetNewViewHolder.tv_time.setText(items.get(position).getPubDate());
@@ -137,14 +188,14 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 //    public void addAll(List<Tweet> datas) {
 //        items.addAll(datas);
-//        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());//从一个区间段添加item
+//        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());
 //        //需要刷新一次，因为加载新的item时，itemCount需要相应变化
 //        notifyDataSetChanged();
 //    }
 
     //在哪用的？？？
     public void clear() {
-//        notifyItemRangeRemoved(1, getItemCount());//从一个区间段移除item
+//        notifyItemRangeRemoved(1, getItemCount());
         items.clear();
     }
 

@@ -1,7 +1,7 @@
 package com.itheima.oschina.fragment.tweet;
 
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.LoginActivity;
 import com.itheima.oschina.adapter.tweet.TweetNewFragmentAdapter;
 import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetsList;
@@ -54,6 +55,7 @@ public class TweetMineFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uid = SPUtil.newInstance(getActivity()).getString("uid");
+
     }
 
     @Nullable
@@ -62,8 +64,13 @@ public class TweetMineFragment extends Fragment{
 //        uid = SPUtil.newInstance(getActivity()).getString("uid");
         View view;
         if (TextUtils.isEmpty(uid)){
-            System.out.println("11111111111");
-            view = inflater.inflate(R.layout.layout_need_login, container, false);
+            view = inflater.inflate(R.layout.layout_please_login, container, false);
+            view.findViewById(R.id.bt_pleaseLogin).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+            });
         }else {
             flag = true;
             view = inflater.inflate(R.layout.layout_sub_new_fragment, container, false);
@@ -93,8 +100,8 @@ public class TweetMineFragment extends Fragment{
 
             //支持下拉刷新
             mRecyclerView.setPullRefreshEnabled(true);
-            //支持加载更多
-            mRecyclerView.setLoadingMoreEnabled(true);
+            //不要加载更多，下面就不会多出分隔线
+            mRecyclerView.setLoadingMoreEnabled(false);
 
 
             //设置recyclerview下拉刷新和加载更多的监听
@@ -113,7 +120,6 @@ public class TweetMineFragment extends Fragment{
                 }
             });
 
-            mRecyclerView.setLoadingMoreEnabled(false);
             //设置初始化状态为刷新状态。作用：界面初始加载时，刷新数据。
             mRecyclerView.refresh();
 
@@ -137,20 +143,17 @@ public class TweetMineFragment extends Fragment{
 
         HttpParams params = new HttpParams();
         params.put("uid",uid);
-//        params.put("uid","3566723");
         params.put("pageIndex", pageIndex+"");
         params.put("pageSize", "20");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.put("cookie", CookieManager.getCookie(getActivity()));
-        HttpLoader.getInstance(getActivity()).get(url, params, headers, requestCode, new HttpLoader.HttpListener<String>() {
+        HttpLoader.getInstance(getActivity()).get(url, params, null, requestCode, new HttpLoader.HttpListener<String>() {
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
                 System.out.println(response);
                 TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
 
                 if (isPullRefresh) {
-                    tweetNewFragmentAdapter.clear();//让适配器清空一下数据
+                    tweetNewFragmentAdapter.clear();
                     items.addAll(tweetsList.getList());
                     mRecyclerView.refreshComplete();
 

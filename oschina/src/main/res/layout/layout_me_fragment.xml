@@ -37,7 +37,6 @@
             android:id="@+id/iv_portrait"
             android:layout_width="74dp"
             android:layout_height="74dp"
-
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:src="@drawable/widget_dface" />

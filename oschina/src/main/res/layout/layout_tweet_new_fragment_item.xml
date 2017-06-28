@@ -25,7 +25,7 @@
             android:layout_centerVertical="true"
             android:textColor="#ba0077ff"/>
 
-        <TextView
+        <cn.droidlover.xrichtext.XRichText
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
