@@ -24,12 +24,15 @@ public class MessageMeAdapter  extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(context).inflate(R.layout.message_me_item, parent, false);
 
-        return new viewHolder(v);
+
+        return new ViewHolder(v);
     }
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        //ViewHolder viewHolder= (ViewHolder) holder;
 
     }
 
@@ -39,9 +42,9 @@ public class MessageMeAdapter  extends RecyclerView.Adapter {
         return 0;
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public viewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
         }
     }

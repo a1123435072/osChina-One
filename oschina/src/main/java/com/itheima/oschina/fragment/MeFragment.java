@@ -106,22 +106,33 @@ public class MeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
+        view = inflater.inflate(R.layout.layout_me_fragment, container, false);
+        tvScore = (TextView) view.findViewById(R.id.tv_score);
+        unbinder = ButterKnife.bind(this, view);
         if (TextUtils.isEmpty(uid)) {
             //uid为空的时候我们跳转到新的界面
-            view = inflater.inflate(R.layout.layout_me_notlogin_fragment, container, false);
+            // view = inflater.inflate(R.layout.layout_me_notlogin_fragment, container, false);
+            tvScore.setVisibility(View.GONE);
+            llDongtan.setVisibility(View.GONE);
+            llShoucang.setVisibility(View.GONE);
+            llShoucang.setVisibility(View.GONE);
+            llGuanzhu.setVisibility(View.GONE);
+            llFensi.setVisibility(View.GONE);
+
+            tvUsername.setTextSize(18);
+            tvUsername.setText("点击头像登陆");
+
         } else {
-            view = inflater.inflate(R.layout.layout_me_fragment, container, false);
             //uid不为空，加载 用户界面 加载数据
             hasUid = true;
         }
-        unbinder = ButterKnife.bind(this, view);
+
         if (hasUid) {
             requestData();
         }else {
 
         }
-        tvScore = (TextView) view.findViewById(R.id.tv_score);
+
 
         return view;
     }
@@ -201,11 +212,11 @@ public class MeFragment extends Fragment {
                         //ser.
                         //System.out.println("-----------"+user);
                         tvUsername.setText(user.getUser().getName());
-                        tvScore.setText("积分 " + user.getUser().getScore());
+                        tvScore.setText("积分 " + user.getUser().getScore()+"");
                         tvTweetSize.setText(user.getUser().getFans() + "");
                         tvShoucang.setText(user.getUser().getFavoritecount() + "");
                         tvGuanzhu.setText(user.getUser().getFollowers() + "");
-                        tvFensi.setText(user.getNotice().getNewFansCount() + "");
+                        tvFensi.setText(user.getUser().getFans() + "");
                         // Toast.makeText(getActivity(),"请求数据成功"+response,Toast.LENGTH_SHORT).show();
                         if(user.getUser().getPortrait()!=null){
 

@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         app:tabMode="fixed"
         android:layout_height="40dp">
-o
+
     </android.support.design.widget.TabLayout>
 
 
