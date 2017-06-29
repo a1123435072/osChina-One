@@ -1,5 +1,6 @@
 package com.itheima.oschina.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,8 +20,10 @@ import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
 import com.itheima.oschina.activity.me.ActionActivity;
 import com.itheima.oschina.activity.me.BlogActivity;
+import com.itheima.oschina.activity.me.ErWweiMaActivity;
 import com.itheima.oschina.activity.me.MessageActivity;
 import com.itheima.oschina.activity.me.NoteActivity;
+import com.itheima.oschina.activity.me.SettingActivity;
 import com.itheima.oschina.activity.me.TeamActivity;
 import com.itheima.oschina.bean.MyInformation;
 import com.itheima.oschina.view.CircleImageView;
@@ -155,11 +158,11 @@ public class MeFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting://设置点击事件
-                Intent intent6 = new Intent(getActivity(), MessageActivity.class);
+                Intent intent6 = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent6);
                 break;
             case R.id.qrcode://二维码点击世纪那
-                Intent intent7 = new Intent(getActivity(), MessageActivity.class);
+                Intent intent7 = new Intent(getActivity(), ErWweiMaActivity.class);
                 startActivity(intent7);
                 break;
             case R.id.ll_dongtan://动弹`

@@ -32,8 +32,9 @@
         <activity android:name=".activity.me.ActionActivity" />
         <activity android:name=".activity.me.TeamActivity" />
         <activity android:name=".activity.TweetPublishActivity" />
-
-        <activity android:name=".activity.BigImageActivity"/>
+        <activity android:name=".activity.BigImageActivity" />
+        <activity android:name=".activity.me.SettingActivity" />
+        <activity android:name=".activity.me.ErWweiMaActivity"></activity>
     </application>
 
 </manifest>
