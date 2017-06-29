@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.itheima.oschina.R;
+import com.itheima.oschina.bean.Active;
+import com.itheima.oschina.bean.ActiveList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yangg on 2017/6/28.
@@ -15,6 +20,8 @@ import com.itheima.oschina.R;
 
 public class MessageMeAdapter  extends RecyclerView.Adapter {
     private Context context;
+
+    private List<Active> item = new ArrayList<>();
 
     public MessageMeAdapter(Context context) {
         this.context = context;
@@ -32,14 +39,26 @@ public class MessageMeAdapter  extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        //ViewHolder viewHolder= (ViewHolder) holder;
+        MessageMeAdapter.ViewHolder viewHolder= (ViewHolder) holder;
 
+//        viewHolder.itemView.
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return item.size();
+    }
+
+    /**
+     * adapter 中清理条目的方法
+     */
+    public void clear() {
+        notifyItemRangeRemoved(-1,getItemCount());
+    }
+    public void addAll(List<Active> data){
+        item.addAll(data);
+        notifyItemRangeInserted(item.size()-1,getItemCount()+data.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
