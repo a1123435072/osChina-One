@@ -33,6 +33,8 @@
         <activity android:name=".activity.me.ActionActivity" />
         <activity android:name=".activity.me.TeamActivity"></activity>
 	<activity android:name=".activity.TweetShareActivity"/>
+
+        
     </application>
 
 </manifest>
