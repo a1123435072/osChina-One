@@ -155,11 +155,10 @@ public class TweetMineFragment extends Fragment{
             public void onGetResponseSuccess(int requestCode, String response) {
                 TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
                 items.clear();
+                tweetNewFragmentAdapter.clear();
                 if (isPullRefresh) {
-                    tweetNewFragmentAdapter.clear();
                     items.addAll(tweetsList.getList());
                     mRecyclerView.refreshComplete();
-
                     isPullRefresh = !isPullRefresh;
 
                 }else{

@@ -3,6 +3,8 @@ package com.itheima.oschina.adapter.tweet;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -58,13 +60,21 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 //        BitmapUtils.display(context,imageView,items.get(position).getPortrait());
 
+        //头像
         String urlPortrait = items.get(position).getPortrait();
         if (!TextUtils.isEmpty(urlPortrait)) {
             Picasso.with(context).load(urlPortrait).into(tweetNewViewHolder.iv_head);
+        }else{//如果没有头像，就使用默认
+            tweetNewViewHolder.iv_head.setImageResource(R.drawable.ic_share);
+//            Bitmap bm = BitmapFactory.decodeFile(pirPath);
+//            tweetNewViewHolder.iv_head.setImageBitmap(bm);
         }
+
         String urlImageSmall = items.get(position).getImgSmall();
         if (!TextUtils.isEmpty(urlImageSmall)) {
             Picasso.with(context).load(urlImageSmall).into(tweetNewViewHolder.iv_imageSmall);
+        }else {//如果是空，就没有图片，就把ImageView给隐藏掉，否则会有图片复用的bug
+            tweetNewViewHolder.iv_imageSmall.setVisibility(View.GONE);
         }
 
         //小图的点击事件，进入大图Activity
@@ -82,7 +92,6 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         tweetNewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("------------------"+items.get(position));
                 Intent intent = new Intent(context, TweetDetailsActivity.class);
                 int id = items.get(position).getId();
                 intent.putExtra("id",id);

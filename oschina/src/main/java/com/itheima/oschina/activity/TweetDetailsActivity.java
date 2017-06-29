@@ -11,7 +11,9 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -44,6 +46,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
     TextView tv_content;
     TextView tv_likeMan;
     ImageView iv_imageSmall;
+    ImageView iv_comment;
+    EditText et_comment;
+    ImageView iv_commentSend;
+    LinearLayout ll_comment;
 
     private int pageIndex = 0;
     private boolean isPullRefresh;
@@ -71,9 +77,23 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvLikeNumber = (TextView) view.findViewById(R.id.tv_likeNumber);
         ivLike = (ImageView) view.findViewById(R.id.iv_like);
         tv_content = (TextView) view.findViewById(R.id.tv_content);
-//        iv_content_image = (ImageView) view.findViewById(R.id.iv_content_image);
         tv_likeMan = (TextView) view.findViewById(R.id.tv_likeMan);
         iv_imageSmall = (ImageView) view.findViewById(R.id.iv_image);
+        iv_comment = (ImageView) view.findViewById(R.id.iv_comment);
+
+        //底部的评论三控件
+        et_comment = (EditText) findViewById(R.id.et_comment);
+        iv_commentSend = (ImageView) findViewById(R.id.iv_commentSend);
+        ll_comment = (LinearLayout) findViewById(R.id.ll_comment);
+
+        //评论图标的点击事件
+        iv_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ll_comment.setVisibility(View.VISIBLE);
+
+            }
+        });
 
         String url = "http://www.oschina.net/action/api/tweet_detail";
         HttpParams params = new HttpParams();
@@ -140,6 +160,8 @@ public class TweetDetailsActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+
 
                 //再是点赞人数设置数据
 //                List<User> likeUser = tweet.getLikeUser();
