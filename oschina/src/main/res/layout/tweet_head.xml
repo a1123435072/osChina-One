@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <!--中间内容部分-->
-    <cn.droidlover.xrichtext.XRichText
+    <TextView
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

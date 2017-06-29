@@ -154,6 +154,7 @@ public class TweetMineFragment extends Fragment{
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
                 TweetsList tweetsList = XmlUtils.toBean(TweetsList.class, response.getBytes());
+                items.clear();
                 if (isPullRefresh) {
                     tweetNewFragmentAdapter.clear();
                     items.addAll(tweetsList.getList());
