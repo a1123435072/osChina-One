@@ -155,10 +155,14 @@ public class MeFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting://设置点击事件
+                Intent intent6 = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent6);
                 break;
             case R.id.qrcode://二维码点击世纪那
+                Intent intent7 = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent7);
                 break;
-            case R.id.ll_dongtan://动弹
+            case R.id.ll_dongtan://动弹`
                 break;
             case R.id.ll_shoucang://收藏
                 break;

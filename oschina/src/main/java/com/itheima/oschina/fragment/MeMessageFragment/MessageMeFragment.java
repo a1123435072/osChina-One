@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ import org.senydevpkg.net.HttpParams;
 import org.senydevpkg.utils.CookieManager;
 import org.senydevpkg.utils.SPUtil;
 
+import static android.R.attr.id;
+
 
 /**
  * Created by yangg on 2017/6/27.
@@ -49,6 +52,10 @@ public class MessageMeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         uid = SPUtil.newInstance(getActivity()).getString("uid");
         Log.i("test",uid+"------");
+        if (TextUtils.isEmpty(uid)) {
+
+
+        }
     }
 
     @Nullable
@@ -98,6 +105,9 @@ public class MessageMeFragment extends Fragment {
 
     //请求网络刷新数据的放法
     private void refreshData() {
+        if (TextUtils.isEmpty(uid)){
+            return;
+        }
         String url ="http://www.oschina.net/action/api/active_list";
 
         HttpHeaders headers = new HttpHeaders();

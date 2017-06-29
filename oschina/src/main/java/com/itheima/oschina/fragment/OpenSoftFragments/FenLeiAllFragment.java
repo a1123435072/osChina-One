@@ -3,6 +3,7 @@ package com.itheima.oschina.fragment.OpenSoftFragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import org.senydevpkg.net.HttpParams;
 public class FenLeiAllFragment extends Fragment {
 
     private FragmentTransaction ft;
+    public static FragmentManager childFragmentManager;
 
     @Nullable
     @Override
@@ -39,14 +41,16 @@ public class FenLeiAllFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button  back = (Button) view.findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popFragmentFromStack();
-            }
-        });
+       // Button  back = (Button) view.findViewById(R.id.iv_back);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               // popFragmentFromStack();
+//            }
+//        });
+        childFragmentManager = getChildFragmentManager();
         addFragmentToStack();
+
 
     }
 
@@ -54,24 +58,25 @@ public class FenLeiAllFragment extends Fragment {
     public void addFragmentToStack() {
         Fragment newFragment = FenLeiFragment.newInstance();
         ft = getChildFragmentManager().beginTransaction();
-//        ft.replace(R.id.fl_opensoft_allfragment, newFragment);
-        ft.replace(R.id.fl_opensoft_allfragment, newFragment, newFragment.getClass().getSimpleName());
+        ft.replace(R.id.fl_opensoft_allfragment, newFragment);
+       // ft.replace(R.id.fl_opensoft_allfragment, newFragment, newFragment.getClass().getSimpleName());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.addToBackStack(null);
         ft.commit();
     }
 
-    public void popFragmentFromStack(){
-//        getChildFragmentManager().popBackStack();
-        int backStackEntryCount = getChildFragmentManager().getBackStackEntryCount();
-        if(backStackEntryCount >1){
-
-                getChildFragmentManager().popBackStack();
-
-        }else{
-           getActivity().finish();
-        }
-    }
+//    public void popFragmentFromStack(){
+////        getChildFragmentManager().popBackStack();
+//
+//        int backStackEntryCount = getChildFragmentManager().getBackStackEntryCount();
+//        if(backStackEntryCount >1){
+//
+//                getChildFragmentManager().popBackStack();
+//
+//        }else{
+//           getActivity().finish();
+//        }
+//    }
 
 
 
