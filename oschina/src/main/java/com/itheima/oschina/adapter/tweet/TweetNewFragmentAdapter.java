@@ -27,9 +27,7 @@ import org.senydevpkg.net.HttpParams;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.droidlover.xrichtext.XRichText;
 
-import static com.itheima.oschina.xutil.UIUtils.getContext;
 
 /**
  * Created by raynwang on 2017/6/22.
