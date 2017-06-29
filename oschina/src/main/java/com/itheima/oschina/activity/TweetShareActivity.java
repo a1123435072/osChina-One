@@ -94,43 +94,10 @@ public class TweetShareActivity extends AppCompatActivity {
 
                 if (!TextUtils.isEmpty(share)) {
                     if (!TextUtils.isEmpty((String)objs[0])) {//有图片的发布
-                        String url = "http://www.oschina.net/action/apiv2/resource_image";
-                        HttpParams params = new HttpParams();
-//                    String file_path = Environment.getExternalStorageDirectory().getPath() + "/cup.png";
-                        //  /storage/sdcard
-                        //通过Object数组的方式，实现内部类向外部传递数据
-                        String file_path = (String) objs[0];
-                        params.put("resource", new File(file_path));
-                        //先用图片地址resource和cookie访问服务器，返回token
-                        HttpHeaders headers = new HttpHeaders();
-                        headers.put("cookie", CookieManager.getCookie(TweetShareActivity.this));
-                        //这里要post请求方式
-                        HttpLoader.getInstance(TweetShareActivity.this).post(url, params, headers, 0x23, new HttpLoader.HttpListener<String>() {
-
-                            @Override
-                            public void onGetResponseSuccess(int requestCode, String response) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    JSONObject result = (JSONObject) jsonObject.get("result");
-                                    String token = (String) result.get("token");
-                                    publish(share,token);
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onGetResponseError(int requestCode, VolleyError error) {
-
-                            }
-                        });
-
+                        requestData();
                     }else{//没有图片，纯文字的发布
                         //token只需要传一个空字符串
                         publish(share,"");
-
                     }
                 } else {
                     Toast.makeText(TweetShareActivity.this, "发布内容为空", Toast.LENGTH_SHORT).show();
@@ -149,6 +116,7 @@ public class TweetShareActivity extends AppCompatActivity {
         });
     }
 
+    //在相册页面点击之后的返回处理，data里面携带了数据
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -171,6 +139,42 @@ public class TweetShareActivity extends AppCompatActivity {
         }
     }
 
+    //发图片，返回token
+    public void requestData(){
+        String url = "http://www.oschina.net/action/apiv2/resource_image";
+        HttpParams params = new HttpParams();
+//                    String file_path = Environment.getExternalStorageDirectory().getPath() + "/cup.png";
+        //  /storage/sdcard
+        //通过Object数组的方式，实现内部类向外部传递数据
+        String file_path = (String) objs[0];
+        params.put("resource", new File(file_path));
+        //先用图片地址resource和cookie访问服务器，返回token
+        HttpHeaders headers = new HttpHeaders();
+        headers.put("cookie", CookieManager.getCookie(TweetShareActivity.this));
+        //这里要post请求方式
+        HttpLoader.getInstance(TweetShareActivity.this).post(url, params, headers, 0x23, new HttpLoader.HttpListener<String>() {
+
+            @Override
+            public void onGetResponseSuccess(int requestCode, String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject result = (JSONObject) jsonObject.get("result");
+                    String token = (String) result.get("token");
+                    publish(share,token);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onGetResponseError(int requestCode, VolleyError error) {
+
+            }
+        });
+    }
+
     //发布动弹方法
     public void publish (String share,String token){
         String url = "http://www.oschina.net/action/apiv2/tweet";
@@ -179,9 +183,9 @@ public class TweetShareActivity extends AppCompatActivity {
         params.put("images", token);
         //这里再把token和文字内容向服务器请求，进行发布，至于返回什么值，好像没所谓了
         HttpHeaders headers = new HttpHeaders();
-        headers.put("cookie", CookieManager.getCookie(TweetShareActivity.this));
+        headers.put("cookie", CookieManager.getCookie(this));
         //这里要post请求方式
-        HttpLoader.getInstance(TweetShareActivity.this).post(url, params, headers, 0x24, new HttpLoader.HttpListener<String>() {
+        HttpLoader.getInstance(this).post(url, params, headers, 0x24, new HttpLoader.HttpListener<String>() {
 
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {

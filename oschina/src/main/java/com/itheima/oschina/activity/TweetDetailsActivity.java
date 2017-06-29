@@ -119,22 +119,22 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 }
 
                 //再是点赞人数设置数据
-                List<User> likeUser = tweet.getLikeUser();
-                String str = "";
-                int size = likeUser.size();
-                if (size==1){
-                    str = likeUser.get(0).getName()+"觉得很赞";
-                }else if (size>1){
-                    for (int i = 0; i < size; i++) {
-                        if (i == size - 1) {
-                            str += likeUser.get(i).getName();
-                            break;
-                        }
-                        str += likeUser.get(i).getName() + "、";
-                    }
-                    str = str + "等" + size +"人觉的很赞";
-                }
-                tv_likeMan.setText(str);
+//                List<User> likeUser = tweet.getLikeUser();
+//                String str = "";
+//                int size = likeUser.size();
+//                if (size==1){
+//                    str = likeUser.get(0).getName()+"觉得很赞";
+//                }else if (size>1){
+//                    for (int i = 0; i < size; i++) {
+//                        if (i == size - 1) {
+//                            str += likeUser.get(i).getName();
+//                            break;
+//                        }
+//                        str += likeUser.get(i).getName() + "、";
+//                    }
+//                    str = str + "等" + size +"人觉的很赞";
+//                }
+                tweet.setLikeUsers(getApplicationContext(),tv_likeMan,true);
             }
 
             @Override
@@ -149,8 +149,6 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
         //添加下面的评论item
         String url2 = "http://www.oschina.net/action/api/comment_list";
-        System.out.println("外部"+id);
-
         HttpParams params2 = new HttpParams();
         params2.put("pageIndex", pageIndex+"");
         params2.put("catalog", "3");
@@ -180,8 +178,4 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.iv_like)
-    public void onViewClicked() {
-
-    }
 }
