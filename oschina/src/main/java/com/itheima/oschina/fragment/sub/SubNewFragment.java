@@ -43,25 +43,25 @@ public class SubNewFragment extends baseFragment implements  ViewPager.OnPageCha
     private TextView tvTitle;
     private LinearLayout container;
     private View view;
-    private Handler handler =new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(swichImage!=null){
-                //切换
-                int currenItem=swichImage.getCurrentItem();
-                //判断是否在最后一页
-                if(currenItem==pictureList.size()-1){
-                    currenItem=0;
-                }else {
-                    currenItem++;
-                }
-                //轮播
-                swichImage.setCurrentItem(currenItem);
-            }
-            handler.sendEmptyMessageDelayed(0,3000);
-        }
-    };
+    private Handler handler =new Handler();
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if(swichImage!=null){
+//                //切换
+//                int currenItem=swichImage.getCurrentItem();
+//                //判断是否在最后一页
+//                if(currenItem==pictureList.size()-1){
+//                    currenItem=0;
+//                }else {
+//                    currenItem++;
+//                }
+//                //轮播
+//                swichImage.setCurrentItem(currenItem);
+//            }
+//            handler.sendEmptyMessageDelayed(0,3000);
+//        }
+//    };
     //设置一个开关
     boolean turn=false;
     private List<ImageView> imageViews;
@@ -119,7 +119,6 @@ public class SubNewFragment extends baseFragment implements  ViewPager.OnPageCha
         container = (LinearLayout) view.findViewById(R.id.ll_point_container);
         inihttp();
         initPicture();
-
         initPoint();
         return view;
     }
@@ -158,11 +157,11 @@ public class SubNewFragment extends baseFragment implements  ViewPager.OnPageCha
         imageViews = new ArrayList<>();
         int size=pictureList.size();
         Integer resId=0;
-        for (int i = -1; i <size; i++) {
+        for (int i = -1; i <size+1; i++) {
             if(i == -1){
                 //添加最后的一张图片
                 resId = pictureList.get(size - 1);
-            }else if(i == size-1){
+            }else if(i == size){
                 //添加第一张图片
                 resId = pictureList.get(0);
             }else{
@@ -171,12 +170,28 @@ public class SubNewFragment extends baseFragment implements  ViewPager.OnPageCha
             ImageView iv = new ImageView(getContext());
             iv.setImageResource(resId);
             imageViews.add(iv);
-            tvTitle.setText(i+"");
+            tvTitle.setText("");
         }
         ImageAdapter adapter= new ImageAdapter(imageViews);
-        swichImage.setCurrentItem(1,false);
+        swichImage.setCurrentItem(0,false);
         swichImage.setAdapter(adapter);
         starSwitch();
+    }
+    public class StaskTest implements  Runnable{
+
+        @Override
+        public void run() {
+            if(swichImage!=null){
+                int currentItem = swichImage.getCurrentItem();
+                if(currentItem==pictureList.size()-1){
+                    currentItem=0;
+                }else{
+                    currentItem++;
+                }
+                swichImage.setCurrentItem(currentItem);
+            }
+            swichImage.postDelayed(this,2000);
+        }
     }
     //初始化点
     private void initPoint() {
@@ -240,7 +255,7 @@ public class SubNewFragment extends baseFragment implements  ViewPager.OnPageCha
         }else {
             pageIndex=position-1;
         }
-        tvTitle.setText("2131");
+
         //设置轮播图的点的背景
         int childCount=container.getChildCount();
         for (int i =0;i<childCount;i++){
@@ -263,7 +278,7 @@ public class SubNewFragment extends baseFragment implements  ViewPager.OnPageCha
     //开始切换
     public void starSwitch(){
         if(!turn){
-            handler.sendEmptyMessageDelayed(0,3000);
+            handler.postDelayed(new StaskTest(),2000);
         }
     }
     //停止切换
