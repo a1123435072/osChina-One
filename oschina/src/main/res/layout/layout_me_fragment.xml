@@ -219,7 +219,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             settingview:icon="@drawable/icon_my_blog"
-            settingview:title="我的播客" />
+            settingview:title="我的博客" />
 
         <View
             android:layout_width="match_parent"

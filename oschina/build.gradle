@@ -50,5 +50,4 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     compile 'com.github.limedroid:XRichText:v1.0.0' //富文本依赖
-    compile 'com.zzhoujay.richtext:richtext:2.5.2'
 }
