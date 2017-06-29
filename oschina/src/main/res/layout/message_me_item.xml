@@ -1,21 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
 
 
-    <ImageView
+    <com.itheima.oschina.view.CircleImageView
         android:id="@+id/iv_touxiang"
-        android:src="@mipmap/ic_launcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_touxiang"
+        android:text="我的名字"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_username"
+        android:layout_toRightOf="@id/iv_touxiang"
+        android:text="Baymaxxxxx"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_pinglun"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@id/tv_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_me"
+        android:text="评论的文本"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_xiangguan"
+        android:padding="5dp"
+        android:background="#a4e2e2e2"
+        android:text="阿里杭州-电商服务创新中心诚意招聘三年以上java，p6起招，有意私聊，新到底额名额一求俩聊聊"
+        android:layout_below="@id/tv_pinglun"
+        android:layout_toRightOf="@id/iv_touxiang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:layout_toRightOf="@id/iv_touxiang"
-        android:textColor="#000"
-        android:textSize="14sp"
-        android:text="我的名字"
+        android:id="@+id/tv_time"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tv_xiangguan"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_touxiang"
+        android:text="评论的文本"
+        android:textColor="#fba7a6a6"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_pinglunCount"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+        android:text="2"
+        android:textColor="#fba7a6a6"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_pinglun_msg"
+        android:layout_marginLeft="5dp"
 
+        android:layout_below="@id/tv_time"
+        android:layout_toLeftOf="@id/tv_pinglunCount"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+
+        android:src="@drawable/ic_private_message"
+        android:textColor="#fba7a6a6"
+        android:textSize="12sp" />
 </RelativeLayout>
