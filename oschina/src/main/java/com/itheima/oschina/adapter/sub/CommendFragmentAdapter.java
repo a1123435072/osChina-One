@@ -3,6 +3,7 @@ package com.itheima.oschina.adapter.sub;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import com.itheima.oschina.R;
 import com.itheima.oschina.activity.NewDatailActivity;
 import com.itheima.oschina.bean.Blog;
 import com.itheima.oschina.bean.News;
+import com.itheima.oschina.utills.DateUtile;
+import com.itheima.oschina.utills.showSpannableString;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -50,7 +54,18 @@ public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         SubNewViewHolder  subNewViewHolder = (SubNewViewHolder) holder;
 
         if(item!=null){
-            subNewViewHolder.title.setText(item.get(position).getTitle());
+            String pubDate = item.get(position).getPubDate();
+
+            String title = item.get(position).getTitle();
+            String title1 = "[今天]" + title;
+            boolean today = DateUtile.isToday(pubDate);
+            if (today) {
+                SpannableString spannableString = showSpannableString.showTextWithImage(title1, R.drawable.ic_discover_scan);
+                subNewViewHolder.title.setText(spannableString);
+            } else {
+                subNewViewHolder.title.setText(title);
+            }
+           // subNewViewHolder.title.setText(item.get(position).getTitle());
             subNewViewHolder.tvcontent.setText(item.get(position).getBody());
             subNewViewHolder.nickName.setText(item.get(position).getAuthor());
         }

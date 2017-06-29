@@ -3,6 +3,7 @@ package com.itheima.oschina.adapter.sub;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.itheima.oschina.R;
 import com.itheima.oschina.activity.NewDatailActivity;
 import com.itheima.oschina.bean.Blog;
 import com.itheima.oschina.bean.News;
+import com.itheima.oschina.utills.DateUtile;
+import com.itheima.oschina.utills.showSpannableString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +47,17 @@ public class BlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         SubBlogViewHolder  subBlogViewHolder = (SubBlogViewHolder) holder;
-
-        subBlogViewHolder.title.setText(items.get(position).getTitle());
+        String pubDate = items.get(position).getPubDate();
+        String title = items.get(position).getTitle();
+        String title1 = "[今天]" + title;
+        boolean today = DateUtile.isToday(pubDate);
+        if (today) {
+            SpannableString spannableString = showSpannableString.showTextWithImage(title1, R.drawable.ic_discover_scan);
+            subBlogViewHolder.title.setText(spannableString);
+        } else {
+            subBlogViewHolder.title.setText(title);
+        }
+       // subBlogViewHolder.title.setText(items.get(position).getTitle());
         subBlogViewHolder.tv_content.setText(items.get(position).getBody());
         subBlogViewHolder.nickName.setText(items.get(position).getAuthor());
         subBlogViewHolder.count.setText("10"+(new Random().nextInt(10)+1));
