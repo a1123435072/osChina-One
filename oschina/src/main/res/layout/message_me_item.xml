@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
 
-    <ImageView
+    <com.itheima.oschina.view.CircleImageView
         android:id="@+id/iv_touxiang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,4 +73,16 @@
         android:text="2"
         android:textColor="#fba7a6a6"
         android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_pinglun_msg"
+        android:layout_marginLeft="5dp"
+
+        android:layout_below="@id/tv_time"
+        android:layout_toLeftOf="@id/tv_pinglunCount"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+
+        android:src="@drawable/ic_private_message"
+        android:textColor="#fba7a6a6"
+        android:textSize="12sp" />
 </RelativeLayout>

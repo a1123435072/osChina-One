@@ -120,12 +120,15 @@ public class MessageMeFragment extends Fragment {
                     public void onGetResponseSuccess(int requestCode, String response) {
                         ActiveList activeList = XmlUtils.toBean(ActiveList.class, response.getBytes());
                         messageMeAdapter.clear();
+                        messageMeAdapter.addAll(activeList.getList());
+                        rv_message.refreshComplete();
 
 
                     }
 
                     @Override
                     public void onGetResponseError(int requestCode, VolleyError error) {
+                        Toast.makeText(getActivity(), "请求数据失败", Toast.LENGTH_LONG).show();
 
                     }
                 });
