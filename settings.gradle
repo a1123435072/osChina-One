@@ -1,1 +1,1 @@
-include ':oschina', ':xrecyclerview', ':qrecyclerview', ':volley-library-source', ':okhttp3-library-source', ':volleyok-devpkg', ':libraryXRichText'
+include ':oschina', ':xrecyclerview', ':qrecyclerview', ':volley-library-source', ':okhttp3-library-source', ':volleyok-devpkg'

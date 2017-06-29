@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.itheima.oschina.adapter.sub.BlogFragmentAdapter;
 import com.itheima.oschina.base.baseFragment;
+import com.itheima.oschina.bean.BlogList;
 import com.itheima.oschina.bean.NewsList;
 import com.itheima.oschina.xutil.XmlUtils;
 
@@ -31,10 +32,10 @@ public class SubBlogFragment extends baseFragment {
         this.isPullResfresh =true;
         if(isPullResfresh){
             pageIndex=0;
-            requestData(0x24,"news_list","","20","4","","","week&pag");
+            requestData(0x24,"blog_list","","20","4","","","week&pag");
         }else{
             pageIndex++;
-            requestData(0x24,"news_list","","20","4","","","week&pag");
+            requestData(0x24,"blog_list","","20","4","","","week&pag");
         }
     }
 
@@ -50,14 +51,14 @@ public class SubBlogFragment extends baseFragment {
 
     @Override
     protected void refresh(String response) {
-        NewsList newsList = XmlUtils.toBean(NewsList.class, response.getBytes());
+        BlogList blogList = XmlUtils.toBean(BlogList.class, response.getBytes());
         if(isPullResfresh){
             blogFragmentAdapter.clear();
-            blogFragmentAdapter.addAll(newsList.getList());
+            blogFragmentAdapter.addAll(blogList.getList());
             isPullResfresh =!isPullResfresh;
             mRecyclerView.refreshComplete();
         }else{
-            blogFragmentAdapter.addAll(newsList.getList());
+            blogFragmentAdapter.addAll(blogList.getList());
             mRecyclerView.loadMoreComplete();
         }
     }

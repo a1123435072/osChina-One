@@ -17,6 +17,7 @@ import com.itheima.oschina.bean.Blog;
 import com.itheima.oschina.bean.News;
 import com.itheima.oschina.utills.DateUtile;
 import com.itheima.oschina.utills.showSpannableString;
+import com.itheima.oschina.xutil.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class BlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private Activity mActivity;
 
-    private List<News>  items = new ArrayList<>();
+    private List<Blog>  items = new ArrayList<>();
 
 
     public BlogFragmentAdapter(Activity activity){
@@ -45,7 +46,6 @@ public class BlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-
         SubBlogViewHolder  subBlogViewHolder = (SubBlogViewHolder) holder;
         String pubDate = items.get(position).getPubDate();
         String title = items.get(position).getTitle();
@@ -61,14 +61,16 @@ public class BlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         subBlogViewHolder.tv_content.setText(items.get(position).getBody());
         subBlogViewHolder.nickName.setText(items.get(position).getAuthor());
         subBlogViewHolder.count.setText("10"+(new Random().nextInt(10)+1));
-        subBlogViewHolder.tvTimes.setText("4"+System.currentTimeMillis());
+        subBlogViewHolder.tvTimes.setText(StringUtils.friendly_time(pubDate));
 
         subBlogViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mActivity, "被点击了", Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(mActivity,NewDatailActivity.class);
-                intent.putExtra("url",items.get(position).getUrl());
+                intent.putExtra("url",items.get(position).getUrl()+"");
+                intent.putExtra("dif","blog");
+                intent.putExtra("id",items.get(position).getId());
                 mActivity.startActivity(intent);
             }
         });
@@ -80,7 +82,7 @@ public class BlogFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return items.size();
     }
 
-    public void addAll(List<News> datas){
+    public void addAll(List<Blog> datas){
         items.addAll(datas);
         notifyItemRangeInserted(items.size() -1, getItemCount() + datas.size());
     }

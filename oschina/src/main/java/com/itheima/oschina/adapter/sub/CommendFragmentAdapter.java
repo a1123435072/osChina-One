@@ -14,6 +14,8 @@ import com.itheima.oschina.bean.Blog;
 import com.itheima.oschina.bean.News;
 import com.itheima.oschina.utills.DateUtile;
 import com.itheima.oschina.utills.showSpannableString;
+import com.itheima.oschina.xutil.StringUtils;
+import com.itheima.oschina.xutil.XmlUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +54,11 @@ public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         SubNewViewHolder  subNewViewHolder = (SubNewViewHolder) holder;
-
+        String pubDate = item.get(position).getPubDate();
+        String title = item.get(position).getTitle();
         if(item!=null){
-            String pubDate = item.get(position).getPubDate();
-
-            String title = item.get(position).getTitle();
             String title1 = "[今天]" + title;
-            boolean today = DateUtile.isToday(pubDate);
+            boolean today = StringUtils.isToday(pubDate);
             if (today) {
                 SpannableString spannableString = showSpannableString.showTextWithImage(title1, R.drawable.ic_discover_scan);
                 subNewViewHolder.title.setText(spannableString);
@@ -69,14 +69,18 @@ public class CommendFragmentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             subNewViewHolder.tvcontent.setText(item.get(position).getBody());
             subNewViewHolder.nickName.setText(item.get(position).getAuthor());
         }
-        subNewViewHolder.tvTimes.setText("4"+System.currentTimeMillis());
-        subNewViewHolder.count.setText("10"+(new Random().nextInt(10)+1));
+        subNewViewHolder.tvTimes.setText(StringUtils.friendly_time(pubDate));
+        int number=item.get(position).getCommentCount();
+        subNewViewHolder.count.setText(number+"");
 
         subNewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent= new Intent(mActivity,NewDatailActivity.class);
-                intent.putExtra("url",item.get(position).getUrl());
+                intent.putExtra("url",item.get(position).getUrl()+"");
+                intent.putExtra("dif","news");
+                intent.putExtra("id",item.get(position).getId()+"");
 
                 mActivity.startActivity(intent);
             }
