@@ -20,7 +20,27 @@
 
     <include
         android:id="@+id/ll_progress"
+        android:visibility="gone"
         layout="@layout/layouot_progress" />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_login_please"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <ImageView
+
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="亲您忘记登陆了哦"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </FrameLayout>
 </LinearLayout>

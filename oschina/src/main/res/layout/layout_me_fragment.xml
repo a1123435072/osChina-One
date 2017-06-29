@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/rl_all"
         android:layout_width="match_parent"
-        android:layout_height="224dp"
+        android:layout_height="234dp"
         android:background="@color/actionbar_background">
 
         <ImageView
@@ -103,7 +103,7 @@
                     android:clickable="true"
                     android:text="动弹"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -131,7 +131,7 @@
                     android:clickable="true"
                     android:text="收藏"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -159,7 +159,7 @@
                     android:clickable="true"
                     android:text="关注"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -181,12 +181,13 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:text="粉丝"
                     android:textColor="#fff"
-                    android:textSize="20sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </LinearLayout>

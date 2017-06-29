@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.LoginActivity;
 import com.itheima.oschina.activity.me.ActionActivity;
 import com.itheima.oschina.activity.me.BlogActivity;
 import com.itheima.oschina.activity.me.ErWweiMaActivity;
@@ -42,7 +43,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.itheima.oschina.R.id.spacer;
+import static com.itheima.oschina.R.id.text;
 import static com.itheima.oschina.R.id.tv_username;
+import static com.itheima.oschina.R.string.login;
 
 /**
  * Created by fly on 2017/3/1.
@@ -123,7 +127,7 @@ public class MeFragment extends Fragment {
             llFensi.setVisibility(View.GONE);
 
             tvUsername.setTextSize(18);
-            tvUsername.setText("点击头像登陆");
+            tvUsername.setText("亲您忘记登陆了哦");
 
         } else {
             //uid不为空，加载 用户界面 加载数据
@@ -153,6 +157,33 @@ public class MeFragment extends Fragment {
         unbinder.unbind();
     }
 
+    @Override
+    public void onResume() {
+        uid = SPUtil.newInstance(getActivity()).getString("uid");
+        if (!TextUtils.isEmpty(uid)){
+
+            requestData();
+            tvScore.setVisibility(View.VISIBLE);
+            llDongtan.setVisibility(View.VISIBLE);
+            llShoucang.setVisibility(View.VISIBLE);
+            llShoucang.setVisibility(View.VISIBLE);
+            llGuanzhu.setVisibility(View.VISIBLE);
+            llFensi.setVisibility(View.VISIBLE);
+        }else {
+            tvScore.setVisibility(View.GONE);
+            llDongtan.setVisibility(View.GONE);
+            llShoucang.setVisibility(View.GONE);
+            llShoucang.setVisibility(View.GONE);
+            llGuanzhu.setVisibility(View.GONE);
+            llFensi.setVisibility(View.GONE);
+            tvUsername.setTextSize(18);
+            tvUsername.setText("亲您已经推出了哦");
+            ivPortrait.setImageResource(R.drawable.widget_dface);
+
+        }
+        super.onResume();
+    }
+
     @OnClick({R.id.setting, R.id.qrcode, R.id.ll_dongtan, R.id.ll_shoucang, R.id.ll_guanzhu,
             R.id.ll_fensi, R.id.rl_all, R.id.message, R.id.blog, R.id.note, R.id.action, R.id.team})
     public void onClick(View view) {
@@ -173,7 +204,14 @@ public class MeFragment extends Fragment {
                 break;
             case R.id.ll_fensi://粉丝
                 break;
-            case R.id.rl_all://头像下面的布局点击使劲
+            case R.id.rl_all://头像下面的布局点击登陆
+                if (TextUtils.isEmpty(uid)){
+                    Intent intent13 = new Intent(getActivity(), LoginActivity.class);
+                    startActivityForResult(intent13,110);
+                }{
+
+            }
+
                 break;
             case R.id.message://消息布局   @我
                 Intent intent1 = new Intent(getActivity(), MessageActivity.class);
@@ -213,7 +251,7 @@ public class MeFragment extends Fragment {
 
                     @Override
                     public void onGetResponseSuccess(int requestCode, String response) {
-                        //System.out.println("-------------response-----------"+response);
+                        System.out.println("-------------response-----------"+response);
                         MyInformation user = XmlUtils.toBean(MyInformation.class, response.getBytes());
                         //item.add();
                         //ser.
@@ -225,7 +263,7 @@ public class MeFragment extends Fragment {
                         tvGuanzhu.setText(user.getUser().getFollowers() + "");
                         tvFensi.setText(user.getUser().getFans() + "");
                         // Toast.makeText(getActivity(),"请求数据成功"+response,Toast.LENGTH_SHORT).show();
-                        if(user.getUser().getPortrait()!=null){
+                        if(!TextUtils.isEmpty(user.getUser().getPortrait())){
 
                             Picasso.with(getActivity()).load(user.getUser().getPortrait()).into(ivPortrait);
                         }

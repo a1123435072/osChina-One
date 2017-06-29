@@ -1,6 +1,7 @@
 package com.itheima.oschina.fragment.MeMessageFragment;
 
 import android.app.FragmentBreadCrumbs;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,10 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.LoginActivity;
 import com.itheima.oschina.adapter.me.MessageMeAdapter;
 import com.itheima.oschina.adapter.opensoft.recommendAdapter;
 import com.itheima.oschina.bean.ActiveList;
@@ -45,6 +49,8 @@ public class MessageMeFragment extends Fragment {
     private XRecyclerView rv_message;
     private String uid;
     private MessageMeAdapter messageMeAdapter;
+    private LinearLayout progressBar;
+    private LinearLayout ll_login_please;
 
 
     @Override
@@ -52,8 +58,12 @@ public class MessageMeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         uid = SPUtil.newInstance(getActivity()).getString("uid");
         Log.i("test",uid+"------");
-        if (TextUtils.isEmpty(uid)) {
+        if (!TextUtils.isEmpty(uid)) {
 
+
+        }else {
+
+            //ll_login_please.setVisibility(View.VISIBLE);
 
         }
     }
@@ -62,6 +72,25 @@ public class MessageMeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.message_fragment, container, false);
+        progressBar = (LinearLayout) view.findViewById(R.id.ll_progress);
+        ll_login_please = (LinearLayout) view.findViewById(R.id.ll_login_please);
+        // Log.i("test",uid+"------");
+        if (!TextUtils.isEmpty(uid)) {
+
+            progressBar.setVisibility(View.VISIBLE);
+
+        }else {
+
+            ll_login_please.setVisibility(View.VISIBLE);
+
+        }
+        ll_login_please.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
 
     }
@@ -71,7 +100,22 @@ public class MessageMeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rv_message = (XRecyclerView) view.findViewById(R.id.rv_messageMe);
 
-         initRecycleView();
+        if (!TextUtils.isEmpty(uid)) {
+
+            initRecycleView();
+        }
+    }
+
+    @Override
+    public void onResume() {
+
+        uid = SPUtil.newInstance(getActivity()).getString("uid");
+        if (!TextUtils.isEmpty(uid)) {
+            initRecycleView();
+            refreshData();
+            ll_login_please.setVerticalGravity(View.GONE);
+        }
+        super.onResume();
     }
 
     /**
@@ -101,6 +145,7 @@ public class MessageMeFragment extends Fragment {
         rv_message.refresh();
         messageMeAdapter = new MessageMeAdapter(getActivity());
         rv_message.setAdapter(messageMeAdapter);
+
     }
 
     //请求网络刷新数据的放法
@@ -134,6 +179,8 @@ public class MessageMeFragment extends Fragment {
                         messageMeAdapter.clear();
                         messageMeAdapter.addAll(activeList.getList());
                         rv_message.refreshComplete();
+                        progressBar.setVisibility(View.GONE);
+                        ll_login_please.setVisibility(View.GONE);
 
                     }
 
