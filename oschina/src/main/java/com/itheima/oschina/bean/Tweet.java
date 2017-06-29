@@ -346,4 +346,25 @@ public class Tweet extends Entity implements Parcelable {
             return ssb.append("觉得很赞");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "portrait='" + portrait + '\'' +
+                ", author='" + author + '\'' +
+                ", authorid=" + authorid +
+                ", body='" + body + '\'' +
+                ", appclient=" + appclient +
+                ", commentCount='" + commentCount + '\'' +
+                ", pubDate='" + pubDate + '\'' +
+                ", imgSmall='" + imgSmall + '\'' +
+                ", imgBig='" + imgBig + '\'' +
+                ", attach='" + attach + '\'' +
+                ", likeCount=" + likeCount +
+                ", isLike=" + isLike +
+                ", likeUser=" + likeUser +
+                ", imageFilePath='" + imageFilePath + '\'' +
+                ", audioPath='" + audioPath + '\'' +
+                '}';
+    }
 }

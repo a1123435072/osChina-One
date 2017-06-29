@@ -1,11 +1,12 @@
 package com.itheima.oschina.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -27,8 +28,6 @@ import com.squareup.picasso.Picasso;
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
 
-import java.net.URL;
-
 public class TweetDetailsActivity extends AppCompatActivity {
 
 
@@ -44,6 +43,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     ImageView ivLike;
     TextView tv_content;
     TextView tv_likeMan;
+    ImageView iv_imageSmall;
 
     private int pageIndex = 0;
     private boolean isPullRefresh;
@@ -73,12 +73,12 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tv_content = (TextView) view.findViewById(R.id.tv_content);
 //        iv_content_image = (ImageView) view.findViewById(R.id.iv_content_image);
         tv_likeMan = (TextView) view.findViewById(R.id.tv_likeMan);
+        iv_imageSmall = (ImageView) view.findViewById(R.id.iv_image);
 
         String url = "http://www.oschina.net/action/api/tweet_detail";
         HttpParams params = new HttpParams();
         //从intent中获取id
         id = getIntent().getIntExtra("id", 0);
-        System.out.println("-----------------"+id);
         params.put("id", id);
         HttpLoader.getInstance(this).get(url, params, null, 0x11, new HttpLoader.HttpListener<String>() {
             @Override
@@ -96,40 +96,50 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                 String body = tweet.getBody().trim();
                 //解析成Html
-//                Spanned html = Html.fromHtml(body);
-//                tv_content.setText(html);
+                Spanned html = Html.fromHtml(body);
+                tv_content.setText(html);
                 // 无需管他啥意思 加上这个东西 textview中的超链接就可以点击
-//                tv_content.setMovementMethod(LinkMovementMethod.getInstance());
-
-
-                Html.ImageGetter imgGetter = new Html.ImageGetter() {
-                    public Drawable getDrawable(String source) {
-                        Drawable drawable = null;
-                        System.out.println("-------------   "+source);
-                        URL url;
-                        try {
-                            url = new URL(source);
-                            drawable = Drawable.createFromStream(url.openStream(), "");
-                        } catch (Exception e) {
-                            return null;
-                        }
-                        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-                        return drawable;
-                    }
-                };
-                tv_content.setText(Html.fromHtml(body,imgGetter,null));
                 tv_content.setMovementMethod(LinkMovementMethod.getInstance());
 
 
-
-
-
+//                Html.ImageGetter imgGetter = new Html.ImageGetter() {
+//                    public Drawable getDrawable(String source) {
+//                        Drawable drawable = null;
+//                        System.out.println("-------------   "+source);
+//                        URL url;
+//                        try {
+//                            url = new URL(source);
+//                            drawable = Drawable.createFromStream(url.openStream(), "");
+//                        } catch (Exception e) {
+//                            return null;
+//                        }
+//                        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+//                        return drawable;
+//                    }
+//                };
+//                tv_content.setText(Html.fromHtml(body,imgGetter,null));
+//                tv_content.setMovementMethod(LinkMovementMethod.getInstance());
 
 
                 String urlPortrait = tweet.getPortrait();
                 if (!TextUtils.isEmpty(urlPortrait)) {
                     Picasso.with(getApplicationContext()).load(urlPortrait).into(ivHead);
                 }
+                String urlImageSmall = tweet.getImgSmall();
+                if (!TextUtils.isEmpty(urlImageSmall)) {
+                    Picasso.with(getApplicationContext()).load(urlImageSmall).into(iv_imageSmall);
+                }
+
+                //小图点击事件，进入大图Activity
+                iv_imageSmall.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(TweetDetailsActivity.this, BigImageActivity.class);
+                        String urlImageBig = tweet.getImgBig();
+                        intent.putExtra("urlImageBig",urlImageBig);
+                        startActivity(intent);
+                    }
+                });
 
                 //再是点赞人数设置数据
 //                List<User> likeUser = tweet.getLikeUser();

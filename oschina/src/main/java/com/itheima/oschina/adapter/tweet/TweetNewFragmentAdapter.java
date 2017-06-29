@@ -4,29 +4,21 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.BigImageActivity;
 import com.itheima.oschina.activity.TweetDetailsActivity;
 import com.itheima.oschina.bean.Tweet;
-import com.itheima.oschina.bean.TweetDetail;
-import com.itheima.oschina.xutil.XmlUtils;
 import com.squareup.picasso.Picasso;
-
-import org.senydevpkg.net.HttpLoader;
-import org.senydevpkg.net.HttpParams;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 /**
@@ -41,10 +33,9 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     private List<Tweet> items = new ArrayList<>();
 
 
-    public TweetNewFragmentAdapter(Activity activity, Context context,List<Tweet> items) {
+    public TweetNewFragmentAdapter(Activity activity, Context context) {
         this.mActivity = activity;
         this.context = context;
-        this.items = items;
     }
 
     @Override
@@ -65,17 +56,33 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         tweetNewViewHolder.tv_likeNumber.setText(items.get(position).getLikeCount()+"");
         items.get(position).setLikeUsers(context,tweetNewViewHolder.tv_likeUser,true);
 
-        ImageView imageView = tweetNewViewHolder.iv_head;
 //        BitmapUtils.display(context,imageView,items.get(position).getPortrait());
 
         String urlPortrait = items.get(position).getPortrait();
         if (!TextUtils.isEmpty(urlPortrait)) {
-            Picasso.with(context).load(urlPortrait).into(imageView);
+            Picasso.with(context).load(urlPortrait).into(tweetNewViewHolder.iv_head);
+        }
+        String urlImageSmall = items.get(position).getImgSmall();
+        if (!TextUtils.isEmpty(urlImageSmall)) {
+            Picasso.with(context).load(urlImageSmall).into(tweetNewViewHolder.iv_imageSmall);
         }
 
+        //小图的点击事件，进入大图Activity
+        tweetNewViewHolder.iv_imageSmall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, BigImageActivity.class);
+                String urlImageBig = items.get(position).getImgBig();
+                intent.putExtra("urlImageBig",urlImageBig);
+                context.startActivity(intent);
+            }
+        });
+
+        //条目的点击事件，进入详情
         tweetNewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("------------------"+items.get(position));
                 Intent intent = new Intent(context, TweetDetailsActivity.class);
                 int id = items.get(position).getId();
                 intent.putExtra("id",id);
@@ -90,15 +97,16 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         return items.size();
     }
 
-//    public void addAll(List<Tweet> datas) {
-//        items.addAll(datas);
-//        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());
-//        //需要刷新一次，因为加载新的item时，itemCount需要相应变化
-//        notifyDataSetChanged();
-//    }
+    public void addAll(List<Tweet> datas) {
+        items.clear();
+        items.addAll(datas);
+        notifyItemRangeInserted(items.size() - 1, getItemCount() + datas.size());
+        //需要刷新一次，因为加载新的item时，itemCount需要相应变化
+        notifyDataSetChanged();
+    }
 
     public void clear() {
-//        notifyItemRangeRemoved(1, getItemCount());
+        notifyItemRangeRemoved(1, getItemCount());
         items.clear();
     }
 
@@ -110,7 +118,8 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         private final ImageView iv_head;
         private final TextView tv_likeNumber;
         private final TextView tv_commemntNumber;
-        private TextView tv_likeUser;
+        private final TextView tv_likeUser;
+        private final ImageView iv_imageSmall;
 
         public TweetNewViewHolder(View itemView) {
             super(itemView);
@@ -121,6 +130,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             tv_likeNumber = (TextView) itemView.findViewById(R.id.tv_likeNumber);
             tv_commemntNumber = (TextView) itemView.findViewById(R.id.tv_commentNumber);
             tv_likeUser = (TextView) itemView.findViewById(R.id.tv_likeUser);
+            iv_imageSmall = (ImageView) itemView.findViewById(R.id.iv_image);
         }
 
     }

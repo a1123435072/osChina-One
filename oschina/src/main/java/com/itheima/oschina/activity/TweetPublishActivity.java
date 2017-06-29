@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,35 +16,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.itheima.oschina.R;
-import com.itheima.oschina.bean.LoginUserBean;
-import com.itheima.oschina.bean.Result;
-import com.itheima.oschina.bean.User;
-import com.itheima.oschina.xutil.XmlUtils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.senydevpkg.net.HttpHeaders;
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
 import org.senydevpkg.utils.CookieManager;
-import org.senydevpkg.utils.SPUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import butterknife.OnClick;
-
-import static android.R.attr.data;
-
-public class TweetShareActivity extends AppCompatActivity {
+public class TweetPublishActivity extends AppCompatActivity {
 
     EditText et_share;
     TextView tv_cancel;
@@ -100,7 +84,7 @@ public class TweetShareActivity extends AppCompatActivity {
                         publish(share,"");
                     }
                 } else {
-                    Toast.makeText(TweetShareActivity.this, "发布内容为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TweetPublishActivity.this, "发布内容为空", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -150,9 +134,9 @@ public class TweetShareActivity extends AppCompatActivity {
         params.put("resource", new File(file_path));
         //先用图片地址resource和cookie访问服务器，返回token
         HttpHeaders headers = new HttpHeaders();
-        headers.put("cookie", CookieManager.getCookie(TweetShareActivity.this));
+        headers.put("cookie", CookieManager.getCookie(TweetPublishActivity.this));
         //这里要post请求方式
-        HttpLoader.getInstance(TweetShareActivity.this).post(url, params, headers, 0x23, new HttpLoader.HttpListener<String>() {
+        HttpLoader.getInstance(TweetPublishActivity.this).post(url, params, headers, 0x23, new HttpLoader.HttpListener<String>() {
 
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
@@ -189,7 +173,7 @@ public class TweetShareActivity extends AppCompatActivity {
 
             @Override
             public void onGetResponseSuccess(int requestCode, String response) {
-                Toast.makeText(TweetShareActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TweetPublishActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
                 finish();
             }
 

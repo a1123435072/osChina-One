@@ -119,7 +119,7 @@ public class TweetMineFragment extends Fragment{
 
 
         //设置适配器
-        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(), getContext(),items);
+        tweetNewFragmentAdapter = new TweetNewFragmentAdapter(getActivity(), getContext());
         mRecyclerView.setAdapter(tweetNewFragmentAdapter);
     }
 
@@ -166,6 +166,7 @@ public class TweetMineFragment extends Fragment{
                     items.addAll(tweetsList.getList());
                     mRecyclerView.loadMoreComplete();
                 }
+                tweetNewFragmentAdapter.addAll(items);
                 tweetNewFragmentAdapter.notifyDataSetChanged();
             }
 

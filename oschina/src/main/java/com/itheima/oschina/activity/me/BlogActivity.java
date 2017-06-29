@@ -7,12 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
-import com.itheima.oschina.activity.TweetDetailsActivity;
-import com.itheima.oschina.activity.TweetShareActivity;
 import com.itheima.oschina.adapter.me.MeBlogAdapter;
-import com.itheima.oschina.adapter.tweet.TweetCommentAdapter;
 import com.itheima.oschina.bean.BlogList;
-import com.itheima.oschina.bean.CommentList;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
