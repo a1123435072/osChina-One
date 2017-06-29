@@ -1,7 +1,6 @@
 package com.itheima.oschina.activity;
 
 import android.content.Intent;
-import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,12 +13,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.itheima.oschina.R;
-import com.itheima.oschina.activity.LoginActivity;
 import com.itheima.oschina.fragment.ExploreFragment;
 import com.itheima.oschina.fragment.MeFragment;
 import com.itheima.oschina.fragment.AllFragment;
 import com.itheima.oschina.fragment.TweetFragment;
-import com.itheima.oschina.fragment.tweet.TweetMineFragment;
 
 import org.senydevpkg.utils.SPUtil;
 
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 if (TextUtils.isEmpty(uid)) {
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 }else{
-                    startActivity(new Intent(MainActivity.this,TweetShareActivity.class));
+                    startActivity(new Intent(MainActivity.this,TweetPublishActivity.class));
                 }
             }
         });
