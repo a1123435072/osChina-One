@@ -27,9 +27,7 @@ import org.senydevpkg.net.HttpParams;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.droidlover.xrichtext.XRichText;
 
-import static com.itheima.oschina.xutil.UIUtils.getContext;
 
 /**
  * Created by raynwang on 2017/6/22.
@@ -65,6 +63,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         tweetNewViewHolder.tv_time.setText(items.get(position).getPubDate());
         tweetNewViewHolder.tv_commemntNumber.setText(items.get(position).getCommentCount());
         tweetNewViewHolder.tv_likeNumber.setText(items.get(position).getLikeCount()+"");
+        items.get(position).setLikeUsers(context,tweetNewViewHolder.tv_likeUser,true);
 
         ImageView imageView = tweetNewViewHolder.iv_head;
 //        BitmapUtils.display(context,imageView,items.get(position).getPortrait());
@@ -111,6 +110,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
         private final ImageView iv_head;
         private final TextView tv_likeNumber;
         private final TextView tv_commemntNumber;
+        private TextView tv_likeUser;
 
         public TweetNewViewHolder(View itemView) {
             super(itemView);
@@ -120,6 +120,7 @@ public class TweetNewFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_likeNumber = (TextView) itemView.findViewById(R.id.tv_likeNumber);
             tv_commemntNumber = (TextView) itemView.findViewById(R.id.tv_commentNumber);
+            tv_likeUser = (TextView) itemView.findViewById(R.id.tv_likeUser);
         }
 
     }

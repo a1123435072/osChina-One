@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.me.MessageMeAdapter;
 import com.itheima.oschina.adapter.opensoft.recommendAdapter;
+import com.itheima.oschina.bean.ActiveList;
 import com.itheima.oschina.bean.MyInformation;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
@@ -40,13 +41,14 @@ public class MessageMeFragment extends Fragment {
 
     private XRecyclerView rv_message;
     private String uid;
+    private MessageMeAdapter messageMeAdapter;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uid = SPUtil.newInstance(getActivity()).getString("uid");
-
+        Log.i("test",uid+"------");
     }
 
     @Nullable
@@ -84,8 +86,6 @@ public class MessageMeFragment extends Fragment {
                 refreshData();
             }
 
-
-
             @Override
             public void onLoadMore() {
                 refreshData();
@@ -93,34 +93,45 @@ public class MessageMeFragment extends Fragment {
         });
 
         rv_message.refresh();
-        MessageMeAdapter messageMeAdapter = new MessageMeAdapter(getActivity());
+        messageMeAdapter = new MessageMeAdapter(getActivity());
         rv_message.setAdapter(messageMeAdapter);
     }
 
     //请求网络刷新数据的放法
     private void refreshData() {
-        String url ="";
+        String url ="http://www.oschina.net/action/api/active_list";
 
         HttpHeaders headers = new HttpHeaders();
 
         headers.put("cookie",CookieManager.getCookie(getActivity()));
 
-
         HttpParams httpParams = new HttpParams();
         httpParams.put("uid",uid);
+        httpParams.put("pageIndex",0);
+        //httpParams.put("catalog",2);带上就报错
+        httpParams.put("pageSize",20);
+
         Log.i("test",uid+"------");
         //httpParams.put();
 
         HttpLoader.getInstance(getActivity())
-                .get(url, httpParams, headers, 0x13, new HttpLoader.HttpListener<String>() {
+                .get(url, httpParams, headers, 0x14, new HttpLoader.HttpListener<String>() {
                     @Override
                     public void onGetResponseSuccess(int requestCode, String response) {
-                        //XmlUtils.toBean()
+                        ActiveList activeList = XmlUtils.toBean(ActiveList.class, response.getBytes());
+                        //Toast.makeText(getActivity(), "请求数据成功"+response, Toast.LENGTH_LONG).show();
+
+                        Log.i("test",response);
+                        messageMeAdapter.clear();
+                        messageMeAdapter.addAll(activeList.getList());
+                        rv_message.refreshComplete();
+
 
                     }
 
                     @Override
                     public void onGetResponseError(int requestCode, VolleyError error) {
+                        Toast.makeText(getActivity(), "请求数据失败", Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -136,8 +147,6 @@ public class MessageMeFragment extends Fragment {
         //params.put("user",)
         HttpLoader.getInstance(getActivity())
                 .get(url, params, headers, 0x11, new HttpLoader.HttpListener<String>() {
-
-
                     @Override
                     public void onGetResponseSuccess(int requestCode, String response) {
                         //System.out.println("-------------response-----------"+response);
@@ -153,7 +162,6 @@ public class MessageMeFragment extends Fragment {
                         tvFensi.setText(user.getUser().getFans() + "");
                         // Toast.makeText(getActivity(),"请求数据成功"+response,Toast.LENGTH_SHORT).show();
                         if(user.getUser().getPortrait()!=null){
-
                             Picasso.with(getActivity()).load(user.getUser().getPortrait()).into(ivPortrait);
                         }
                         String gender = user.getUser().getGender();

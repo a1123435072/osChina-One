@@ -64,7 +64,7 @@ public  class  LoginActivity extends AppCompatActivity {
                 params.put("username", username);
                 params.put("pwd", pwd);
 
-                HttpLoader.getInstance(context).get(url, params, null, 0x22, new HttpLoader.HttpListener<String>() {
+                HttpLoader.getInstance(context).post(url, params, null, 0x22, new HttpLoader.HttpListener<String>() {
                     @Override
                     public void onParaseNetWorkResponse(NetworkResponse networkResponse) {
                         super.onParaseNetWorkResponse(networkResponse);

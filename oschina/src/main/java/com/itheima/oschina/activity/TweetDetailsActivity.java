@@ -1,33 +1,24 @@
 package com.itheima.oschina.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.tweet.TweetCommentAdapter;
-import com.itheima.oschina.bean.Comment;
 import com.itheima.oschina.bean.CommentList;
 import com.itheima.oschina.bean.Tweet;
 import com.itheima.oschina.bean.TweetDetail;
-import com.itheima.oschina.bean.TweetLike;
-import com.itheima.oschina.bean.TweetLikeUserList;
-import com.itheima.oschina.bean.TweetsList;
-import com.itheima.oschina.bean.User;
 import com.itheima.oschina.view.RecycleViewDivider;
 import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -36,12 +27,7 @@ import com.squareup.picasso.Picasso;
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import java.net.URL;
 
 public class TweetDetailsActivity extends AppCompatActivity {
 
@@ -108,10 +94,37 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 tvCommentNumber.setText(tweet.getCommentCount() + "");
                 tvLikeNumber.setText(tweet.getLikeCount() + "");
 
+                String body = tweet.getBody().trim();
                 //解析成Html
-                tv_content.setText(Html.fromHtml(tweet.getBody().trim()));
+//                Spanned html = Html.fromHtml(body);
+//                tv_content.setText(html);
                 // 无需管他啥意思 加上这个东西 textview中的超链接就可以点击
+//                tv_content.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+                Html.ImageGetter imgGetter = new Html.ImageGetter() {
+                    public Drawable getDrawable(String source) {
+                        Drawable drawable = null;
+                        System.out.println("-------------   "+source);
+                        URL url;
+                        try {
+                            url = new URL(source);
+                            drawable = Drawable.createFromStream(url.openStream(), "");
+                        } catch (Exception e) {
+                            return null;
+                        }
+                        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                        return drawable;
+                    }
+                };
+                tv_content.setText(Html.fromHtml(body,imgGetter,null));
                 tv_content.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+
+
+
+
 
                 String urlPortrait = tweet.getPortrait();
                 if (!TextUtils.isEmpty(urlPortrait)) {
@@ -119,22 +132,22 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 }
 
                 //再是点赞人数设置数据
-                List<User> likeUser = tweet.getLikeUser();
-                String str = "";
-                int size = likeUser.size();
-                if (size==1){
-                    str = likeUser.get(0).getName()+"觉得很赞";
-                }else if (size>1){
-                    for (int i = 0; i < size; i++) {
-                        if (i == size - 1) {
-                            str += likeUser.get(i).getName();
-                            break;
-                        }
-                        str += likeUser.get(i).getName() + "、";
-                    }
-                    str = str + "等" + size +"人觉的很赞";
-                }
-                tv_likeMan.setText(str);
+//                List<User> likeUser = tweet.getLikeUser();
+//                String str = "";
+//                int size = likeUser.size();
+//                if (size==1){
+//                    str = likeUser.get(0).getName()+"觉得很赞";
+//                }else if (size>1){
+//                    for (int i = 0; i < size; i++) {
+//                        if (i == size - 1) {
+//                            str += likeUser.get(i).getName();
+//                            break;
+//                        }
+//                        str += likeUser.get(i).getName() + "、";
+//                    }
+//                    str = str + "等" + size +"人觉的很赞";
+//                }
+                tweet.setLikeUsers(getApplicationContext(),tv_likeMan,true);
             }
 
             @Override
@@ -149,8 +162,6 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
         //添加下面的评论item
         String url2 = "http://www.oschina.net/action/api/comment_list";
-        System.out.println("外部"+id);
-
         HttpParams params2 = new HttpParams();
         params2.put("pageIndex", pageIndex+"");
         params2.put("catalog", "3");
@@ -180,8 +191,5 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.iv_like)
-    public void onViewClicked() {
 
-    }
 }
