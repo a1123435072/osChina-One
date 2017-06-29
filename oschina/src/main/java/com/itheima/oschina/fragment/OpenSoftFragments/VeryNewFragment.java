@@ -102,7 +102,7 @@ public class VeryNewFragment extends Fragment {
 //        params.put("pageSize", 20);
 
         HttpLoader.getInstance(getActivity())
-                .get(url, params, null, 0x21, new HttpLoader.HttpListener<String>() {
+                .get(url, params, null, 0x16, new HttpLoader.HttpListener<String>() {
                     @Override
                     public void onGetResponseSuccess(int requestCode, String response) {
                         SoftwareList softwareList = XmlUtils.toBean(SoftwareList.class, response.getBytes());

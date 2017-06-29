@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private List<Fragment> fragments;
     private TextView tv_toolbar_title;
     private Toolbar toolbar;
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         tv_toolbar_title = (TextView) findViewById(R.id.tv_toolbar_title);
 
         toolbar = (Toolbar) findViewById(R.id.too_bar);
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
+        radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
         radioGroup.setOnCheckedChangeListener(this);
 
         //点击底部tab，发布动弹的监听，加号
@@ -128,6 +129,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 toolbar.setVisibility(View.GONE);
                 break;
         }
+    }
+    public void hiedRadioGroup(){
+        radioGroup.setVisibility(View.GONE);
+    }
+    public void showRadioGroup(){
+        radioGroup.setVisibility(View.VISIBLE);
     }
 
 //    @Override

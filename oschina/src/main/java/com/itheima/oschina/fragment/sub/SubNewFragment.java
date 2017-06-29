@@ -10,12 +10,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.itheima.oschina.R;
 import com.itheima.oschina.adapter.sub.ImageAdapter;
 import com.itheima.oschina.adapter.sub.CommendFragmentAdapter;
 import com.itheima.oschina.base.baseFragment;
 import com.itheima.oschina.bean.NewsList;
+import com.itheima.oschina.utills.Constant;
 import com.itheima.oschina.xutil.XmlUtils;
+
+import org.senydevpkg.net.HttpLoader;
+import org.senydevpkg.net.HttpParams;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +33,7 @@ import java.util.List;
  * 资讯， 热点 公用的 fragment
  */
 
-public class SubNewFragment extends baseFragment {
+public class SubNewFragment extends baseFragment implements  ViewPager.OnPageChangeListener{
     //一个通用的适配器
     private CommendFragmentAdapter commendFragmentAdapter;
 
@@ -35,27 +43,28 @@ public class SubNewFragment extends baseFragment {
     private TextView tvTitle;
     private LinearLayout container;
     private View view;
-    private Handler handler =new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(swichImage!=null){
-                //切换
-                int currenItem=swichImage.getCurrentItem();
-                //判断是否在最后一页
-                if(currenItem==pictureList.size()-1){
-                    currenItem=0;
-                }else {
-                    currenItem++;
-                }
-                //轮播
-                swichImage.setCurrentItem(currenItem);
-            }
-            handler.sendEmptyMessageDelayed(0,3000);
-        }
-    };
+    private Handler handler =new Handler();
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if(swichImage!=null){
+//                //切换
+//                int currenItem=swichImage.getCurrentItem();
+//                //判断是否在最后一页
+//                if(currenItem==pictureList.size()-1){
+//                    currenItem=0;
+//                }else {
+//                    currenItem++;
+//                }
+//                //轮播
+//                swichImage.setCurrentItem(currenItem);
+//            }
+//            handler.sendEmptyMessageDelayed(0,3000);
+//        }
+//    };
     //设置一个开关
     boolean turn=false;
+    private List<ImageView> imageViews;
 
 
     @Override
@@ -108,11 +117,33 @@ public class SubNewFragment extends baseFragment {
         swichImage = (ViewPager) view.findViewById(R.id.vp_switch_image);
         tvTitle = (TextView) view.findViewById(R.id.tv_title);
         container = (LinearLayout) view.findViewById(R.id.ll_point_container);
+        inihttp();
         initPicture();
-        initSwitchImageView();
         initPoint();
         return view;
     }
+    private void inihttp(){
+        String url="http://www.oschina.net/action/apiv2/banner?catalog=1";
+        HttpParams params= new HttpParams();
+
+        HttpLoader.getInstance(getContext()).get(url,params, null, 0x42, new HttpLoader.HttpListener<String>() {
+            @Override
+            public void onGetResponseSuccess(int requestCode, String response) {
+                    processData(response);
+            }
+
+            @Override
+            public void onGetResponseError(int requestCode, VolleyError error) {
+
+            }
+        });
+    }
+
+    private void processData(String response) {
+        Gson gson= new Gson();
+
+    }
+
     private void initPicture() {
         //写一个装轮播图片的临时集合
         pictureList = new ArrayList<>();
@@ -120,17 +151,17 @@ public class SubNewFragment extends baseFragment {
         pictureList.add(R.drawable.anguished);
         pictureList.add(R.drawable.bear);
         pictureList.add(R.drawable.boar);
-
+        initSwitchImageView();
     }
-
     private void initSwitchImageView() {
-        List<ImageView>  imageViews = new ArrayList<>();
-        for (int i = -1; i < pictureList.size()+1; i++) {
-            Integer resId=0;
+        imageViews = new ArrayList<>();
+        int size=pictureList.size();
+        Integer resId=0;
+        for (int i = -1; i <size+1; i++) {
             if(i == -1){
                 //添加最后的一张图片
-                resId = pictureList.get(pictureList.size() - 1);
-            }else if(i ==  pictureList.size()){
+                resId = pictureList.get(size - 1);
+            }else if(i == size){
                 //添加第一张图片
                 resId = pictureList.get(0);
             }else{
@@ -139,13 +170,28 @@ public class SubNewFragment extends baseFragment {
             ImageView iv = new ImageView(getContext());
             iv.setImageResource(resId);
             imageViews.add(iv);
+            tvTitle.setText("");
         }
-        tvTitle.setText("第n张图");
         ImageAdapter adapter= new ImageAdapter(imageViews);
+        swichImage.setCurrentItem(0,false);
         swichImage.setAdapter(adapter);
-
-        swichImage.setCurrentItem(1,false);
         starSwitch();
+    }
+    public class StaskTest implements  Runnable{
+
+        @Override
+        public void run() {
+            if(swichImage!=null){
+                int currentItem = swichImage.getCurrentItem();
+                if(currentItem==pictureList.size()-1){
+                    currentItem=0;
+                }else{
+                    currentItem++;
+                }
+                swichImage.setCurrentItem(currentItem);
+            }
+            swichImage.postDelayed(this,2000);
+        }
     }
     //初始化点
     private void initPoint() {
@@ -166,12 +212,73 @@ public class SubNewFragment extends baseFragment {
         //让第一个点的背景为红色
         container.getChildAt(0).setBackgroundResource(R.drawable.point_red_bg);
     }
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+    //    如果轮播图选中下标position= 0,修正之后的下标值为：pageIndex = size - 1
+//    如果轮播图选中的下标position = size+1，修正之后的下标值为：pageIndex = 0；
+//    其他情况，修正下标为：pageIndex = position -1；
+    @Override
+    public void onPageSelected(int position) {
+        //修正下标
+        int pageIndex=0;
+        //得到数据的大小
+        final int size=pictureList.size();
+        //在手动滑动时,
+        if(position == 0){
+            //
+            pageIndex=size-1;
+            final int num = size;
+            new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    swichImage.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            swichImage.setCurrentItem(num,false);
+                        }
+                    });
+                }
+            }.start();
+
+        }else if(position==size+1){
+            //如果size到了最后,则把pageIndex置为0,也就是第一个角标
+            pageIndex = 0;
+            //修改位置,
+            swichImage.setCurrentItem(1,false);
+        }else {
+            pageIndex=position-1;
+        }
+
+        //设置轮播图的点的背景
+        int childCount=container.getChildCount();
+        for (int i =0;i<childCount;i++){
+        //通过索引,来获得每个圆点的位置
+        View childView=container.getChildAt(i);
+        if(pageIndex==i){
+            childView.setBackgroundResource(R.drawable.point_red_bg);
+        }else {
+            childView.setBackgroundResource(R.drawable.point_gray_bg);
+        }
+    }
+}
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 
 
     //开始切换
     public void starSwitch(){
         if(!turn){
-            handler.sendEmptyMessageDelayed(0,3000);
+            handler.postDelayed(new StaskTest(),2000);
         }
     }
     //停止切换
