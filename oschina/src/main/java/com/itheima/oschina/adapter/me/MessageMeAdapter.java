@@ -2,6 +2,7 @@ package com.itheima.oschina.adapter.me;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.itheima.oschina.R;
 import com.itheima.oschina.bean.Active;
+import com.itheima.oschina.bean.SoftwareCatalogList;
 import com.itheima.oschina.view.CircleImageView;
 
 import java.util.ArrayList;
@@ -34,8 +36,6 @@ public class MessageMeAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.message_me_item, parent, false);
-
-
         return new ViewHolder(v);
     }
 
@@ -43,16 +43,18 @@ public class MessageMeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ViewHolder viewHolder = (ViewHolder) holder;
+        MessageMeAdapter.ViewHolder viewHolder = (ViewHolder) holder;
 
-        viewHolder.tvUsername.setText(item.get(position).getAuthor());
-        viewHolder.tvMe.setText(item.get(position).getMessage());
+        viewHolder.tvUsername.setText(item.get(position).getAuthor()+"");
+        viewHolder.tvMe.setText(item.get(position).getMessage()+"");
         //viewHolder.tvPinglunMsg.setText(item.get(position).get);
+
     }
 
 
     @Override
     public int getItemCount() {
+        Log.i("test",item.size()+"item-->>>>");
         return item.size();
     }
 
@@ -60,13 +62,14 @@ public class MessageMeAdapter extends RecyclerView.Adapter {
      * adapter 中清理条目的方法
      */
     public void clear() {
-        notifyItemRangeRemoved(-1, getItemCount());
+        notifyItemRangeRemoved(1, getItemCount());
     }
 
     public void addAll(List<Active> data) {
         item.addAll(data);
         notifyItemRangeInserted(item.size() - 1, getItemCount() + data.size());
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_touxiang)
