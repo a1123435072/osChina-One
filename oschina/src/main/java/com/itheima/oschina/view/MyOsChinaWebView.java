@@ -2,7 +2,9 @@ package com.itheima.oschina.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -47,5 +49,23 @@ public class MyOsChinaWebView extends WebView {
         settings.setDisplayZoomControls(false);
         //支持js
         settings.setJavaScriptEnabled(true);
+
+//        addJavascriptInterface(new OnWebViewImageListener(){
+//            @Override
+//            @JavascriptInterface
+//            public void showImagePreview(String bigImageUrl) {
+//                if(!TextUtils.isEmpty(bigImageUrl)){
+//
+//                }
+//            }
+//        });
     }
+
+    /**
+     * js执行java方法的监听对象
+     */
+    public interface OnWebViewImageListener{
+        void showImagePreview(String bigImageUrl);
+    }
+
 }

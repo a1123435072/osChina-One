@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.itheima.oschina.R;
 import com.itheima.oschina.activity.NewDatailActivity;
 import com.itheima.oschina.bean.Blog;
+import com.itheima.oschina.xutil.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,20 +41,21 @@ public class EveryDayFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-
+        String pubDate = items.get(position).getPubDate();
         SubBlogViewHolder  subBlogViewHolder = (SubBlogViewHolder) holder;
        // subBlogViewHolder.iv_image.setImageResource(R.drawable.alien);
         subBlogViewHolder.title.setText(items.get(position).getTitle());
         subBlogViewHolder.tv_content.setText(items.get(position).getBody());
         subBlogViewHolder.nickName.setText(items.get(position).getAuthor());
         subBlogViewHolder.count.setText("10"+(new Random().nextInt(10)+1));
-        subBlogViewHolder.tvTimes.setText("4"+System.currentTimeMillis());
+        subBlogViewHolder.tvTimes.setText(StringUtils.friendly_time(pubDate));
 
         subBlogViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(mActivity,NewDatailActivity.class);
                 intent.putExtra("url",items.get(position).getUrl());
+                intent.putExtra("id",items.get(position).getId());
                 mActivity.startActivity(intent);
             }
         });

@@ -4,19 +4,21 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itheima.oschina.R;
+import com.itheima.oschina.activity.MainActivity;
 import com.itheima.oschina.adapter.AllFragmentAdapter;
-import com.itheima.oschina.fragment.sub.CategoryListFragment;
 import com.itheima.oschina.fragment.sub.SubBlogFragment;
 import com.itheima.oschina.fragment.sub.SubEveryDayBlogFragment;
 import com.itheima.oschina.fragment.sub.SubNewFragment;
@@ -42,7 +44,6 @@ public class AllFragment extends Fragment {
     Unbinder unbinder;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
     private AllFragmentAdapter allAdapter;
 
     private List<Fragment> subFragments = new ArrayList<>();
@@ -92,13 +93,12 @@ public class AllFragment extends Fragment {
         allAdapter = new AllFragmentAdapter(getChildFragmentManager());
         //初始化子fragment
         initSubFragment();
-
-
         //绑定 viewpager 和 tablayout
         //注意： 初始化子fragment和标题之后，确保adapter中有数据，才能绑定。
         viewPagerBindTabLayout();
         //初始化gridLayout
         loadGridLayout();
+        mainActivity= (MainActivity) getActivity();
     }
 
     /**
@@ -211,7 +211,7 @@ public class AllFragment extends Fragment {
     private void addNewFragment(String title) {
         if (!allAdapter.subTitles.contains(title)) {
             allAdapter.subTitles.add(allAdapter.subTitles.size(), title);
-            allAdapter.subFragments.add(new CategoryListFragment());
+            allAdapter.subFragments.add(new SubNewFragment());
             allAdapter.notifyDataSetChanged();
         }
     }
@@ -235,16 +235,23 @@ public class AllFragment extends Fragment {
                 break;
         }
     }
+    public MainActivity mainActivity;
 
     //集合gridlaylout的方法
     private void imove_boolean() {
+
         if (isShowCross) {
+           // crossButton.setimage
+            crossButton.setImageResource(R.drawable.crossx);
+
             viewPager.setVisibility(View.GONE);
             linear.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.GONE);
             relativeLayoutfunction.setVisibility(View.VISIBLE);
             isShowCross = !isShowCross;
+            mainActivity.hiedRadioGroup();
         } else {
+            crossButton.setImageResource(R.drawable.crossnormal1);
             viewPager.setVisibility(View.VISIBLE);
             linear.setVisibility(View.GONE);
             tabLayout.setVisibility(View.VISIBLE);
