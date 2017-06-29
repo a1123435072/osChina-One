@@ -99,7 +99,7 @@ public class MessageMeFragment extends Fragment {
 
     //请求网络刷新数据的放法
     private void refreshData() {
-        String url ="http://www.oschina.net/action/api/active_list?uid=3568577&pageIndex=0&catalog=2&pageSize=20";
+        String url ="http://www.oschina.net/action/api/active_list";
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -108,17 +108,20 @@ public class MessageMeFragment extends Fragment {
         HttpParams httpParams = new HttpParams();
         httpParams.put("uid",uid);
         httpParams.put("pageIndex",0);
-        httpParams.put("catalog",2);
+        //httpParams.put("catalog",2);带上就报错
         httpParams.put("pageSize",20);
 
         Log.i("test",uid+"------");
         //httpParams.put();
 
         HttpLoader.getInstance(getActivity())
-                .get(url, httpParams, headers, 0x13, new HttpLoader.HttpListener<String>() {
+                .get(url, httpParams, headers, 0x14, new HttpLoader.HttpListener<String>() {
                     @Override
                     public void onGetResponseSuccess(int requestCode, String response) {
                         ActiveList activeList = XmlUtils.toBean(ActiveList.class, response.getBytes());
+                        //Toast.makeText(getActivity(), "请求数据成功"+response, Toast.LENGTH_LONG).show();
+
+                        Log.i("test",response);
                         messageMeAdapter.clear();
                         messageMeAdapter.addAll(activeList.getList());
                         rv_message.refreshComplete();
@@ -159,7 +162,6 @@ public class MessageMeFragment extends Fragment {
                         tvFensi.setText(user.getUser().getFans() + "");
                         // Toast.makeText(getActivity(),"请求数据成功"+response,Toast.LENGTH_SHORT).show();
                         if(user.getUser().getPortrait()!=null){
-
                             Picasso.with(getActivity()).load(user.getUser().getPortrait()).into(ivPortrait);
                         }
                         String gender = user.getUser().getGender();
