@@ -11,10 +11,10 @@ import java.util.List;
  * 综合界面的适配器
  */
 
-public class AllFragmentAdapter extends FragmentPagerAdapter {
+public class AllFragmentAdapter extends  FragmentPagerAdapter {
 
-    private List<Fragment> subFragments = new ArrayList<>();
-    private List<String>   subTitles = new ArrayList<>();
+    public List<Fragment> subFragments = new ArrayList<>();
+    public List<String>   subTitles = new ArrayList<>();
 
     public AllFragmentAdapter(FragmentManager fm) {
         super(fm);

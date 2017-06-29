@@ -54,4 +54,5 @@ public class NewDatailActivity extends AppCompatActivity {
         Intent intent= new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
     }
+
 }

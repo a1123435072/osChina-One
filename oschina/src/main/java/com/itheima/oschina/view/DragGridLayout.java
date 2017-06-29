@@ -172,6 +172,7 @@ public class DragGridLayout extends GridLayout {
                 onDragItemClickListener.onDragItemClick((TextView) v);
             }
         }
+
     };
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
@@ -179,10 +180,12 @@ public class DragGridLayout extends GridLayout {
             dragView = v;
             //产生浮动的阴影效果
             //①传递数据  ② 产生阴影的    ③ 传递数据  ④ 状态
-            v.startDrag(null,new View.DragShadowBuilder(v),null,0);
+          //  v.startDrag(null,new View.DragShadowBuilder(v),null,0);
+            LongOrNot=true;
             return true;//处理长按事件
         }
     };
+    private boolean LongOrNot;
 
     //接口
     public interface OnDragItemClickListener{
