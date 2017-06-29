@@ -55,7 +55,6 @@ public class MessageMeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.message_fragment, container, false);
-
         return view;
 
     }
@@ -103,19 +102,19 @@ public class MessageMeFragment extends Fragment {
 
         HttpHeaders headers = new HttpHeaders();
 
-        headers.put("cookie",CookieManager.getCookie(getActivity()));
+        headers.put("Cookie",CookieManager.getCookie(getActivity()));
 
         HttpParams httpParams = new HttpParams();
         httpParams.put("uid",uid);
-        httpParams.put("pageIndex",0);
-        //httpParams.put("catalog",2);带上就报错
-        httpParams.put("pageSize",20);
+        httpParams.put("pageIndex",0 + "");
+        httpParams.put("catalog",2 + "");//带上就报错
+        httpParams.put("pageSize",20 + "");
 
         Log.i("test",uid+"------");
         //httpParams.put();
 
         HttpLoader.getInstance(getActivity())
-                .get(url, httpParams, headers, 0x14, new HttpLoader.HttpListener<String>() {
+                .get(url, httpParams, headers, 0x17, new HttpLoader.HttpListener<String>() {
                     @Override
                     public void onGetResponseSuccess(int requestCode, String response) {
                         ActiveList activeList = XmlUtils.toBean(ActiveList.class, response.getBytes());
@@ -125,7 +124,6 @@ public class MessageMeFragment extends Fragment {
                         messageMeAdapter.clear();
                         messageMeAdapter.addAll(activeList.getList());
                         rv_message.refreshComplete();
-
 
                     }
 
