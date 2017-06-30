@@ -172,26 +172,30 @@ public class TweetDetailsActivity extends AppCompatActivity {
                         if (TextUtils.isEmpty(comment)){
                             Toast.makeText(TweetDetailsActivity.this, "您还没写评论呢~", Toast.LENGTH_SHORT).show();
                         }else {
-                            String url = "www.oschina.net/action/api/comment_pub";
+                            String url = "http://www.oschina.net/action/api/comment_pub";
                             HttpParams params = new HttpParams();
-                            System.out.println(id+";;;----------------");
                             params.put("id",id);
                             params.put("catalog","3");
                             params.put("content",comment);
-                            params.put("uid", SPUtil.newInstance(TweetDetailsActivity.this).getString("uid"));
+                            String uid = SPUtil.newInstance(TweetDetailsActivity.this).getString("uid");
+                            params.put("uid",uid);
 
                             HttpHeaders headers = new HttpHeaders();
                             headers.put("cookie", CookieManager.getCookie(TweetDetailsActivity.this));
 
                             //这是发送评论的请求
-                            HttpLoader.getInstance(TweetDetailsActivity.this).post(url, params, headers, 0x25, new HttpLoader.HttpListener<String>() {
+                            HttpLoader.getInstance(getApplicationContext()).post(url, params, headers, 0x26, new HttpLoader.HttpListener<String>() {
                                 @Override
                                 public void onGetResponseSuccess(int requestCode, String response) {
                                     Toast.makeText(TweetDetailsActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
+//                                    requestData();
+//                                    xrecyclerView.refresh();
+
                                 }
 
                                 @Override
                                 public void onGetResponseError(int requestCode, VolleyError error) {
+                                    Toast.makeText(TweetDetailsActivity.this, "评论失败", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -228,7 +232,29 @@ public class TweetDetailsActivity extends AppCompatActivity {
         //把头部楼主部分添加到XRecyclerView上面
         xrecyclerView.addHeaderView(view);
 
+        requestData();
 
+        //分隔线，需要一个自定义分隔线控件，在view里面
+        xrecyclerView.addItemDecoration(new RecycleViewDivider(
+                this, LinearLayoutManager.HORIZONTAL, 1, Color.GRAY));
+        xrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        tweetCommentAdapter = new TweetCommentAdapter(TweetDetailsActivity.this,getApplicationContext());
+        xrecyclerView.setAdapter(tweetCommentAdapter);
+
+    }
+
+    private void refresh() {
+        finish();
+        Intent intent = new Intent(TweetDetailsActivity.this, TweetDetailsActivity.class);
+        startActivity(intent);
+
+//        onCreate(null);
+//        setContentView(R.layout.activity_tweet_details);
+    }
+
+
+    private void requestData(){
         //添加下面的评论item
         String url2 = "http://www.oschina.net/action/api/comment_list";
         HttpParams params2 = new HttpParams();
@@ -250,14 +276,6 @@ public class TweetDetailsActivity extends AppCompatActivity {
             public void onGetResponseError(int requestCode, VolleyError error) {
             }
         });
-        //分隔线，需要一个自定义分隔线控件，在view里面
-        xrecyclerView.addItemDecoration(new RecycleViewDivider(
-                this, LinearLayoutManager.HORIZONTAL, 1, Color.GRAY));
-        xrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        tweetCommentAdapter = new TweetCommentAdapter(TweetDetailsActivity.this,getApplicationContext());
-        xrecyclerView.setAdapter(tweetCommentAdapter);
-
     }
 
 
