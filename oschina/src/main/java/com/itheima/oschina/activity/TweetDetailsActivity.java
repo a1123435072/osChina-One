@@ -28,8 +28,10 @@ import com.itheima.oschina.xutil.XmlUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.squareup.picasso.Picasso;
 
+import org.senydevpkg.net.HttpHeaders;
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
+import org.senydevpkg.utils.CookieManager;
 import org.senydevpkg.utils.SPUtil;
 
 public class TweetDetailsActivity extends AppCompatActivity {
@@ -163,22 +165,26 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 });
 
                 //评论发送按钮的点击事件
-                final String comment = et_comment.getText().toString();
-                System.out.println(comment+"-----------------");
                 iv_commentSend.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        String comment = et_comment.getText().toString();
                         if (TextUtils.isEmpty(comment)){
                             Toast.makeText(TweetDetailsActivity.this, "您还没写评论呢~", Toast.LENGTH_SHORT).show();
                         }else {
                             String url = "www.oschina.net/action/api/comment_pub";
                             HttpParams params = new HttpParams();
+                            System.out.println(id+";;;----------------");
                             params.put("id",id);
-                            params.put("catalog",3);
+                            params.put("catalog","3");
                             params.put("content",comment);
                             params.put("uid", SPUtil.newInstance(TweetDetailsActivity.this).getString("uid"));
+
+                            HttpHeaders headers = new HttpHeaders();
+                            headers.put("cookie", CookieManager.getCookie(TweetDetailsActivity.this));
+
                             //这是发送评论的请求
-                            HttpLoader.getInstance(TweetDetailsActivity.this).post(url, params, null, 0x25, new HttpLoader.HttpListener<String>() {
+                            HttpLoader.getInstance(TweetDetailsActivity.this).post(url, params, headers, 0x25, new HttpLoader.HttpListener<String>() {
                                 @Override
                                 public void onGetResponseSuccess(int requestCode, String response) {
                                     Toast.makeText(TweetDetailsActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
