@@ -177,7 +177,7 @@ public class MeFragment extends Fragment {
             llGuanzhu.setVisibility(View.GONE);
             llFensi.setVisibility(View.GONE);
             tvUsername.setTextSize(18);
-            tvUsername.setText("亲您已经推出了哦");
+            tvUsername.setText("亲您还有没有登陆哦");
             ivPortrait.setImageResource(R.drawable.widget_dface);
 
         }

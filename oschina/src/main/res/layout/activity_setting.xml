@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg"
-        settingview:title="清理花缓存"
+        settingview:title="清理缓存"
         android:padding="5dp" />
     <View
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg"
-        settingview:title="双击推出"
+        settingview:title="双击退出"
         android:padding="5dp" />
 
     <com.itheima.oschina.view.findItemView

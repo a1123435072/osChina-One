@@ -7,12 +7,16 @@
 
 
     <com.itheima.oschina.view.CircleImageView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="8dp"
         android:id="@+id/iv_touxiang"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="8dp"
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
 
@@ -23,6 +27,7 @@
         android:textSize="14sp" />
 
     <TextView
+        android:layout_marginLeft="8dp"
         android:id="@+id/tv_me"
         android:visibility="gone"
         android:layout_width="wrap_content"
@@ -34,9 +39,11 @@
         android:textSize="14sp" />
 
     <TextView
+
         android:id="@+id/tv_pinglun"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="8dp"
         android:layout_alignBottom="@id/tv_me"
+        android:layout_below="@id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tv_me"
@@ -45,8 +52,9 @@
         android:textSize="14sp" />
 
     <TextView
+        android:layout_marginLeft="8dp"
         android:id="@+id/tv_xiangguan"
-        android:padding="5dp"
+        android:padding="3dp"
         android:background="#a4e2e2e2"
         android:text="测试阿里杭州-电商服务创新中心诚意招聘三年以上java，p6起招，有意私聊，新到底额名额一求俩聊聊"
         android:layout_below="@id/tv_pinglun"

@@ -49,6 +49,8 @@ public class FenLeiAllFragment extends Fragment {
 //            }
 //        });
         childFragmentManager = getChildFragmentManager();
+
+
         addFragmentToStack();
 
 
