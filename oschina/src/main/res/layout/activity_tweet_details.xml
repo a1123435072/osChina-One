@@ -27,13 +27,14 @@
             android:id="@+id/et_comment"
             android:layout_width="0dp"
             android:layout_weight="9"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:hint="开始你的表演~"/>
         <ImageView
             android:id="@+id/iv_commentSend"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            />
+            android:src="@drawable/selector_comment_send"/>
     </LinearLayout>
 
 

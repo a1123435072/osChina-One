@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.itheima.oschina.R;
@@ -29,6 +30,7 @@ import com.squareup.picasso.Picasso;
 
 import org.senydevpkg.net.HttpLoader;
 import org.senydevpkg.net.HttpParams;
+import org.senydevpkg.utils.SPUtil;
 
 public class TweetDetailsActivity extends AppCompatActivity {
 
@@ -91,10 +93,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ll_comment.setVisibility(View.VISIBLE);
-
             }
         });
 
+        //动弹详情，头部楼主信息
         String url = "http://www.oschina.net/action/api/tweet_detail";
         HttpParams params = new HttpParams();
         //从intent中获取id
@@ -108,7 +110,6 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                 //给头部item控件设置数据
                 //先是楼主信息
-
                 tvName.setText(tweet.getAuthor());
                 tvTime.setText(tweet.getPubDate());
                 tvCommentNumber.setText(tweet.getCommentCount() + "");
@@ -158,6 +159,36 @@ public class TweetDetailsActivity extends AppCompatActivity {
                         String urlImageBig = tweet.getImgBig();
                         intent.putExtra("urlImageBig",urlImageBig);
                         startActivity(intent);
+                    }
+                });
+
+                //评论发送按钮的点击事件
+                final String comment = et_comment.getText().toString();
+                System.out.println(comment+"-----------------");
+                iv_commentSend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (TextUtils.isEmpty(comment)){
+                            Toast.makeText(TweetDetailsActivity.this, "您还没写评论呢~", Toast.LENGTH_SHORT).show();
+                        }else {
+                            String url = "www.oschina.net/action/api/comment_pub";
+                            HttpParams params = new HttpParams();
+                            params.put("id",id);
+                            params.put("catalog",3);
+                            params.put("content",comment);
+                            params.put("uid", SPUtil.newInstance(TweetDetailsActivity.this).getString("uid"));
+                            //这是发送评论的请求
+                            HttpLoader.getInstance(TweetDetailsActivity.this).post(url, params, null, 0x25, new HttpLoader.HttpListener<String>() {
+                                @Override
+                                public void onGetResponseSuccess(int requestCode, String response) {
+                                    Toast.makeText(TweetDetailsActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onGetResponseError(int requestCode, VolleyError error) {
+                                }
+                            });
+                        }
                     }
                 });
 
