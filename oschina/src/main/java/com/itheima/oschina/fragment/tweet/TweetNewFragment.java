@@ -1,6 +1,7 @@
 package com.itheima.oschina.fragment.tweet;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,11 +42,16 @@ public class TweetNewFragment extends Fragment{
     private int requestCode;
     private int uid;
     private List<Tweet> items = new ArrayList<>();
-
+    @SuppressLint("ValidFragment")
     public TweetNewFragment(int requestCode,int uid){
         this.requestCode = requestCode;
         this.uid = uid;
     }
+    @SuppressLint("ValidFragment")
+    public TweetNewFragment(){
+
+    }
+
 
     @Nullable
     @Override
